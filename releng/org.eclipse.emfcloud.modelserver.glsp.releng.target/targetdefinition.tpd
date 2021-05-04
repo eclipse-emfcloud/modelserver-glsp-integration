@@ -1,0 +1,24 @@
+target "EMF.cloud Model Server GLSP Integration Targetplatform" with source requirements
+
+location "https://download.eclipse.org/glsp/server/p2/nightly/0.9/0.9.0.202104211242/" {
+	org.eclipse.glsp.feature.feature.group [0.9.0,1.0.0)
+	org.eclipse.glsp.feature.source.feature.group [0.9.0,1.0.0)
+}
+
+location "https://download.eclipse.org/emfcloud/modelserver/p2/nightly/0.7/0.7.0.202104072147/" {
+	org.eclipse.emfcloud.modelserver.feature.feature.group [0.7.0,0.8.0)
+}
+
+location "http://download.eclipse.org/releases/2021-03" {
+	org.eclipse.equinox.executable.feature.group [3.8.600,4.0.0)
+}
+
+location "http://ghillairet.github.io/p2" {
+	org.emfjson.jackson lazy
+}
+
+location "https://download.eclipse.org/jetty/updates/jetty-bundles-9.x/9.4.34.v20201102/" {
+	org.eclipse.jetty.server lazy
+	org.eclipse.jetty.websocket.server lazy
+}
+

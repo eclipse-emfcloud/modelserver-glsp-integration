@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="org.eclipse.emfcloud.modelserver.glsp.feature" version="0.7.0.qualifier">
+      <category name="org.eclipse.emfcloud.modelserver.glsp"/>
+   </feature>
+   <feature id="org.eclipse.emfcloud.modelserver.glsp.feature.source" version="0.7.0.qualifier">
+      <category name="org.eclipse.emfcloud.modelserver.glsp"/>
+   </feature>
+   <category-def name="org.eclipse.emfcloud.modelserver.glsp" label="Eclipse EMF.cloud Model Server GLSP Integration"/>
+</site>

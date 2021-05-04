@@ -1,0 +1,54 @@
+/********************************************************************************
+ * Copyright (c) 2021 EclipseSource and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * https://www.eclipse.org/legal/epl-2.0, or the MIT License which is
+ * available at https://opensource.org/licenses/MIT.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR MIT
+ ********************************************************************************/
+package org.eclipse.emfcloud.modelserver.glsp;
+
+import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSDisposeClientSessionActionHandler;
+import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSOperationActionHandler;
+import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSSaveModelActionHandler;
+import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSUndoActionHandler;
+import org.eclipse.emfcloud.modelserver.glsp.client.ModelServerClientProvider;
+import org.eclipse.glsp.server.actions.ActionHandler;
+import org.eclipse.glsp.server.actions.DisposeClientSessionActionHandler;
+import org.eclipse.glsp.server.actions.SaveModelActionHandler;
+import org.eclipse.glsp.server.di.DefaultGLSPModule;
+import org.eclipse.glsp.server.features.undoredo.UndoRedoActionHandler;
+import org.eclipse.glsp.server.operations.OperationActionHandler;
+import org.eclipse.glsp.server.protocol.GLSPServer;
+import org.eclipse.glsp.server.utils.MultiBinding;
+
+public abstract class EMSGLSPModule extends DefaultGLSPModule {
+
+   @Override
+   protected void configureActionHandlers(final MultiBinding<ActionHandler> bindings) {
+      super.configureActionHandlers(bindings);
+      bindings.rebind(SaveModelActionHandler.class, EMSSaveModelActionHandler.class);
+      bindings.rebind(OperationActionHandler.class, EMSOperationActionHandler.class);
+      bindings.rebind(UndoRedoActionHandler.class, EMSUndoActionHandler.class);
+      bindings.rebind(DisposeClientSessionActionHandler.class, EMSDisposeClientSessionActionHandler.class);
+   }
+
+   @Override
+   public void configure() {
+      super.configure();
+      bind(bindModelServerClientProvider()).asEagerSingleton();
+   }
+
+   @SuppressWarnings("rawtypes")
+   @Override
+   protected Class<? extends GLSPServer> bindGLSPServer() {
+      return EMSGLSPServer.class;
+   }
+
+   protected Class<? extends ModelServerClientProvider> bindModelServerClientProvider() {
+      return ModelServerClientProvider.class;
+   }
+
+}

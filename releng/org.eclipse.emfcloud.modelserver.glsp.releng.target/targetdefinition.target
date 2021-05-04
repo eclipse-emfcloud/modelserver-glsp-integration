@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde?>
+<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
+<target name="EMF.cloud Model Server GLSP Integration Targetplatform" sequenceNumber="1620242480">
+  <locations>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.glsp.feature.feature.group" version="0.9.0.202104211242"/>
+      <unit id="org.eclipse.glsp.feature.source.feature.group" version="0.9.0.202104211242"/>
+      <repository location="https://download.eclipse.org/glsp/server/p2/nightly/0.9/0.9.0.202104211242/"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.emfcloud.modelserver.feature.feature.group" version="0.7.0.202104072147"/>
+      <repository location="https://download.eclipse.org/emfcloud/modelserver/p2/nightly/0.7/0.7.0.202104072147/"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.equinox.executable.feature.group" version="3.8.1100.v20210209-1541"/>
+      <repository location="http://download.eclipse.org/releases/2021-03"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.emfjson.jackson" version="0.0.0"/>
+      <repository location="http://ghillairet.github.io/p2"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.jetty.server" version="0.0.0"/>
+      <unit id="org.eclipse.jetty.websocket.server" version="0.0.0"/>
+      <repository location="https://download.eclipse.org/jetty/updates/jetty-bundles-9.x/9.4.34.v20201102/"/>
+    </location>
+  </locations>
+</target>

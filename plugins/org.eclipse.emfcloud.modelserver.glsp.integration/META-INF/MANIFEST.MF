@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMF.cloud Model Server GLSP Integration
+Bundle-SymbolicName: org.eclipse.emfcloud.modelserver.glsp.integration;singleton:=true
+Bundle-ActivationPolicy: lazy
+Bundle-Version: 0.7.0.qualifier
+Bundle-Vendor: Eclipse GLSP
+Automatic-Module-Name: com.eclipsesource.glsp.modelserver.integration
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: org.eclipse.glsp.server,
+ org.eclipse.emfcloud.modelserver.client,
+ org.eclipse.emfcloud.modelserver.common,
+ org.eclipse.emfcloud.modelserver.edit,
+ org.eclipse.emfcloud.modelserver.emf,
+ org.eclipse.emfcloud.modelserver.lib
+Bundle-ClassPath: .
+Export-Package: org.eclipse.emfcloud.modelserver.glsp;
+ org.eclipse.emfcloud.modelserver.glsp.actions.handlers,
+ org.eclipse.emfcloud.modelserver.glsp.client,
+ org.eclipse.emfcloud.modelserver.glsp.model,
+ org.eclipse.emfcloud.modelserver.glsp.operations.handlers

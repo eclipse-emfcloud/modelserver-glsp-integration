@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.eclipse.emfcloud.modelserver.glsp</groupId>
+	<artifactId>org.eclipse.emfcloud.modelserver.glsp.parent</artifactId>
+	<version>0.7.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<url>https://www.eclipse.org/emfcloud/</url>
+
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v2.0</name>
+			<url>http://www.eclipse.org/legal/epl-v20.html</url>
+			<distribution>repo</distribution>
+		</license>
+		<license>
+			<name>MIT License</name>
+			<url>https://opensource.org/licenses/MIT</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Nina Doschek</name>
+			<email>ndoschek@eclipsesource.com</email>
+			<organization>EclipseSource</organization>
+			<organizationUrl>http://www.eclipsesource.com</organizationUrl>
+		</developer>
+		<developer>
+			<name>Tobias Ortmayr</name>
+			<email>tortmayr@eclipsesource.com</email>
+			<organization>EclipseSource</organization>
+			<organizationUrl>http://www.eclipsesource.com</organizationUrl>
+		</developer>
+		<developer>
+			<name>Martin Fleck</name>
+			<email>mfleck@eclipsesource.com</email>
+			<organization>EclipseSource</organization>
+			<organizationUrl>http://www.eclipsesource.com</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<url>https://github.com/eclipse-emfcloud/modelserver-glsp-integration</url>
+		<connection>scm:git@github.com:eclipse-emfcloud/modelserver-glsp-integration.git</connection>
+		<developerConnection>scm:git@github.com:eclipse-emfcloud/modelserver-glsp-integration.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<properties>
+		<!-- Encoding: used by the maven-resource-plugin -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- Compiler: used by the maven-compiler-plugin for Java source and target -->
+		<java.source>11</java.source>
+		<java.target>11</java.target>
+
+		<!-- Target: version used to reference target platform from our releng 
+			bundle -->
+		<target.version>0.7.0-SNAPSHOT</target.version>
+
+		<!-- Deployment: used by the maven-deploy-plugin -->
+		<maven.deploy.skip>true</maven.deploy.skip>
+
+		<!-- Package Type: type of bundles to create (can be re-defined by profiles) -->
+		<package.type>eclipse-plugin</package.type>
+		<package.type.test>eclipse-test-plugin</package.type.test>
+
+		<!-- Maven Plugin Versions: General maven plugin versions -->
+		<tycho.version>2.2.0</tycho.version>
+		<jacoco.version>0.8.6</jacoco.version>
+		<maven.compiler.version>3.8.1</maven.compiler.version>
+		<maven.clean.version>3.1.0</maven.clean.version>
+		<maven.checkstyle.version>3.1.1</maven.checkstyle.version>
+		<puppycrawl.checkstyle.version>8.39</puppycrawl.checkstyle.version>
+		<emfcloud.checkstyle.version>0.1.0-SNAPSHOT</emfcloud.checkstyle.version>
+		<maven.resources.version>3.2.0</maven.resources.version>
+		<maven.surefire.version>3.0.0-M5</maven.surefire.version>
+		<maven.failsafe.version>3.0.0-M5</maven.failsafe.version>
+		<maven.source.plugin>3.2.0</maven.source.plugin>
+		<maven.dependency.version>3.1.2</maven.dependency.version>
+		<maven.shade.version>3.2.4</maven.shade.version>
+		<maven.antrun.version>3.0.0</maven.antrun.version>
+		<maven.deploy.version>3.0.0-M1</maven.deploy.version>
+		<codehaus.mojo.maven.version>3.2.0</codehaus.mojo.maven.version>
+
+	</properties>
+
+	<modules>
+		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
+		<module>releng</module>
+	</modules>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<!-- Compilation -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-compiler-plugin</artifactId>
+				<version>${tycho.version}</version>
+			</plugin>
+			<!-- Check Style: to disable use -Dcheckstyle.skip -->
+			<!-- <plugin> enable once emfcloud-checkstyle.xml is deployed
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${maven.checkstyle.version}</version>
+				<configuration>
+					<configLocation>emfcloud-checkstyle.xml</configLocation>
+					<consoleOutput>true</consoleOutput>
+
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<phase>verify</phase>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>com.puppycrawl.tools</groupId>
+						<artifactId>checkstyle</artifactId>
+						<version>${puppycrawl.checkstyle.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emfcloud</groupId>
+						<artifactId>org.eclipse.emfcloud.checkstyle</artifactId>
+						<version>${emfcloud.checkstyle.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin> -->
+		</plugins>
+	</build>
+
+	<profiles>
+		<!-- P2 Profile: Runs a Tycho-based build that generates Eclipse artifacts -->
+		<profile>
+			<id>p2</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+
+			<modules>
+				<module>releng/org.eclipse.emfcloud.modelserver.glsp.feature</module>
+			</modules>
+
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.eclipse.tycho</groupId>
+							<artifactId>tycho-compiler-plugin</artifactId>
+							<version>${tycho.version}</version>
+						</plugin>
+						<!-- enable tycho build extension -->
+						<plugin>
+							<groupId>org.eclipse.tycho</groupId>
+							<artifactId>tycho-maven-plugin</artifactId>
+							<version>${tycho.version}</version>
+							<extensions>true</extensions>
+						</plugin>
+						<plugin>
+							<!-- enable source bundle generation -->
+							<groupId>org.eclipse.tycho</groupId>
+							<artifactId>tycho-source-plugin</artifactId>
+							<version>${tycho.version}</version>
+						</plugin>
+						<plugin>
+							<groupId>org.eclipse.tycho</groupId>
+							<artifactId>target-platform-configuration</artifactId>
+							<version>${tycho.version}</version>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>${maven.resources.version}</version>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-maven-plugin</artifactId>
+						<extensions>true</extensions>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-compiler-plugin</artifactId>
+						<configuration>
+							<optimize>true</optimize>
+							<showDeprecation>true</showDeprecation>
+							<showWarnings>true</showWarnings>
+						</configuration>
+					</plugin>
+					<plugin>
+						<!-- enable source bundle generation -->
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>plugin-source</id>
+								<goals>
+									<goal>plugin-source</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>target-platform-configuration</artifactId>
+						<configuration>
+							<includePackedArtifacts>true</includePackedArtifacts>
+							<targetDefinitionIncludeSource>honor</targetDefinitionIncludeSource>
+							<environments>
+								<environment>
+									<os>win32</os>
+									<ws>win32</ws>
+									<arch>x86_64</arch>
+								</environment>
+								<environment>
+									<os>linux</os>
+									<ws>gtk</ws>
+									<arch>x86_64</arch>
+								</environment>
+								<environment>
+									<os>macosx</os>
+									<ws>cocoa</ws>
+									<arch>x86_64</arch>
+								</environment>
+							</environments>
+							<target>
+								<artifact>
+									<groupId>org.eclipse.emfcloud.modelserver.glsp</groupId>
+									<artifactId>org.eclipse.emfcloud.modelserver.glsp.parent</artifactId>
+									<classifier>releng/org.eclipse.emfcloud.modelserver.glsp.releng.target/targetdefinition</classifier>
+									<version>${target.version}</version>
+								</artifact>
+							</target>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- P2-Release Profile: Used to build and Eclipse update site. Should 
+			only be used in conjunction with the P2 Profile -->
+		<profile>
+			<id>p2-release</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.eclipse.tycho</groupId>
+							<artifactId>tycho-p2-repository-plugin</artifactId>
+							<version>${tycho.version}</version>
+						</plugin>
+						<plugin>
+							<groupId>org.eclipse.tycho</groupId>
+							<artifactId>tycho-p2-plugin</artifactId>
+							<version>${tycho.version}</version>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>feature-source</id>
+								<phase>package</phase>
+								<goals>
+									<goal>feature-source</goal>
+								</goals>
+								<configuration>
+									<excludes>
+										<plugin id="org.apache.batik.pdf" />
+										<plugin id="org.eclipse.wst.common.project.facet.core" />
+										<plugin id="org.eclipse.emfcloud.modelserver.lib" />
+									</excludes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-p2-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-p2-metadata</id>
+								<phase>package</phase>
+								<goals>
+									<goal>p2-metadata</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<defaultP2Metadata>false</defaultP2Metadata>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-p2-repository-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
+</project>

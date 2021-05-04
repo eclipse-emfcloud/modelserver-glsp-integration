@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.emfcloud.modelserver.glsp.feature"
+      label="Model Server GLSP Integration"
+      version="0.7.0.qualifier"
+      provider-name="EclipseSource">
+
+   <description url="https://github.com/eclipse-emfcloud/modelserver-glsp-integration">
+      Base integration code for GLSP diagrams in an Model Server aware editor environment
+   </description>
+
+   <copyright url="https://github.com/eclipse-emfcloud/modelserver-glsp-integration">
+      /********************************************************************************
+ * Copyright (c) 2021 EclipseSource and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * https://www.eclipse.org/legal/epl-2.0, or the MIT License which is
+ * available at https://opensource.org/licenses/MIT.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR MIT
+ ********************************************************************************/
+   </copyright>
+
+   <license url="">
+      EPL-2.0 or MIT
+   </license>
+
+   <url>
+      <discovery label="Eclipse EMF.cloud Github Repository" url="https://github.com/eclipse-emfcloud/emfcloud"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.glsp.server" version="0.9.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.emfcloud.modelserver.glsp.integration"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
