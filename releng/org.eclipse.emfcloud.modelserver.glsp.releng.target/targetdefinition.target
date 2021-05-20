@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="EMF.cloud Model Server GLSP Integration Targetplatform" sequenceNumber="1620242480">
+<target name="EMF.cloud Model Server GLSP Integration Targetplatform" sequenceNumber="1621520901">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.glsp.feature.feature.group" version="0.9.0.202104211242"/>
-      <unit id="org.eclipse.glsp.feature.source.feature.group" version="0.9.0.202104211242"/>
+      <unit id="org.eclipse.glsp.layout" version="0.9.0.202104211242"/>
+      <unit id="org.eclipse.glsp.graph" version="0.9.0.202104211242"/>
       <repository location="https://download.eclipse.org/glsp/server/p2/nightly/0.9/0.9.0.202104211242/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.emfcloud.modelserver.feature.feature.group" version="0.7.0.202104072147"/>
-      <repository location="https://download.eclipse.org/emfcloud/modelserver/p2/nightly/0.7/0.7.0.202104072147/"/>
+      <unit id="org.eclipse.emfcloud.modelserver.feature.feature.group" version="0.7.0.202105141035"/>
+      <repository location="https://download.eclipse.org/emfcloud/modelserver/p2/nightly/0.7/0.7.0.202105141035/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.equinox.executable.feature.group" version="3.8.1100.v20210209-1541"/>
-      <repository location="http://download.eclipse.org/releases/2021-03"/>
+      <unit id="org.eclipse.equinox.executable.feature.group" version="3.8.900.v20200819-0940"/>
+      <repository location="http://download.eclipse.org/releases/2020-09"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.apache.commons.io" version="2.6.0.v20190123-2029"/>
+      <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20200831200620/repository/"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.elk.core" version="0.7.0"/>
+      <unit id="org.eclipse.elk.graph" version="0.7.0"/>
+      <unit id="org.eclipse.elk.graph.text" version="0.7.0"/>
+      <unit id="org.eclipse.elk.alg.layered" version="0.7.0"/>
+      <repository location="https://download.eclipse.org/elk/updates/releases/0.7.0/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.emfjson.jackson" version="0.0.0"/>

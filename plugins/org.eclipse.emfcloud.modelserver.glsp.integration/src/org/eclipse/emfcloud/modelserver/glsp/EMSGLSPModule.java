@@ -12,6 +12,7 @@ package org.eclipse.emfcloud.modelserver.glsp;
 
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSDisposeClientSessionActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSOperationActionHandler;
+import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSRedoActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSSaveModelActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSUndoActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.client.ModelServerClientProvider;
@@ -31,7 +32,9 @@ public abstract class EMSGLSPModule extends DefaultGLSPModule {
       super.configureActionHandlers(bindings);
       bindings.rebind(SaveModelActionHandler.class, EMSSaveModelActionHandler.class);
       bindings.rebind(OperationActionHandler.class, EMSOperationActionHandler.class);
-      bindings.rebind(UndoRedoActionHandler.class, EMSUndoActionHandler.class);
+      bindings.remove(UndoRedoActionHandler.class);
+      bindings.add(EMSUndoActionHandler.class);
+      bindings.add(EMSRedoActionHandler.class);
       bindings.rebind(DisposeClientSessionActionHandler.class, EMSDisposeClientSessionActionHandler.class);
    }
 

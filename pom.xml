@@ -93,6 +93,7 @@
 
 	<modules>
 		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
+		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.model</module>
 		<module>releng</module>
 	</modules>
 
