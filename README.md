@@ -1,10 +1,10 @@
-# Eclipse EMF.cloud Model Server GLSP Integration [![build-status](https://img.shields.io/jenkins/build?jobUrl=https://ci.eclipse.org/emfcloud/job/eclipse-emfcloud/job/modelserver-glps-integration/job/master/)](https://ci.eclipse.org/emfcloud/job/eclipse-emfcloud/job/modelserver-glsp-integration/job/master/)
+# Eclipse EMF.cloud Model Server GLSP Integration [![build-status](https://img.shields.io/jenkins/build?jobUrl=https://ci.eclipse.org/emfcloud/job/eclipse-emfcloud/job/modelserver-glsp-integration/job/main/)](https://ci.eclipse.org/emfcloud/job/eclipse-emfcloud/job/modelserver-glsp-integration/job/main/)
 
 Contains the base integration code for GLSP diagrams in an Model Server aware editor environment.
 Throughout the repository the abbreviation `EMS` is used as a prefix for base classes and stands for **E**MF.cloud **M**odel **S**erver.
 
 
-### Available via P2 Update Sites [![publish-status-p2](https://img.shields.io/jenkins/build?jobUrl=https://ci.eclipse.org/emfcloud/job/deploy-modelserver-glsp-integration-p2/&label=p2)](https://ci.eclipse.org/emfcloud/job/deploy-modelserver-glsp-integration-p2/)
+### Available via P2 Update Sites [![publish-status-p2](https://img.shields.io/jenkins/build?jobUrl=https://ci.eclipse.org/emfcloud/job/deploy-emfcloud-modelserver-glsp-integration-p2/&label=p2)](https://ci.eclipse.org/emfcloud/job/deploy-emfcloud-modelserver-glsp-integration-p2/)
 - <i>Snapshots: </i> https://download.eclipse.org/emfcloud/modelserver-glsp-integration/p2/nightly/
 
 ### Where to find the sources?

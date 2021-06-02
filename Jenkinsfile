@@ -14,12 +14,10 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            when { branch 'master' }
+        stage('Deploy (main only)') {
+            when { branch 'main' }
             steps {
-                p2: {
-                    build job: 'deploy-emfcloud-modelserver-glsp-integration-p2', wait: false
-                }
+                build job: 'deploy-emfcloud-modelserver-glsp-integration-p2', wait: false
             }
         }
     }
