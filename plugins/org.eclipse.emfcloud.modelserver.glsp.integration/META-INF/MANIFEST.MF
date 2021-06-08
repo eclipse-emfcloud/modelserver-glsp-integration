@@ -20,8 +20,10 @@ Require-Bundle: org.eclipse.glsp.server,
  org.eclipse.emfcloud.modelserver.glsp.notation.model,
  org.eclipse.emf.ecore
 Bundle-ClassPath: .
-Export-Package: org.eclipse.emfcloud.modelserver.glsp;
+Export-Package: org.eclipse.emfcloud.modelserver.glsp,
  org.eclipse.emfcloud.modelserver.glsp.actions.handlers,
  org.eclipse.emfcloud.modelserver.glsp.client,
+ org.eclipse.emfcloud.modelserver.glsp.layout,
  org.eclipse.emfcloud.modelserver.glsp.model,
+ org.eclipse.emfcloud.modelserver.glsp.notation.integration,
  org.eclipse.emfcloud.modelserver.glsp.operations.handlers
