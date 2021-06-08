@@ -8,14 +8,13 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR MIT
  ********************************************************************************/
-package org.eclipse.emfcloud.modelserver.glsp;
+package org.eclipse.emfcloud.modelserver.glsp.notation.integration;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emfcloud.modelserver.glsp.model.EMSModelState;
 
-public interface EMSNotationModelServerAccess {
+public abstract class EMSNotationModelState extends EMSModelState {
 
-   String getNotationURI();
-
-   EObject getNotationModel();
+   @Override
+   public abstract EMSNotationModelIndex getIndex();
 
 }

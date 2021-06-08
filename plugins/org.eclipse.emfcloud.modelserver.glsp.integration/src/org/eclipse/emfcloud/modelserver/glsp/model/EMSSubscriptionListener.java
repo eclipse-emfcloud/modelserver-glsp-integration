@@ -19,6 +19,7 @@ import org.eclipse.emfcloud.modelserver.command.CCommandExecutionResult;
 import org.eclipse.glsp.server.actions.ActionDispatcher;
 import org.eclipse.glsp.server.actions.SetDirtyStateAction;
 import org.eclipse.glsp.server.features.core.model.ModelSubmissionHandler;
+import org.eclipse.glsp.server.features.core.model.RequestBoundsAction;
 
 public class EMSSubscriptionListener extends XmiToEObjectSubscriptionListener {
 
@@ -52,6 +53,8 @@ public class EMSSubscriptionListener extends XmiToEObjectSubscriptionListener {
       modelState.loadSourceModels();
       // refresh GModelRoot
       submissionHandler.submitModel(modelState);
+      // requestboundsaction in submissionhandler not enough?
+      actionDispatcher.dispatch(modelState.getClientId(), new RequestBoundsAction(modelState.getRoot()));
    }
 
    @Override
