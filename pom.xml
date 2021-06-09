@@ -9,6 +9,8 @@
 	<version>0.7.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	<!-- Required metadata for deploying releases to mvn central -->
+
 	<url>https://www.eclipse.org/emfcloud/</url>
 
 	<licenses>
@@ -73,12 +75,12 @@
 
 		<!-- Maven Plugin Versions: General maven plugin versions -->
 		<tycho.version>2.2.0</tycho.version>
-		<jacoco.version>0.8.6</jacoco.version>
 		<maven.compiler.version>3.8.1</maven.compiler.version>
 		<maven.clean.version>3.1.0</maven.clean.version>
 		<maven.checkstyle.version>3.1.1</maven.checkstyle.version>
 		<puppycrawl.checkstyle.version>8.39</puppycrawl.checkstyle.version>
 		<emfcloud.checkstyle.version>0.1.0-SNAPSHOT</emfcloud.checkstyle.version>
+
 		<maven.resources.version>3.2.0</maven.resources.version>
 		<maven.surefire.version>3.0.0-M5</maven.surefire.version>
 		<maven.failsafe.version>3.0.0-M5</maven.failsafe.version>
@@ -89,54 +91,29 @@
 		<maven.deploy.version>3.0.0-M1</maven.deploy.version>
 		<codehaus.mojo.maven.version>3.2.0</codehaus.mojo.maven.version>
 
+		<!-- Release Dependencies for M2 -->
+		<nexus.maven.version>1.6.8</nexus.maven.version>
+		<maven.gpg.version>1.6</maven.gpg.version>
+
+		<emf.edit.version>2.16.0</emf.edit.version>
+		<glsp.version>0.9.0-SNAPSHOT</glsp.version>
+		<emf.transaction.version>1.4.0-v20100331-1738</emf.transaction.version>
 	</properties>
 
-	<modules>
-		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
-		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.model</module>
-		<module>releng</module>
-	</modules>
+
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
-			<!-- Compilation -->
 			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-compiler-plugin</artifactId>
-				<version>${tycho.version}</version>
-			</plugin>
-			<!-- Check Style: to disable use -Dcheckstyle.skip -->
-			<!-- <plugin> enable once emfcloud-checkstyle.xml is deployed
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${maven.checkstyle.version}</version>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.version}</version>
 				<configuration>
-					<configLocation>emfcloud-checkstyle.xml</configLocation>
-					<consoleOutput>true</consoleOutput>
-
+					<source>${java.source}</source>
+					<target>${java.target}</target>
+					<generatedSourcesDirectory>src-gen</generatedSourcesDirectory>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>check</goal>
-						</goals>
-						<phase>verify</phase>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>com.puppycrawl.tools</groupId>
-						<artifactId>checkstyle</artifactId>
-						<version>${puppycrawl.checkstyle.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>org.eclipse.emfcloud</groupId>
-						<artifactId>org.eclipse.emfcloud.checkstyle</artifactId>
-						<version>${emfcloud.checkstyle.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin> -->
+			</plugin>
 		</plugins>
 	</build>
 
@@ -149,7 +126,8 @@
 			</activation>
 
 			<modules>
-				<module>releng/org.eclipse.emfcloud.modelserver.glsp.feature</module>
+				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
+				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.model</module>
 			</modules>
 
 			<build>
@@ -318,5 +296,111 @@
 			</build>
 		</profile>
 
+		<!-- M2 Profile: Runs a standard maven build that produces jar artifacts -->
+		<profile>
+			<id>m2</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+
+			<properties>
+				<package.type>jar</package.type>
+				<package.type.test>jar</package.type.test>
+			</properties>
+
+			<repositories>
+				<repository>
+					<id>sonatype</id>
+					<name>Sonatype</name>
+					<url>https://oss.sonatype.org/content/groups/public</url>
+				</repository>
+				<repository>
+					<id>irisa</id>
+					<name>Irisa</name>
+					<url>http://maven.irisa.fr/artifactory/list/kermeta-public-release/</url>
+				</repository>
+			</repositories>
+
+			<modules>
+				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
+				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.model</module>
+			</modules>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>${maven.surefire.version}</version>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>${maven.source.plugin}</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- M2-Release Profile: Used to deploy maven artifacts to Sonatype/Maven 
+			central. Should only be used in conjunction with the M2 Profile -->
+		<profile>
+			<id>m2-release</id>
+
+			<distributionManagement>
+				<snapshotRepository>
+					<id>ossrh</id>
+					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+				</snapshotRepository>
+			</distributionManagement>
+
+			<build>
+				<plugins>
+					<!-- To release to Sonatype/Maven central -->
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>${nexus.maven.version}</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoreleaseafterclose>false</autoreleaseafterclose>
+						</configuration>
+					</plugin>
+
+					<!-- To sign the artifacts -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${maven.gpg.version}</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<configuration>
+									<gpgArguments>
+										<arg>--pinentry-mode</arg>
+										<arg>loopback</arg>
+									</gpgArguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
+
 </project>

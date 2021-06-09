@@ -9,15 +9,27 @@ pipeline {
     stages {
         stage ('Build: Eclipse-based (P2)') {
             steps {
-                // ignore test failures since we parse the test results afterwards
-                sh 'mvn clean verify -Pp2 --batch-mode package' 
+                sh 'mvn clean verify -Pp2 -B' 
+            }
+        }
+        
+        stage ('Build: Plain Maven (M2)') {
+        	steps {
+           		sh 'mvn clean verify -Pm2 -B' 
             }
         }
 
         stage('Deploy (main only)') {
             when { branch 'main' }
             steps {
-                build job: 'deploy-emfcloud-modelserver-glsp-integration-p2', wait: false
+                parallel(
+                    p2: {
+                        build job: 'deploy-emfcloud-modelserver-glsp-integration-p2', wait: false	               
+                    },
+                    m2: {
+                        build job: 'deploy-emfcloud-modelserver-glsp-integration-m2', wait: false
+                    }
+                )
             }
         }
     }
