@@ -100,7 +100,10 @@
 		<emf.transaction.version>1.4.0-v20100331-1738</emf.transaction.version>
 	</properties>
 
-
+	<modules>
+		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
+		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.model</module>
+	</modules>
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -125,10 +128,6 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 
-			<modules>
-				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
-				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.model</module>
-			</modules>
 
 			<build>
 				<pluginManagement>
@@ -236,6 +235,12 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 
+			<modules>
+				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
+				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.model</module>
+				<module>releng</module>
+			</modules>
+			
 			<build>
 				<pluginManagement>
 					<plugins>
