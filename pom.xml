@@ -8,6 +8,7 @@
 	<artifactId>org.eclipse.emfcloud.modelserver.glsp.parent</artifactId>
 	<version>0.7.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<name>EMF.cloud Modelserver GLSP Integration Parent</name>
 
 	<!-- Required metadata for deploying releases to mvn central -->
 
@@ -100,7 +101,10 @@
 		<emf.transaction.version>1.4.0-v20100331-1738</emf.transaction.version>
 	</properties>
 
-
+	<modules>
+		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
+		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.model</module>
+	</modules>
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -125,10 +129,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 
-			<modules>
-				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
-				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.model</module>
-			</modules>
+
 
 			<build>
 				<pluginManagement>
@@ -156,6 +157,11 @@
 							<artifactId>target-platform-configuration</artifactId>
 							<version>${tycho.version}</version>
 						</plugin>
+						<plugin>
+							<groupId>org.eclipse.tycho</groupId>
+							<artifactId>tycho-versions-plugin</artifactId>
+							<version>${tycho.version}</version>
+						</plugin>
 					</plugins>
 				</pluginManagement>
 				<plugins>
@@ -177,6 +183,10 @@
 							<showDeprecation>true</showDeprecation>
 							<showWarnings>true</showWarnings>
 						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-versions-plugin</artifactId>
 					</plugin>
 					<plugin>
 						<!-- enable source bundle generation -->
@@ -235,7 +245,11 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
-
+			
+			<modules>
+				<module>releng</module>
+			</modules>
+			
 			<build>
 				<pluginManagement>
 					<plugins>
