@@ -9,7 +9,7 @@
 	<version>0.7.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>EMF.cloud Modelserver GLSP Integration Parent</name>
-
+	<description>EMF.cloud Modelserver GLSP Integration Parent pom</description>
 	<!-- Required metadata for deploying releases to mvn central -->
 
 	<url>https://www.eclipse.org/emfcloud/</url>
@@ -63,9 +63,7 @@
 		<java.source>11</java.source>
 		<java.target>11</java.target>
 
-		<!-- Target: version used to reference target platform from our releng 
-			bundle -->
-		<target.version>0.7.0-SNAPSHOT</target.version>
+
 
 		<!-- Deployment: used by the maven-deploy-plugin -->
 		<maven.deploy.skip>true</maven.deploy.skip>
@@ -80,7 +78,7 @@
 		<maven.clean.version>3.1.0</maven.clean.version>
 		<maven.checkstyle.version>3.1.1</maven.checkstyle.version>
 		<puppycrawl.checkstyle.version>8.39</puppycrawl.checkstyle.version>
-		<emfcloud.checkstyle.version>0.1.0-SNAPSHOT</emfcloud.checkstyle.version>
+		<emfcloud.checkstyle.version>0.1.0-RC1</emfcloud.checkstyle.version>
 
 		<maven.resources.version>3.2.0</maven.resources.version>
 		<maven.surefire.version>3.0.0-M5</maven.surefire.version>
@@ -98,6 +96,7 @@
 
 		<emf.edit.version>2.16.0</emf.edit.version>
 		<glsp.version>0.9.0-SNAPSHOT</glsp.version>
+		<modelserver.version>0.7.0-SNAPSHOT</modelserver.version>
 		<emf.transaction.version>1.4.0-v20100331-1738</emf.transaction.version>
 	</properties>
 
@@ -129,7 +128,9 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 
-
+			<modules>
+				<module>releng</module>
+			</modules>
 
 			<build>
 				<pluginManagement>
@@ -160,6 +161,16 @@
 						<plugin>
 							<groupId>org.eclipse.tycho</groupId>
 							<artifactId>tycho-versions-plugin</artifactId>
+							<version>${tycho.version}</version>
+						</plugin>
+						<plugin>
+							<groupId>org.eclipse.tycho</groupId>
+							<artifactId>tycho-p2-repository-plugin</artifactId>
+							<version>${tycho.version}</version>
+						</plugin>
+						<plugin>
+							<groupId>org.eclipse.tycho</groupId>
+							<artifactId>tycho-p2-plugin</artifactId>
 							<version>${tycho.version}</version>
 						</plugin>
 					</plugins>
@@ -199,6 +210,20 @@
 									<goal>plugin-source</goal>
 								</goals>
 							</execution>
+							<execution>
+								<id>feature-source</id>
+								<phase>package</phase>
+								<goals>
+									<goal>feature-source</goal>
+								</goals>
+								<configuration>
+									<excludes>
+										<plugin id="org.apache.batik.pdf" />
+										<plugin id="org.eclipse.wst.common.project.facet.core" />
+										<plugin id="org.eclipse.emfcloud.modelserver.lib" />
+									</excludes>
+								</configuration>
+							</execution>
 						</executions>
 					</plugin>
 					<plugin>
@@ -229,62 +254,10 @@
 									<groupId>org.eclipse.emfcloud.modelserver.glsp</groupId>
 									<artifactId>org.eclipse.emfcloud.modelserver.glsp.parent</artifactId>
 									<classifier>releng/org.eclipse.emfcloud.modelserver.glsp.releng.target/targetdefinition</classifier>
-									<version>${target.version}</version>
+									<version>${project.version}</version>
 								</artifact>
 							</target>
 						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<!-- P2-Release Profile: Used to build and Eclipse update site. Should 
-			only be used in conjunction with the P2 Profile -->
-		<profile>
-			<id>p2-release</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			
-			<modules>
-				<module>releng</module>
-			</modules>
-			
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.eclipse.tycho</groupId>
-							<artifactId>tycho-p2-repository-plugin</artifactId>
-							<version>${tycho.version}</version>
-						</plugin>
-						<plugin>
-							<groupId>org.eclipse.tycho</groupId>
-							<artifactId>tycho-p2-plugin</artifactId>
-							<version>${tycho.version}</version>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>tycho-source-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>feature-source</id>
-								<phase>package</phase>
-								<goals>
-									<goal>feature-source</goal>
-								</goals>
-								<configuration>
-									<excludes>
-										<plugin id="org.apache.batik.pdf" />
-										<plugin id="org.eclipse.wst.common.project.facet.core" />
-										<plugin id="org.eclipse.emfcloud.modelserver.lib" />
-									</excludes>
-								</configuration>
-							</execution>
-						</executions>
 					</plugin>
 					<plugin>
 						<groupId>org.eclipse.tycho</groupId>
