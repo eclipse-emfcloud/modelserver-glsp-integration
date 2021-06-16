@@ -19,13 +19,4 @@
 		<module>org.eclipse.emfcloud.modelserver.glsp.repository</module>
 	</modules>
 
-	<profiles>
-		<profile>
-			<id>p2-release</id>
-			<modules>
-				<module>org.eclipse.emfcloud.modelserver.glsp.repository</module>
-			</modules>
-		</profile>
-	</profiles>
-
 </project>

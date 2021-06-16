@@ -65,12 +65,12 @@
 				<dependency>
 					<groupId>org.eclipse.emfcloud.modelserver</groupId>
 					<artifactId>org.eclipse.emfcloud.modelserver.emf</artifactId>
-					<version>${target.version}</version>
+					<version>${modelserver.version}</version>
 				</dependency>
 					<dependency>
 					<groupId>org.eclipse.emfcloud.modelserver</groupId>
 					<artifactId>org.eclipse.emfcloud.modelserver.client</artifactId>
-					<version>${target.version}</version>
+					<version>${modelserver.version}</version>
 				</dependency>
 				<dependency>
 					<groupId>org.eclipse.glsp</groupId>
