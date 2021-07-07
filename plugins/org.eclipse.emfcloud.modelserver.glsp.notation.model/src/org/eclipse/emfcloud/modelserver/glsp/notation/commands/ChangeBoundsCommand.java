@@ -31,10 +31,24 @@ public class ChangeBoundsCommand extends NotationElementCommand {
       this.shape = NotationCommandUtil.getNotationElement(modelUri, domain, semanticProxyUri, Shape.class);
    }
 
+   public ChangeBoundsCommand(final EditingDomain domain, final URI modelUri, final String semanticProxyUri,
+      final GPoint shapePosition) {
+      this(domain, modelUri, semanticProxyUri, shapePosition, null);
+   }
+
+   public ChangeBoundsCommand(final EditingDomain domain, final URI modelUri, final String semanticProxyUri,
+      final GDimension shapeSize) {
+      this(domain, modelUri, semanticProxyUri, null, shapeSize);
+   }
+
    @Override
    protected void doExecute() {
-      shape.setPosition(shapePosition);
-      shape.setSize(shapeSize);
+      if (this.shapePosition != null) {
+         shape.setPosition(shapePosition);
+      }
+      if (this.shapeSize != null) {
+         shape.setSize(shapeSize);
+      }
    }
 
 }
