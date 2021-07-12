@@ -78,6 +78,11 @@
 					<version>${glsp.version}</version>
 				</dependency>
 				<dependency>
+					<groupId>org.eclipse.glsp</groupId>
+					<artifactId>org.eclipse.glsp.server</artifactId>
+					<version>${glsp.version}</version>
+				</dependency>
+				<dependency>
 					<groupId>org.eclipse.emf</groupId>
 					<artifactId>org.eclipse.emf.edit</artifactId>
 					<version>${emf.edit.version}</version>

@@ -24,8 +24,10 @@ import org.eclipse.emfcloud.modelserver.command.CCompoundCommand;
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
 import org.eclipse.emfcloud.modelserver.glsp.notation.Shape;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.contribution.ChangeBoundsCommandContribution;
+import org.eclipse.glsp.graph.GDimension;
 import org.eclipse.glsp.graph.GModelElement;
 import org.eclipse.glsp.graph.GNode;
+import org.eclipse.glsp.graph.GPoint;
 import org.eclipse.glsp.server.protocol.GLSPServerException;
 import org.eclipse.glsp.server.types.ElementAndBounds;
 
@@ -56,14 +58,25 @@ public abstract class EMSNotationModelServerAccess extends EMSModelServerAccess 
     * Change Bounds
     */
    public CompletableFuture<Response<Boolean>> changeBounds(final Map<Shape, ElementAndBounds> changeBoundsMap) {
-      CCompoundCommand compoundCommand = CCommandFactory.eINSTANCE.createCompoundCommand();
-      compoundCommand.setType(ChangeBoundsCommandContribution.TYPE);
-      changeBoundsMap.forEach((shape, elementAndBounds) -> {
-         CCommand changeBoundsCommand = ChangeBoundsCommandContribution.create(shape.getSemanticElement().getUri(),
-            elementAndBounds.getNewPosition(), elementAndBounds.getNewSize());
-         compoundCommand.getCommands().add(changeBoundsCommand);
-      });
+      CCompoundCommand compoundCommand = ChangeBoundsCommandContribution.create(changeBoundsMap);
       return this.edit(compoundCommand);
+   }
+
+   public CompletableFuture<Response<Boolean>> changeBounds(final Shape shape, final ElementAndBounds changedBounds) {
+      CCommand changeBoundsCommand = ChangeBoundsCommandContribution.create(shape.getSemanticElement().getUri(),
+         changedBounds.getNewPosition(), changedBounds.getNewSize());
+      return this.edit(changeBoundsCommand);
+   }
+
+   public CompletableFuture<Response<Boolean>> changePosition(final Shape shape, final GPoint position) {
+      CCommand changePositionCommand = ChangeBoundsCommandContribution.create(shape.getSemanticElement().getUri(),
+         position);
+      return this.edit(changePositionCommand);
+   }
+
+   public CompletableFuture<Response<Boolean>> changeSize(final Shape shape, final GDimension size) {
+      CCommand changeSizeCommand = ChangeBoundsCommandContribution.create(shape.getSemanticElement().getUri(), size);
+      return this.edit(changeSizeCommand);
    }
 
    /*

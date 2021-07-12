@@ -34,10 +34,10 @@ public final class NotationCommandUtil {
       return gPoint;
    }
 
-   public static GDimension getGDimension(final String height, final String width) {
+   public static GDimension getGDimension(final String width, final String height) {
       GDimension gDimension = GraphUtil.dimension(
-         height.isEmpty() ? 0.0d : Double.parseDouble(height),
-         width.isEmpty() ? 0.0d : Double.parseDouble(width));
+         height.isEmpty() ? 0.0d : Double.parseDouble(width),
+         width.isEmpty() ? 0.0d : Double.parseDouble(height));
       return gDimension;
    }
 
