@@ -79,10 +79,10 @@ public class ChangeBoundsCommandContribution extends NotationCommandContribution
       if (command instanceof CCompoundCommand) {
          CompoundCommand changeBoundsCommand = new CompoundCommand();
 
-         ((CCompoundCommand) command).getCommands().forEach(cmd -> {
-            String semanticProxyUri = cmd.getProperties().get(SEMANTIC_PROXI_URI);
-            GPoint elementPosition = getElementPosition(command);
-            GDimension elementSize = getElementSize(command);
+         ((CCompoundCommand) command).getCommands().forEach(childCommand -> {
+            String semanticProxyUri = childCommand.getProperties().get(SEMANTIC_PROXI_URI);
+            GPoint elementPosition = getElementPosition(childCommand);
+            GDimension elementSize = getElementSize(childCommand);
             changeBoundsCommand
                .append(new ChangeBoundsCommand(domain, modelUri, semanticProxyUri, elementPosition, elementSize));
          });
