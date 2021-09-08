@@ -10,7 +10,6 @@
  ********************************************************************************/
 package org.eclipse.emfcloud.modelserver.glsp;
 
-import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSDisposeClientSessionActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSOperationActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSRedoActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSSaveModelActionHandler;
@@ -18,7 +17,6 @@ import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSUndoActionHandl
 import org.eclipse.emfcloud.modelserver.glsp.client.ModelServerClientProvider;
 import org.eclipse.emfcloud.modelserver.glsp.layout.EMSLayoutEngine;
 import org.eclipse.glsp.server.actions.ActionHandler;
-import org.eclipse.glsp.server.actions.DisposeClientSessionActionHandler;
 import org.eclipse.glsp.server.actions.SaveModelActionHandler;
 import org.eclipse.glsp.server.di.DefaultGLSPModule;
 import org.eclipse.glsp.server.features.undoredo.UndoRedoActionHandler;
@@ -37,7 +35,6 @@ public abstract class EMSGLSPModule extends DefaultGLSPModule {
       bindings.remove(UndoRedoActionHandler.class);
       bindings.add(EMSUndoActionHandler.class);
       bindings.add(EMSRedoActionHandler.class);
-      bindings.rebind(DisposeClientSessionActionHandler.class, EMSDisposeClientSessionActionHandler.class);
    }
 
    @Override
@@ -46,7 +43,6 @@ public abstract class EMSGLSPModule extends DefaultGLSPModule {
       bind(bindModelServerClientProvider()).asEagerSingleton();
    }
 
-   @SuppressWarnings("rawtypes")
    @Override
    protected Class<? extends GLSPServer> bindGLSPServer() {
       return EMSGLSPServer.class;
