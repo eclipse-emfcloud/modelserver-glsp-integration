@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emfcloud.modelserver.glsp.notation.Diagram;
 import org.eclipse.emfcloud.modelserver.glsp.notation.NotationElement;
-import org.eclipse.emfcloud.modelserver.glsp.notation.model.NotationUtil;
+import org.eclipse.emfcloud.modelserver.glsp.notation.epackage.NotationUtil;
 import org.eclipse.glsp.graph.GDimension;
 import org.eclipse.glsp.graph.GPoint;
 import org.eclipse.glsp.graph.util.GraphUtil;

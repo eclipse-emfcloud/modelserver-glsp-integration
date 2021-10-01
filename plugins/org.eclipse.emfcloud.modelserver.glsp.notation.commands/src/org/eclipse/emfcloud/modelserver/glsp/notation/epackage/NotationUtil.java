@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR MIT
  ********************************************************************************/
-package org.eclipse.emfcloud.modelserver.glsp.notation.model;
+package org.eclipse.emfcloud.modelserver.glsp.notation.epackage;
 
 public final class NotationUtil {
 

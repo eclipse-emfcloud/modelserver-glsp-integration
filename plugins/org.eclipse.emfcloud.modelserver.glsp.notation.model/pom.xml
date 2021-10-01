@@ -51,37 +51,43 @@
 
 			<dependencies>
 				<dependency>
-					<groupId>org.eclipse.emfcloud.modelserver</groupId>
-					<artifactId>org.eclipse.emfcloud.modelserver.emf</artifactId>
-					<version>${modelserver.version}</version>
-				</dependency>
-					<dependency>
-					<groupId>org.eclipse.emfcloud.modelserver</groupId>
-					<artifactId>org.eclipse.emfcloud.modelserver.client</artifactId>
-					<version>${modelserver.version}</version>
-				</dependency>
-				<dependency>
 					<groupId>org.eclipse.glsp</groupId>
 					<artifactId>org.eclipse.glsp.graph</artifactId>
 					<version>${glsp.version}</version>
 				</dependency>
-				<dependency>
-					<groupId>org.eclipse.glsp</groupId>
-					<artifactId>org.eclipse.glsp.server</artifactId>
-					<version>${glsp.version}</version>
-				</dependency>
-				<dependency>
-					<groupId>org.eclipse.emf</groupId>
-					<artifactId>org.eclipse.emf.edit</artifactId>
-					<version>${emf.edit.version}</version>
-				</dependency>
-				<dependency>
-					<groupId>org.eclipse.emf</groupId>
-					<artifactId>transaction</artifactId>
-					<version>${emf.transaction.version}</version>
-				</dependency>
 			</dependencies>
 
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<version>${codehaus.mojo.maven.version}</version>
+						<executions>
+							<execution>
+								<id>add-source</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>add-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>src-gen</source>
+									</sources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<version>${maven.deploy.version}</version>
+						<configuration>
+							<skip>false</skip>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 

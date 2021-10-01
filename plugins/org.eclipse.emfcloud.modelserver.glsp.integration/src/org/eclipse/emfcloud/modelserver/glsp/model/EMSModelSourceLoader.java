@@ -35,10 +35,10 @@ public abstract class EMSModelSourceLoader implements ModelSourceLoader {
    public static final String WORKSPACE_ROOT_OPTION = "workspaceRoot";
 
    @Inject
-   private ModelServerClientProvider modelServerClientProvider;
+   protected ModelServerClientProvider modelServerClientProvider;
 
    @Inject
-   private ActionDispatcher actionDispatcher;
+   protected ActionDispatcher actionDispatcher;
 
    @Inject
    protected ModelSubmissionHandler submissionHandler;

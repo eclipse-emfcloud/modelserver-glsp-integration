@@ -13,7 +13,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-package org.eclipse.emfcloud.modelserver.glsp.notation.model;
+package org.eclipse.emfcloud.modelserver.glsp.notation.epackage;
 
 import java.util.Collection;
 
