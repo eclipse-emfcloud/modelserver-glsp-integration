@@ -17,6 +17,7 @@ import org.eclipse.emfcloud.modelserver.emf.configuration.EPackageConfiguration;
 import org.eclipse.emfcloud.modelserver.emf.di.DefaultModelServerModule;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.contribution.ChangeBoundsCommandContribution;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.contribution.ChangeRoutingPointsCommandContribution;
+import org.eclipse.emfcloud.modelserver.glsp.notation.commands.contribution.LayoutCommandContribution;
 import org.eclipse.emfcloud.modelserver.glsp.notation.model.NotationPackageConfiguration;
 
 public abstract class EMSNotationModelServerModule extends DefaultModelServerModule {
@@ -34,6 +35,8 @@ public abstract class EMSNotationModelServerModule extends DefaultModelServerMod
       binding.put(ChangeBoundsCommandContribution.TYPE, ChangeBoundsCommandContribution.class);
       // ChangeRoutingPoints
       binding.put(ChangeRoutingPointsCommandContribution.TYPE, ChangeRoutingPointsCommandContribution.class);
+      // Layout
+      binding.put(LayoutCommandContribution.TYPE, LayoutCommandContribution.class);
    }
 
 }

@@ -10,6 +10,8 @@
  ********************************************************************************/
 package org.eclipse.emfcloud.modelserver.glsp.notation.integration;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -22,14 +24,19 @@ import org.eclipse.emfcloud.modelserver.command.CCommand;
 import org.eclipse.emfcloud.modelserver.command.CCommandFactory;
 import org.eclipse.emfcloud.modelserver.command.CCompoundCommand;
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
+import org.eclipse.emfcloud.modelserver.glsp.notation.Edge;
 import org.eclipse.emfcloud.modelserver.glsp.notation.Shape;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.contribution.ChangeBoundsCommandContribution;
+import org.eclipse.emfcloud.modelserver.glsp.notation.commands.contribution.ChangeRoutingPointsCommandContribution;
+import org.eclipse.emfcloud.modelserver.glsp.notation.commands.contribution.LayoutCommandContribution;
 import org.eclipse.glsp.graph.GDimension;
+import org.eclipse.glsp.graph.GEdge;
 import org.eclipse.glsp.graph.GModelElement;
 import org.eclipse.glsp.graph.GNode;
 import org.eclipse.glsp.graph.GPoint;
 import org.eclipse.glsp.server.protocol.GLSPServerException;
 import org.eclipse.glsp.server.types.ElementAndBounds;
+import org.eclipse.glsp.server.types.ElementAndRoutingPoints;
 
 public abstract class EMSNotationModelServerAccess extends EMSModelServerAccess {
 
@@ -80,30 +87,45 @@ public abstract class EMSNotationModelServerAccess extends EMSModelServerAccess 
    }
 
    /*
+    * Change Routing Points
+    */
+   public CompletableFuture<Response<Boolean>> changeRoutingPoints(
+      final Map<Edge, ElementAndRoutingPoints> changeBendPointsMap) {
+      CCompoundCommand compoundCommand = CCommandFactory.eINSTANCE.createCompoundCommand();
+      compoundCommand.setType(ChangeRoutingPointsCommandContribution.TYPE);
+
+      changeBendPointsMap.forEach((edge, elementAndRoutingPoints) -> {
+         CCommand changeRoutingPointsCommand = ChangeRoutingPointsCommandContribution
+            .create(edge.getSemanticElement().getUri(), elementAndRoutingPoints.getNewRoutingPoints());
+         compoundCommand.getCommands().add(changeRoutingPointsCommand);
+      });
+      return this.edit(compoundCommand);
+   }
+
+   /*
     * Auto layouting
     */
-   protected CCompoundCommand createLayoutCommand(final EMSNotationModelState modelState,
+   public CompletableFuture<Response<Boolean>> setLayout(final EMSNotationModelState modelState,
       final GModelElement layoutedRoot) {
-      CCompoundCommand compoundCommand = CCommandFactory.eINSTANCE.createCompoundCommand();
-      compoundCommand.setType(ChangeBoundsCommandContribution.TYPE);
+      Map<Shape, ElementAndBounds> changeBoundsMap = new HashMap<>();
+      Map<Edge, List<GPoint>> changeBendPointsMap = new HashMap<>();
 
-      layoutedRoot.getChildren().forEach(gModelElement -> {
-         if (gModelElement instanceof GNode) {
-            modelState.getIndex().getNotation(gModelElement.getId(), Shape.class).ifPresent(shape -> {
-               CCommand changeBoundsCommand = ChangeBoundsCommandContribution.create(
-                  shape.getSemanticElement().getUri(), ((GNode) gModelElement).getPosition(),
-                  ((GNode) gModelElement).getSize());
-               compoundCommand.getCommands().add(changeBoundsCommand);
+      layoutedRoot.getChildren().forEach(layoutedGModelElement -> {
+         if (layoutedGModelElement instanceof GNode) {
+            modelState.getIndex().getNotation(layoutedGModelElement.getId(), Shape.class).ifPresent(shape -> {
+               ElementAndBounds eb = new ElementAndBounds();
+               eb.setNewPosition(((GNode) layoutedGModelElement).getPosition());
+               eb.setNewSize(((GNode) layoutedGModelElement).getSize());
+               changeBoundsMap.put(shape, eb);
+            });
+         } else if (layoutedGModelElement instanceof GEdge) {
+            modelState.getIndex().getNotation(layoutedGModelElement.getId(), Edge.class).ifPresent(edge -> {
+               changeBendPointsMap.put(edge, ((GEdge) layoutedGModelElement).getRoutingPoints());
             });
          }
       });
 
-      return compoundCommand;
-   }
-
-   public CompletableFuture<Response<Boolean>> setLayout(final EMSNotationModelState modelState,
-      final GModelElement layoutedRoot) {
-      CCompoundCommand compoundCommand = createLayoutCommand(modelState, layoutedRoot);
+      CCompoundCommand compoundCommand = LayoutCommandContribution.create(changeBoundsMap, changeBendPointsMap);
       return this.edit(compoundCommand);
    }
 }
