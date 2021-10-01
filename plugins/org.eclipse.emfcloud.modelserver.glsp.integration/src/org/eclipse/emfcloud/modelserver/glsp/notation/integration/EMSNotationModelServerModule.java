@@ -18,7 +18,7 @@ import org.eclipse.emfcloud.modelserver.emf.di.DefaultModelServerModule;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.contribution.ChangeBoundsCommandContribution;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.contribution.ChangeRoutingPointsCommandContribution;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.contribution.LayoutCommandContribution;
-import org.eclipse.emfcloud.modelserver.glsp.notation.model.NotationPackageConfiguration;
+import org.eclipse.emfcloud.modelserver.glsp.notation.epackage.NotationPackageConfiguration;
 
 public abstract class EMSNotationModelServerModule extends DefaultModelServerModule {
 

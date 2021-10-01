@@ -51,8 +51,6 @@
 		<java.source>11</java.source>
 		<java.target>11</java.target>
 
-
-
 		<!-- Deployment: used by the maven-deploy-plugin -->
 		<maven.deploy.skip>true</maven.deploy.skip>
 
@@ -82,6 +80,7 @@
 		<nexus.maven.version>1.6.8</nexus.maven.version>
 		<maven.gpg.version>1.6</maven.gpg.version>
 
+		<emf.ecore.version>2.24.0</emf.ecore.version>
 		<emf.edit.version>2.16.0</emf.edit.version>
 		<glsp.version>0.9.0-SNAPSHOT</glsp.version>
 		<modelserver.version>0.7.0-SNAPSHOT</modelserver.version>
@@ -91,6 +90,7 @@
 	<modules>
 		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
 		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.model</module>
+		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.commands</module>
 	</modules>
 
 	<build>
@@ -299,6 +299,7 @@
 			<modules>
 				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
 				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.model</module>
+				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.commands</module>
 			</modules>
 
 			<build>
