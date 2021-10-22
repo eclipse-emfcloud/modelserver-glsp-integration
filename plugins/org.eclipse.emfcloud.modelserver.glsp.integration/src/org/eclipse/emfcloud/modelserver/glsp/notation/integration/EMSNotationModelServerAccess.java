@@ -34,9 +34,9 @@ import org.eclipse.glsp.graph.GEdge;
 import org.eclipse.glsp.graph.GModelElement;
 import org.eclipse.glsp.graph.GNode;
 import org.eclipse.glsp.graph.GPoint;
-import org.eclipse.glsp.server.protocol.GLSPServerException;
 import org.eclipse.glsp.server.types.ElementAndBounds;
 import org.eclipse.glsp.server.types.ElementAndRoutingPoints;
+import org.eclipse.glsp.server.types.GLSPServerException;
 
 public abstract class EMSNotationModelServerAccess extends EMSModelServerAccess {
 

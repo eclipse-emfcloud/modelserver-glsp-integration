@@ -10,7 +10,7 @@
  ********************************************************************************/
 package org.eclipse.emfcloud.modelserver.glsp;
 
-import static org.eclipse.glsp.server.protocol.GLSPServerException.getOrThrow;
+import static org.eclipse.glsp.server.types.GLSPServerException.getOrThrow;
 
 import java.net.MalformedURLException;
 import java.util.Map;
@@ -21,13 +21,10 @@ import java.util.concurrent.ExecutionException;
 import org.apache.log4j.Logger;
 import org.eclipse.emfcloud.modelserver.client.ModelServerClient;
 import org.eclipse.emfcloud.modelserver.client.Response;
-import org.eclipse.emfcloud.modelserver.glsp.client.ModelServerClientProvider;
-import org.eclipse.glsp.server.jsonrpc.DefaultGLSPServer;
+import org.eclipse.glsp.server.protocol.DefaultGLSPServer;
 import org.eclipse.glsp.server.protocol.DisposeClientSessionParameters;
 import org.eclipse.glsp.server.protocol.InitializeResult;
 import org.eclipse.glsp.server.utils.MapUtil;
-
-import com.google.inject.Inject;
 
 public class EMSGLSPServer extends DefaultGLSPServer {
 
@@ -36,11 +33,14 @@ public class EMSGLSPServer extends DefaultGLSPServer {
    private static final String MODELSERVER_URL_KEY = "modelServerURL";
    private static final String MODEL_URI_KEY = "modelUri";
 
-   @Inject
-   protected ModelServerClientProvider modelServerClientProvider;
+   protected String modelServerUrl;
+
+   // @Inject
+   // protected ModelServerClientProvider modelServerClientProvider;
 
    public EMSGLSPServer() {
       super();
+      this.modelServerUrl = "http://localhost:8081/api/v1/";
    }
 
    @Override
@@ -62,7 +62,7 @@ public class EMSGLSPServer extends DefaultGLSPServer {
          ModelServerClient client = createModelServerClient(modelServerURL);
          boolean alive = client.ping().thenApply(Response<Boolean>::body).get();
          if (alive) {
-            modelServerClientProvider.setModelServerClient(client);
+            // modelServerClientProvider.setModelServerClient(client);
          }
 
       } catch (MalformedURLException | InterruptedException | ExecutionException e) {
@@ -78,10 +78,15 @@ public class EMSGLSPServer extends DefaultGLSPServer {
 
    @Override
    public CompletableFuture<Void> disposeClientSession(final DisposeClientSessionParameters params) {
-      Optional<ModelServerClient> modelServerClient = modelServerClientProvider.get();
-      Optional<String> modelUri = MapUtil.getValue(params.getArgs(), MODEL_URI_KEY);
-      if (modelServerClient.isPresent() && modelUri.isPresent()) {
-         modelServerClient.get().unsubscribe(modelUri.get());
+      // Optional<ModelServerClient> modelServerClient = modelServerClientProvider.get();
+      try {
+         ModelServerClient modelServerClient = createModelServerClient(this.modelServerUrl);
+         Optional<String> modelUri = MapUtil.getValue(params.getArgs(), MODEL_URI_KEY);
+         if (modelUri.isPresent()) {
+            modelServerClient.unsubscribe(modelUri.get());
+         }
+      } catch (MalformedURLException e) {
+         LOGGER.error("Error during disposeClientSession", e);
       }
       return super.disposeClientSession(params);
    }

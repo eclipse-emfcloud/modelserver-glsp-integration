@@ -10,23 +10,17 @@
  ********************************************************************************/
 package org.eclipse.emfcloud.modelserver.glsp.client;
 
-import java.util.Optional;
-
-import org.eclipse.emfcloud.modelserver.client.ModelServerClient;
-
-import com.google.inject.Singleton;
-
-@Singleton
+// @Singleton
 public class ModelServerClientProvider {
 
-   private ModelServerClient modelServerClient;
-
-   public Optional<ModelServerClient> get() {
-      return Optional.ofNullable(modelServerClient);
-   }
-
-   public void setModelServerClient(final ModelServerClient modelServerClient) {
-      this.modelServerClient = modelServerClient;
-   }
+   // private ModelServerClient modelServerClient;
+   //
+   // public Optional<ModelServerClient> get() {
+   // return Optional.ofNullable(modelServerClient);
+   // }
+   //
+   // public void setModelServerClient(final ModelServerClient modelServerClient) {
+   // this.modelServerClient = modelServerClient;
+   // }
 
 }

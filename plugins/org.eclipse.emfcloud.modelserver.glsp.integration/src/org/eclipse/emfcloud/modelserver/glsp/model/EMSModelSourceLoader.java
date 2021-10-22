@@ -10,20 +10,19 @@
  ********************************************************************************/
 package org.eclipse.emfcloud.modelserver.glsp.model;
 
+import java.net.MalformedURLException;
 import java.util.Map;
-import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emfcloud.modelserver.client.ModelServerClient;
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
-import org.eclipse.emfcloud.modelserver.glsp.client.ModelServerClientProvider;
 import org.eclipse.glsp.server.actions.ActionDispatcher;
 import org.eclipse.glsp.server.features.core.model.ModelSourceLoader;
 import org.eclipse.glsp.server.features.core.model.ModelSubmissionHandler;
 import org.eclipse.glsp.server.features.core.model.RequestModelAction;
 import org.eclipse.glsp.server.model.GModelState;
-import org.eclipse.glsp.server.protocol.GLSPServerException;
-import org.eclipse.glsp.server.utils.ClientOptions;
+import org.eclipse.glsp.server.types.GLSPServerException;
+import org.eclipse.glsp.server.utils.ClientOptionsUtil;
 import org.eclipse.glsp.server.utils.MapUtil;
 
 import com.google.inject.Inject;
@@ -34,8 +33,8 @@ public abstract class EMSModelSourceLoader implements ModelSourceLoader {
 
    public static final String WORKSPACE_ROOT_OPTION = "workspaceRoot";
 
-   @Inject
-   protected ModelServerClientProvider modelServerClientProvider;
+   // @Inject
+   // protected Optional<ModelServerClientProvider> modelServerClientProvider;
 
    @Inject
    protected ActionDispatcher actionDispatcher;
@@ -50,13 +49,19 @@ public abstract class EMSModelSourceLoader implements ModelSourceLoader {
          LOGGER.error("No source URI given to load source models");
          return;
       }
-      Optional<ModelServerClient> modelServerClient = modelServerClientProvider.get();
-      if (modelServerClient.isEmpty()) {
-         LOGGER.error("Connection to modelserver could not be initialized");
-         return;
+      // Optional<ModelServerClient> modelServerClient = modelServerClientProvider.get().get();
+      ModelServerClient modelServerClient = null;
+      try {
+         modelServerClient = new ModelServerClient("http://localhost:8081/api/v1/");
+      } catch (MalformedURLException e) {
+         LOGGER.error("Error during createModelServerClient", e);
       }
+      // if (modelServerClient.isEmpty()) {
+      // LOGGER.error("Connection to modelserver could not be initialized");
+      // return;
+      // }
 
-      EMSModelServerAccess modelServerAccess = createModelServerAccess(sourceURI, modelServerClient.get());
+      EMSModelServerAccess modelServerAccess = createModelServerAccess(sourceURI, modelServerClient);
 
       EMSModelState modelState = createModelState(gModelState);
       modelState.initialize(action.getOptions(), modelServerAccess);
@@ -83,12 +88,12 @@ public abstract class EMSModelSourceLoader implements ModelSourceLoader {
    }
 
    protected String getSourceURI(final Map<String, String> clientOptions) {
-      String sourceURI = ClientOptions.getSourceUri(clientOptions)
+      String sourceURI = ClientOptionsUtil.getSourceUri(clientOptions)
          .orElseThrow(() -> new GLSPServerException("No source URI given to load model!"));
       String workspaceRoot = MapUtil.getValue(clientOptions, WORKSPACE_ROOT_OPTION)
          .orElseThrow(() -> new GLSPServerException("No workspace URI given to load model!"));
 
-      return sourceURI.replace(ClientOptions.adaptUri(workspaceRoot), "").replaceFirst("/", "");
+      return sourceURI.replace(ClientOptionsUtil.adaptUri(workspaceRoot), "").replaceFirst("/", "");
    }
 
 }
