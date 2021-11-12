@@ -14,17 +14,22 @@ import java.util.List;
 
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
 import org.eclipse.emfcloud.modelserver.glsp.model.EMSModelState;
+import org.eclipse.glsp.server.actions.AbstractActionHandler;
 import org.eclipse.glsp.server.actions.Action;
-import org.eclipse.glsp.server.actions.BasicActionHandler;
 import org.eclipse.glsp.server.internal.util.GenericsUtil;
 import org.eclipse.glsp.server.model.GModelState;
 
+import com.google.inject.Inject;
+
 @SuppressWarnings("restriction")
 public abstract class EMSBasicActionHandler<T extends Action, U extends EMSModelState, V extends EMSModelServerAccess>
-   extends BasicActionHandler<T> implements EMSActionHandler<T, U, V> {
+   extends AbstractActionHandler<T> implements EMSActionHandler<T, U, V> {
 
    protected final Class<U> modelStateType;
    protected final Class<V> modelServerAccessType;
+
+   @Inject
+   protected GModelState gModelState;
 
    public EMSBasicActionHandler() {
       super();
@@ -52,11 +57,10 @@ public abstract class EMSBasicActionHandler<T extends Action, U extends EMSModel
    }
 
    @Override
-   public List<Action> executeAction(final T actualAction, final GModelState gModelState) {
+   public List<Action> executeAction(final T actualAction) {
       if (handles(actualAction)) {
-         EMSModelState modelState = EMSModelState.getModelState(gModelState);
-         EMSModelServerAccess modelServerAccess = EMSModelState.getModelServerAccess(modelState);
-         return executeAction(actionType.cast(actualAction), modelStateType.cast(modelState),
+         EMSModelServerAccess modelServerAccess = EMSModelState.getModelServerAccess(gModelState);
+         return executeAction(actionType.cast(actualAction), modelStateType.cast(gModelState),
             modelServerAccessType.cast(modelServerAccess));
       }
       return none();

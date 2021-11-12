@@ -52,7 +52,7 @@ public class EMSSubscriptionListener extends XmiToEObjectSubscriptionListener {
       // reload models
       modelState.loadSourceModels();
       // refresh GModelRoot
-      submissionHandler.submitModel(modelState);
+      submissionHandler.submitModel();
       // requestboundsaction in submissionhandler not enough?
       actionDispatcher.dispatch(new RequestBoundsAction(modelState.getRoot()));
    }

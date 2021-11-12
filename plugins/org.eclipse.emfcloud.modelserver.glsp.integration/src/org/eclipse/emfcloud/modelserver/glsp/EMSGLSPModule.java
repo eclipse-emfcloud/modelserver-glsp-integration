@@ -38,12 +38,7 @@ public abstract class EMSGLSPModule extends GModelJsonDiagramModule {
    @Override
    protected void configureAdditionals() {
       super.configureAdditionals();
-      // bind(bindModelServerClientProvider()).asEagerSingleton();
    }
-
-   // protected Class<? extends ModelServerClientProvider> bindModelServerClientProvider() {
-   // return ModelServerClientProvider.class;
-   // }
 
    @Override
    protected Class<? extends LayoutEngine> bindLayoutEngine() {

@@ -15,7 +15,6 @@ import java.util.Optional;
 
 import org.eclipse.emfcloud.modelserver.glsp.operations.handlers.EMSOperationHandler;
 import org.eclipse.glsp.server.actions.Action;
-import org.eclipse.glsp.server.model.GModelState;
 import org.eclipse.glsp.server.operations.Operation;
 import org.eclipse.glsp.server.operations.OperationActionHandler;
 import org.eclipse.glsp.server.operations.OperationHandler;
@@ -23,21 +22,20 @@ import org.eclipse.glsp.server.operations.OperationHandler;
 public class EMSOperationActionHandler extends OperationActionHandler {
 
    @Override
-   public List<Action> executeAction(final Operation operation, final GModelState modelState) {
+   public List<Action> executeAction(final Operation operation) {
       // Disable the special handling for CreateOperation, as we don't register
       // one handler per element type to create.
       Optional<? extends OperationHandler> operationHandler = operationHandlerRegistry.get(operation);
       if (operationHandler.isPresent()) {
-         return executeHandler(operation, operationHandler.get(), modelState);
+         return executeHandler(operation, operationHandler.get());
       }
       return none();
    }
 
    @Override
-   protected List<Action> executeHandler(final Operation operation, final OperationHandler handler,
-      final GModelState gModelState) {
+   protected List<Action> executeHandler(final Operation operation, final OperationHandler handler) {
       if (handler instanceof EMSOperationHandler) {
-         handler.execute(operation, gModelState);
+         handler.execute(operation);
       }
       return none();
    }
