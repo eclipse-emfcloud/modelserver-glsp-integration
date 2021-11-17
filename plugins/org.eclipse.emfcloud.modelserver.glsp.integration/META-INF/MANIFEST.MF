@@ -28,3 +28,4 @@ Export-Package: org.eclipse.emfcloud.modelserver.glsp,
  org.eclipse.emfcloud.modelserver.glsp.model,
  org.eclipse.emfcloud.modelserver.glsp.notation.integration,
  org.eclipse.emfcloud.modelserver.glsp.operations.handlers
+Import-Package: org.apache.log4j;version="1.2.15"

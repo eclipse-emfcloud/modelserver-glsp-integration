@@ -10,12 +10,13 @@
  ********************************************************************************/
 package org.eclipse.emfcloud.modelserver.glsp.model;
 
-import java.net.MalformedURLException;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emfcloud.modelserver.client.ModelServerClient;
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
+import org.eclipse.emfcloud.modelserver.glsp.client.ModelServerClientProvider;
 import org.eclipse.glsp.server.actions.ActionDispatcher;
 import org.eclipse.glsp.server.features.core.model.ModelSourceLoader;
 import org.eclipse.glsp.server.features.core.model.ModelSubmissionHandler;
@@ -33,8 +34,8 @@ public abstract class EMSModelSourceLoader implements ModelSourceLoader {
 
    public static final String WORKSPACE_ROOT_OPTION = "workspaceRoot";
 
-   // @Inject
-   // protected Optional<ModelServerClientProvider> modelServerClientProvider;
+   @Inject
+   protected ModelServerClientProvider modelServerClientProvider;
 
    @Inject
    protected ActionDispatcher actionDispatcher;
@@ -42,26 +43,23 @@ public abstract class EMSModelSourceLoader implements ModelSourceLoader {
    @Inject
    protected ModelSubmissionHandler submissionHandler;
 
+   @Inject
+   protected GModelState gModelState;
+
    @Override
-   public void loadSourceModel(final RequestModelAction action, final GModelState gModelState) {
+   public void loadSourceModel(final RequestModelAction action) {
       String sourceURI = getSourceURI(action.getOptions());
       if (sourceURI.isEmpty()) {
          LOGGER.error("No source URI given to load source models");
          return;
       }
-      // Optional<ModelServerClient> modelServerClient = modelServerClientProvider.get().get();
-      ModelServerClient modelServerClient = null;
-      try {
-         modelServerClient = new ModelServerClient("http://localhost:8081/api/v1/");
-      } catch (MalformedURLException e) {
-         LOGGER.error("Error during createModelServerClient", e);
+      Optional<ModelServerClient> modelServerClient = modelServerClientProvider.get();
+      if (modelServerClient.isEmpty()) {
+         LOGGER.error("Connection to modelserver could not be initialized");
+         return;
       }
-      // if (modelServerClient.isEmpty()) {
-      // LOGGER.error("Connection to modelserver could not be initialized");
-      // return;
-      // }
 
-      EMSModelServerAccess modelServerAccess = createModelServerAccess(sourceURI, modelServerClient);
+      EMSModelServerAccess modelServerAccess = createModelServerAccess(sourceURI, modelServerClient.get());
 
       EMSModelState modelState = createModelState(gModelState);
       modelState.initialize(action.getOptions(), modelServerAccess);
