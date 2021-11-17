@@ -76,14 +76,44 @@
 					<version>${glsp.version}</version>
 				</dependency>
 				<dependency>
+					<groupId>org.eclipse.core</groupId>
+					<artifactId>org.eclipse.core.runtime</artifactId>
+					<version>${eclipse.core.runtime.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.core</groupId>
+					<artifactId>org.eclipse.core.resources</artifactId>
+					<version>${eclipse.core.resources.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.emf</groupId>
+					<artifactId>org.eclipse.emf.common</artifactId>
+					<version>${emf.common.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.emf</groupId>
+					<artifactId>org.eclipse.emf.ecore</artifactId>
+					<version>${emf.ecore.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.emf</groupId>
+					<artifactId>org.eclipse.emf.ecore.change</artifactId>
+					<version>${emf.ecore.change.version}</version>
+				</dependency>
+				<dependency>
 					<groupId>org.eclipse.emf</groupId>
 					<artifactId>org.eclipse.emf.edit</artifactId>
 					<version>${emf.edit.version}</version>
 				</dependency>
 				<dependency>
-					<groupId>org.eclipse.emf</groupId>
-					<artifactId>transaction</artifactId>
+					<groupId>org.eclipse</groupId>
+					<artifactId>org.eclipse.emf.transaction</artifactId>
 					<version>${emf.transaction.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse</groupId>
+					<artifactId>org.eclipse.emf.validation</artifactId>
+					<version>${emf.validation.version}</version>
 				</dependency>
 			</dependencies>
 
