@@ -22,8 +22,8 @@ import org.eclipse.glsp.server.features.core.model.ModelSourceLoader;
 import org.eclipse.glsp.server.features.core.model.ModelSubmissionHandler;
 import org.eclipse.glsp.server.features.core.model.RequestModelAction;
 import org.eclipse.glsp.server.model.GModelState;
-import org.eclipse.glsp.server.protocol.GLSPServerException;
-import org.eclipse.glsp.server.utils.ClientOptions;
+import org.eclipse.glsp.server.types.GLSPServerException;
+import org.eclipse.glsp.server.utils.ClientOptionsUtil;
 import org.eclipse.glsp.server.utils.MapUtil;
 
 import com.google.inject.Inject;
@@ -43,8 +43,11 @@ public abstract class EMSModelSourceLoader implements ModelSourceLoader {
    @Inject
    protected ModelSubmissionHandler submissionHandler;
 
+   @Inject
+   protected GModelState gModelState;
+
    @Override
-   public void loadSourceModel(final RequestModelAction action, final GModelState gModelState) {
+   public void loadSourceModel(final RequestModelAction action) {
       String sourceURI = getSourceURI(action.getOptions());
       if (sourceURI.isEmpty()) {
          LOGGER.error("No source URI given to load source models");
@@ -83,12 +86,12 @@ public abstract class EMSModelSourceLoader implements ModelSourceLoader {
    }
 
    protected String getSourceURI(final Map<String, String> clientOptions) {
-      String sourceURI = ClientOptions.getSourceUri(clientOptions)
+      String sourceURI = ClientOptionsUtil.getSourceUri(clientOptions)
          .orElseThrow(() -> new GLSPServerException("No source URI given to load model!"));
       String workspaceRoot = MapUtil.getValue(clientOptions, WORKSPACE_ROOT_OPTION)
          .orElseThrow(() -> new GLSPServerException("No workspace URI given to load model!"));
 
-      return sourceURI.replace(ClientOptions.adaptUri(workspaceRoot), "").replaceFirst("/", "");
+      return sourceURI.replace(ClientOptionsUtil.adaptUri(workspaceRoot), "").replaceFirst("/", "");
    }
 
 }

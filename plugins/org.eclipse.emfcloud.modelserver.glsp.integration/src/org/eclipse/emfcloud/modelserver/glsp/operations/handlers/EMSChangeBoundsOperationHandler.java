@@ -17,8 +17,8 @@ import org.eclipse.emfcloud.modelserver.glsp.notation.Shape;
 import org.eclipse.emfcloud.modelserver.glsp.notation.integration.EMSNotationModelServerAccess;
 import org.eclipse.emfcloud.modelserver.glsp.notation.integration.EMSNotationModelState;
 import org.eclipse.glsp.server.operations.ChangeBoundsOperation;
-import org.eclipse.glsp.server.protocol.GLSPServerException;
 import org.eclipse.glsp.server.types.ElementAndBounds;
+import org.eclipse.glsp.server.types.GLSPServerException;
 
 public class EMSChangeBoundsOperationHandler
    extends EMSBasicOperationHandler<ChangeBoundsOperation, EMSNotationModelState, EMSNotationModelServerAccess> {

@@ -10,7 +10,7 @@
  ********************************************************************************/
 package org.eclipse.emfcloud.modelserver.glsp;
 
-import static org.eclipse.glsp.server.protocol.GLSPServerException.getOrThrow;
+import static org.eclipse.glsp.server.types.GLSPServerException.getOrThrow;
 
 import java.net.MalformedURLException;
 import java.util.Map;
@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emfcloud.modelserver.client.ModelServerClient;
 import org.eclipse.emfcloud.modelserver.client.Response;
 import org.eclipse.emfcloud.modelserver.glsp.client.ModelServerClientProvider;
-import org.eclipse.glsp.server.jsonrpc.DefaultGLSPServer;
+import org.eclipse.glsp.server.protocol.DefaultGLSPServer;
 import org.eclipse.glsp.server.protocol.DisposeClientSessionParameters;
 import org.eclipse.glsp.server.protocol.InitializeResult;
 import org.eclipse.glsp.server.utils.MapUtil;

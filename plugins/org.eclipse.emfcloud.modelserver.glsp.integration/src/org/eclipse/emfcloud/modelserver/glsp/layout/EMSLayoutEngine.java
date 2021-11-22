@@ -22,7 +22,7 @@ import org.eclipse.glsp.server.model.GModelState;
 public class EMSLayoutEngine extends ElkLayoutEngine {
 
    @Override
-   public void layout(final GModelState modelState) {
+   public void layout() {
       // no-op
    }
 

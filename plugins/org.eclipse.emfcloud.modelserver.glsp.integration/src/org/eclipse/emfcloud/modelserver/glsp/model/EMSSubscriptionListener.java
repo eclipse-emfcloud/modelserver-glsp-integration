@@ -52,15 +52,15 @@ public class EMSSubscriptionListener extends XmiToEObjectSubscriptionListener {
       // reload models
       modelState.loadSourceModels();
       // refresh GModelRoot
-      submissionHandler.submitModel(modelState);
+      submissionHandler.submitModel();
       // requestboundsaction in submissionhandler not enough?
-      actionDispatcher.dispatch(modelState.getClientId(), new RequestBoundsAction(modelState.getRoot()));
+      actionDispatcher.dispatch(new RequestBoundsAction(modelState.getRoot()));
    }
 
    @Override
    public void onDirtyChange(final boolean isDirty) {
       LOGGER.debug("Dirty State Changed: " + isDirty + " for clientId: " + modelState.getClientId());
-      actionDispatcher.dispatch(modelState.getClientId(), new SetDirtyStateAction(isDirty));
+      actionDispatcher.dispatch(new SetDirtyStateAction(isDirty));
    }
 
    @Override

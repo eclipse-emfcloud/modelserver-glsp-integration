@@ -14,9 +14,9 @@ import org.eclipse.emfcloud.modelserver.glsp.layout.EMSLayoutEngine;
 import org.eclipse.emfcloud.modelserver.glsp.notation.integration.EMSNotationModelServerAccess;
 import org.eclipse.emfcloud.modelserver.glsp.notation.integration.EMSNotationModelState;
 import org.eclipse.glsp.graph.GModelElement;
-import org.eclipse.glsp.server.diagram.DiagramConfigurationRegistry;
+import org.eclipse.glsp.server.diagram.DiagramConfiguration;
 import org.eclipse.glsp.server.features.core.model.ModelSubmissionHandler;
-import org.eclipse.glsp.server.layout.ILayoutEngine;
+import org.eclipse.glsp.server.layout.LayoutEngine;
 import org.eclipse.glsp.server.layout.ServerLayoutKind;
 import org.eclipse.glsp.server.operations.LayoutOperation;
 
@@ -26,17 +26,17 @@ public class EMSLayoutOperationHandler
    extends EMSBasicOperationHandler<LayoutOperation, EMSNotationModelState, EMSNotationModelServerAccess> {
 
    @Inject
-   protected ILayoutEngine layoutEngine;
+   protected LayoutEngine layoutEngine;
    @Inject
    protected ModelSubmissionHandler modelSubmissionHandler;
    @Inject
-   protected DiagramConfigurationRegistry diagramConfigurationRegistry;
+   protected DiagramConfiguration diagramConfiguration;
 
    @Override
    public void executeOperation(final LayoutOperation operation, final EMSNotationModelState modelState,
       final EMSNotationModelServerAccess modelServerAccess) {
 
-      if (diagramConfigurationRegistry.get(modelState).getLayoutKind() == ServerLayoutKind.MANUAL) {
+      if (diagramConfiguration.getLayoutKind() == ServerLayoutKind.MANUAL) {
          if (layoutEngine != null && layoutEngine instanceof EMSLayoutEngine) {
             GModelElement layoutedRoot = ((EMSLayoutEngine) layoutEngine).layoutRoot(modelState);
             modelServerAccess.setLayout(modelState, layoutedRoot);

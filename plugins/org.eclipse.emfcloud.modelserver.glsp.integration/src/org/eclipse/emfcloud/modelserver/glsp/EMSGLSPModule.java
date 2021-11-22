@@ -14,18 +14,16 @@ import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSOperationAction
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSRedoActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSSaveModelActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSUndoActionHandler;
-import org.eclipse.emfcloud.modelserver.glsp.client.ModelServerClientProvider;
 import org.eclipse.emfcloud.modelserver.glsp.layout.EMSLayoutEngine;
 import org.eclipse.glsp.server.actions.ActionHandler;
 import org.eclipse.glsp.server.actions.SaveModelActionHandler;
-import org.eclipse.glsp.server.di.DefaultGLSPModule;
+import org.eclipse.glsp.server.di.GModelJsonDiagramModule;
+import org.eclipse.glsp.server.di.MultiBinding;
 import org.eclipse.glsp.server.features.undoredo.UndoRedoActionHandler;
-import org.eclipse.glsp.server.layout.ILayoutEngine;
+import org.eclipse.glsp.server.layout.LayoutEngine;
 import org.eclipse.glsp.server.operations.OperationActionHandler;
-import org.eclipse.glsp.server.protocol.GLSPServer;
-import org.eclipse.glsp.server.utils.MultiBinding;
 
-public abstract class EMSGLSPModule extends DefaultGLSPModule {
+public abstract class EMSGLSPModule extends GModelJsonDiagramModule {
 
    @Override
    protected void configureActionHandlers(final MultiBinding<ActionHandler> bindings) {
@@ -38,22 +36,12 @@ public abstract class EMSGLSPModule extends DefaultGLSPModule {
    }
 
    @Override
-   public void configure() {
-      super.configure();
-      bind(bindModelServerClientProvider()).asEagerSingleton();
+   protected void configureAdditionals() {
+      super.configureAdditionals();
    }
 
    @Override
-   protected Class<? extends GLSPServer> bindGLSPServer() {
-      return EMSGLSPServer.class;
-   }
-
-   protected Class<? extends ModelServerClientProvider> bindModelServerClientProvider() {
-      return ModelServerClientProvider.class;
-   }
-
-   @Override
-   protected Class<? extends ILayoutEngine> bindLayoutEngine() {
+   protected Class<? extends LayoutEngine> bindLayoutEngine() {
       return EMSLayoutEngine.class;
    }
 

@@ -16,7 +16,7 @@ import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
 import org.eclipse.emfcloud.modelserver.glsp.model.EMSModelState;
 import org.eclipse.glsp.server.actions.Action;
 import org.eclipse.glsp.server.actions.SaveModelAction;
-import org.eclipse.glsp.server.protocol.GLSPServerException;
+import org.eclipse.glsp.server.types.GLSPServerException;
 
 public class EMSSaveModelActionHandler
    extends EMSBasicActionHandler<SaveModelAction, EMSModelState, EMSModelServerAccess> {

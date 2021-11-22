@@ -14,11 +14,11 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
+import org.eclipse.glsp.server.model.DefaultGModelState;
 import org.eclipse.glsp.server.model.GModelState;
-import org.eclipse.glsp.server.model.GModelStateImpl;
-import org.eclipse.glsp.server.protocol.GLSPServerException;
+import org.eclipse.glsp.server.types.GLSPServerException;
 
-public abstract class EMSModelState extends GModelStateImpl {
+public abstract class EMSModelState extends DefaultGModelState {
 
    public void initialize(final Map<String, String> clientOptions,
       final EMSModelServerAccess modelServerAccess) {

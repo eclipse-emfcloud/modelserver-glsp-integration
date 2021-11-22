@@ -21,7 +21,7 @@ import org.eclipse.emfcloud.modelserver.client.ModelServerClientApi;
 import org.eclipse.emfcloud.modelserver.client.NotificationSubscriptionListener;
 import org.eclipse.emfcloud.modelserver.client.Response;
 import org.eclipse.emfcloud.modelserver.command.CCommand;
-import org.eclipse.glsp.server.protocol.GLSPServerException;
+import org.eclipse.glsp.server.types.GLSPServerException;
 
 import com.google.common.base.Preconditions;
 
