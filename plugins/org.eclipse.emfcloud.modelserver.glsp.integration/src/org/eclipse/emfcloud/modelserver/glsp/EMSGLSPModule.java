@@ -12,16 +12,18 @@ package org.eclipse.emfcloud.modelserver.glsp;
 
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSOperationActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSRedoActionHandler;
+import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSRefreshModelActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSSaveModelActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSUndoActionHandler;
-import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSRefreshModelActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.layout.EMSLayoutEngine;
+import org.eclipse.emfcloud.modelserver.glsp.model.EMSModelState;
 import org.eclipse.glsp.server.actions.ActionHandler;
 import org.eclipse.glsp.server.actions.SaveModelActionHandler;
 import org.eclipse.glsp.server.di.GModelJsonDiagramModule;
 import org.eclipse.glsp.server.di.MultiBinding;
 import org.eclipse.glsp.server.features.undoredo.UndoRedoActionHandler;
 import org.eclipse.glsp.server.layout.LayoutEngine;
+import org.eclipse.glsp.server.model.GModelState;
 import org.eclipse.glsp.server.operations.OperationActionHandler;
 
 public abstract class EMSGLSPModule extends GModelJsonDiagramModule {
@@ -45,6 +47,11 @@ public abstract class EMSGLSPModule extends GModelJsonDiagramModule {
    @Override
    protected Class<? extends LayoutEngine> bindLayoutEngine() {
       return EMSLayoutEngine.class;
+   }
+
+   @Override
+   protected Class<? extends GModelState> bindGModelState() {
+      return EMSModelState.class;
    }
 
 }
