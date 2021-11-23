@@ -6,7 +6,7 @@ location "https://download.eclipse.org/glsp/server/p2/nightly/0.9/0.9.0.20211104
 	org.eclipse.glsp.graph [0.9.0,1.0.0)
 }
 
-location "https://download.eclipse.org/emfcloud/modelserver/p2/nightly/0.7/0.7.0.202110081257/" {
+location "https://download.eclipse.org/emfcloud/modelserver/p2/nightly/0.7/0.7.0.202111221314/" {
 	org.eclipse.emfcloud.modelserver.feature.feature.group [0.7.0,1.0.0)
 }
 
