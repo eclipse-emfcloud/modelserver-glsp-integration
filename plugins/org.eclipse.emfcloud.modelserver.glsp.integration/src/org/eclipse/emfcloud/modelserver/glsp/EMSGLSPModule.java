@@ -14,6 +14,7 @@ import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSOperationAction
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSRedoActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSSaveModelActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSUndoActionHandler;
+import org.eclipse.emfcloud.modelserver.glsp.actions.handlers.EMSRefreshModelActionHandler;
 import org.eclipse.emfcloud.modelserver.glsp.layout.EMSLayoutEngine;
 import org.eclipse.glsp.server.actions.ActionHandler;
 import org.eclipse.glsp.server.actions.SaveModelActionHandler;
@@ -33,6 +34,7 @@ public abstract class EMSGLSPModule extends GModelJsonDiagramModule {
       bindings.remove(UndoRedoActionHandler.class);
       bindings.add(EMSUndoActionHandler.class);
       bindings.add(EMSRedoActionHandler.class);
+      bindings.add(EMSRefreshModelActionHandler.class);
    }
 
    @Override
