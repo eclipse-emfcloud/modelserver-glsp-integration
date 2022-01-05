@@ -18,12 +18,13 @@ import org.eclipse.glsp.server.diagram.DiagramConfiguration;
 import org.eclipse.glsp.server.features.core.model.ModelSubmissionHandler;
 import org.eclipse.glsp.server.layout.LayoutEngine;
 import org.eclipse.glsp.server.layout.ServerLayoutKind;
+import org.eclipse.glsp.server.model.GModelState;
 import org.eclipse.glsp.server.operations.LayoutOperation;
 
 import com.google.inject.Inject;
 
 public class EMSLayoutOperationHandler
-   extends EMSBasicOperationHandler<LayoutOperation, EMSNotationModelState, EMSNotationModelServerAccess> {
+   extends EMSBasicOperationHandler<LayoutOperation, EMSNotationModelServerAccess> {
 
    @Inject
    protected LayoutEngine layoutEngine;
@@ -31,15 +32,16 @@ public class EMSLayoutOperationHandler
    protected ModelSubmissionHandler modelSubmissionHandler;
    @Inject
    protected DiagramConfiguration diagramConfiguration;
+   @Inject
+   protected GModelState modelState;
 
    @Override
-   public void executeOperation(final LayoutOperation operation, final EMSNotationModelState modelState,
-      final EMSNotationModelServerAccess modelServerAccess) {
-
+   public void executeOperation(final LayoutOperation operation, final EMSNotationModelServerAccess modelServerAccess) {
+      EMSNotationModelState emsModelState = EMSNotationModelState.getModelState(modelState);
       if (diagramConfiguration.getLayoutKind() == ServerLayoutKind.MANUAL) {
          if (layoutEngine != null && layoutEngine instanceof EMSLayoutEngine) {
             GModelElement layoutedRoot = ((EMSLayoutEngine) layoutEngine).layoutRoot(modelState);
-            modelServerAccess.setLayout(modelState, layoutedRoot);
+            modelServerAccess.setLayout(emsModelState, layoutedRoot);
          }
       }
    }

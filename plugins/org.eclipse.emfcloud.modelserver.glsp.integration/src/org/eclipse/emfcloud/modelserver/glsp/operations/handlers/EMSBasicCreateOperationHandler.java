@@ -16,27 +16,28 @@ import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
 import org.eclipse.emfcloud.modelserver.glsp.model.EMSModelState;
 import org.eclipse.glsp.server.internal.util.GenericsUtil;
 import org.eclipse.glsp.server.model.GModelState;
-import org.eclipse.glsp.server.operations.BasicCreateOperationHandler;
+import org.eclipse.glsp.server.operations.AbstractCreateOperationHandler;
 import org.eclipse.glsp.server.operations.CreateOperation;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 @SuppressWarnings("restriction")
-public abstract class EMSBasicCreateOperationHandler<T extends CreateOperation, U extends EMSModelState, V extends EMSModelServerAccess>
-   extends BasicCreateOperationHandler<T> implements EMSOperationHandler<T, U, V> {
+public abstract class EMSBasicCreateOperationHandler<T extends CreateOperation, U extends EMSModelServerAccess>
+   extends AbstractCreateOperationHandler<T> implements EMSOperationHandler<T, U> {
 
-   protected final Class<U> modelStateType;
-   protected final Class<V> modelServerAccessType;
+   @Inject
+   protected GModelState gModelState;
+
+   protected final Class<U> modelServerAccessType;
 
    public EMSBasicCreateOperationHandler(final String... elementTypeIds) {
       super(Lists.newArrayList(elementTypeIds));
-      this.modelStateType = deriveModelStateType();
       this.modelServerAccessType = deriveModelServerAccessType();
    }
 
    public EMSBasicCreateOperationHandler(final List<String> handledElementTypeIds) {
       super(handledElementTypeIds);
-      this.modelStateType = deriveModelStateType();
       this.modelServerAccessType = deriveModelServerAccessType();
    }
 
@@ -48,29 +49,17 @@ public abstract class EMSBasicCreateOperationHandler<T extends CreateOperation, 
    }
 
    @SuppressWarnings("unchecked")
-   protected Class<U> deriveModelStateType() {
+   protected Class<U> deriveModelServerAccessType() {
       return (Class<U>) (GenericsUtil.getParametrizedType(getClass(), EMSBasicCreateOperationHandler.class))
          .getActualTypeArguments()[1];
    }
 
-   @SuppressWarnings("unchecked")
-   protected Class<V> deriveModelServerAccessType() {
-      return (Class<V>) (GenericsUtil.getParametrizedType(getClass(), EMSBasicCreateOperationHandler.class))
-         .getActualTypeArguments()[2];
-   }
-
    @Override
-   public void executeOperation(final T operation, final GModelState gModelState) {
+   public void executeOperation(final T operation) {
       if (handles(operation)) {
-         EMSModelState modelState = getModelState(gModelState);
          EMSModelServerAccess modelServerAccess = getModelServerAccess(gModelState);
-         executeOperation(operationType.cast(operation), modelStateType.cast(modelState),
-            modelServerAccessType.cast(modelServerAccess));
+         executeOperation(operationType.cast(operation), modelServerAccessType.cast(modelServerAccess));
       }
-   }
-
-   protected EMSModelState getModelState(final GModelState gModelState) {
-      return EMSModelState.getModelState(gModelState);
    }
 
    protected EMSModelServerAccess getModelServerAccess(final GModelState gModelState) {
