@@ -57,13 +57,11 @@ public abstract class EMSBasicCreateOperationHandler<T extends CreateOperation, 
    @Override
    public void executeOperation(final T operation) {
       if (handles(operation)) {
-         EMSModelServerAccess modelServerAccess = getModelServerAccess(gModelState);
+         EMSModelServerAccess modelServerAccess = EMSModelState.getModelServerAccess(gModelState);
          executeOperation(operationType.cast(operation), modelServerAccessType.cast(modelServerAccess));
       }
    }
 
-   protected EMSModelServerAccess getModelServerAccess(final GModelState gModelState) {
-      return EMSModelState.getModelServerAccess(gModelState);
-   }
+   protected EMSModelState getEMSModelState() { return EMSModelState.getModelState(gModelState); }
 
 }

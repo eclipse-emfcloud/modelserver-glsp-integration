@@ -57,4 +57,6 @@ public abstract class EMSBasicActionHandler<T extends Action, U extends EMSModel
       return none();
    }
 
+   protected EMSModelState getEMSModelState() { return EMSModelState.getModelState(gModelState); }
+
 }
