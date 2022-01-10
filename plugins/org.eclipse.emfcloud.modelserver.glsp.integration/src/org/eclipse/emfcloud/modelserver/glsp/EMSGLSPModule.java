@@ -23,7 +23,6 @@ import org.eclipse.glsp.server.di.GModelJsonDiagramModule;
 import org.eclipse.glsp.server.di.MultiBinding;
 import org.eclipse.glsp.server.features.undoredo.UndoRedoActionHandler;
 import org.eclipse.glsp.server.layout.LayoutEngine;
-import org.eclipse.glsp.server.model.GModelState;
 import org.eclipse.glsp.server.operations.OperationActionHandler;
 
 public abstract class EMSGLSPModule extends GModelJsonDiagramModule {
@@ -50,7 +49,7 @@ public abstract class EMSGLSPModule extends GModelJsonDiagramModule {
    }
 
    @Override
-   protected Class<? extends GModelState> bindGModelState() {
+   protected Class<? extends EMSModelState> bindGModelState() {
       return EMSModelState.class;
    }
 

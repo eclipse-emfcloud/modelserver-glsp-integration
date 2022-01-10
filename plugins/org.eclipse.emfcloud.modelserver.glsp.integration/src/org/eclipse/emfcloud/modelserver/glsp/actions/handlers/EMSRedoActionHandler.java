@@ -18,16 +18,15 @@ import java.util.concurrent.TimeoutException;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
-import org.eclipse.emfcloud.modelserver.glsp.model.EMSModelState;
 import org.eclipse.glsp.server.actions.Action;
 import org.eclipse.glsp.server.features.undoredo.RedoAction;
 
-public class EMSRedoActionHandler extends EMSBasicActionHandler<RedoAction, EMSModelState, EMSModelServerAccess> {
+public class EMSRedoActionHandler extends EMSBasicActionHandler<RedoAction, EMSModelServerAccess> {
 
    private static final Logger LOGGER = Logger.getLogger(EMSRedoActionHandler.class.getSimpleName());
 
    @Override
-   public List<Action> executeAction(final RedoAction action, final EMSModelState modelState,
+   public List<Action> executeAction(final RedoAction action,
       final EMSModelServerAccess modelServerAccess) {
 
       CompletableFuture<Void> result = modelServerAccess.redo().thenAccept(response -> {

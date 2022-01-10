@@ -11,12 +11,11 @@
 package org.eclipse.emfcloud.modelserver.glsp.operations.handlers;
 
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
-import org.eclipse.emfcloud.modelserver.glsp.model.EMSModelState;
 import org.eclipse.glsp.server.operations.Operation;
 import org.eclipse.glsp.server.operations.OperationHandler;
 
-public interface EMSOperationHandler<T extends Operation, U extends EMSModelState, V extends EMSModelServerAccess>
+public interface EMSOperationHandler<T extends Operation, U extends EMSModelServerAccess>
    extends OperationHandler {
 
-   void executeOperation(T operation, U modelState, V modelServerAccess);
+   void executeOperation(T operation, U modelServerAccess);
 }

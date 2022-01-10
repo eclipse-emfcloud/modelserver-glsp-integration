@@ -13,17 +13,15 @@ package org.eclipse.emfcloud.modelserver.glsp.actions.handlers;
 import java.util.List;
 
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
-import org.eclipse.emfcloud.modelserver.glsp.model.EMSModelState;
 import org.eclipse.glsp.server.actions.Action;
 import org.eclipse.glsp.server.actions.SaveModelAction;
 import org.eclipse.glsp.server.types.GLSPServerException;
 
 public class EMSSaveModelActionHandler
-   extends EMSBasicActionHandler<SaveModelAction, EMSModelState, EMSModelServerAccess> {
+   extends EMSBasicActionHandler<SaveModelAction, EMSModelServerAccess> {
 
    @Override
-   public List<Action> executeAction(final SaveModelAction action, final EMSModelState modelState,
-      final EMSModelServerAccess modelServerAccess) {
+   public List<Action> executeAction(final SaveModelAction action, final EMSModelServerAccess modelServerAccess) {
 
       modelServerAccess.save().thenAccept(response -> {
          if (!response.body()) {

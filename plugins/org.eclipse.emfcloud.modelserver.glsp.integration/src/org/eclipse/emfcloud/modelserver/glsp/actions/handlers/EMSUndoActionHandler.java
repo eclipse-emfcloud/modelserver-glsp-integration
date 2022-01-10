@@ -18,18 +18,16 @@ import java.util.concurrent.TimeoutException;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
-import org.eclipse.emfcloud.modelserver.glsp.model.EMSModelState;
 import org.eclipse.glsp.server.actions.Action;
 import org.eclipse.glsp.server.features.undoredo.UndoAction;
 
 public class EMSUndoActionHandler
-   extends EMSBasicActionHandler<UndoAction, EMSModelState, EMSModelServerAccess> {
+   extends EMSBasicActionHandler<UndoAction, EMSModelServerAccess> {
 
    private static final Logger LOGGER = Logger.getLogger(EMSUndoActionHandler.class.getSimpleName());
 
    @Override
-   public List<Action> executeAction(final UndoAction action, final EMSModelState modelState,
-      final EMSModelServerAccess modelServerAccess) {
+   public List<Action> executeAction(final UndoAction action, final EMSModelServerAccess modelServerAccess) {
 
       CompletableFuture<Void> result = modelServerAccess.undo().thenAccept(response -> {
          int status = response.getStatusCode();

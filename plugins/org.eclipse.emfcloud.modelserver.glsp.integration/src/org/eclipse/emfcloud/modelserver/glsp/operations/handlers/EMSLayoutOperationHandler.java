@@ -23,7 +23,7 @@ import org.eclipse.glsp.server.operations.LayoutOperation;
 import com.google.inject.Inject;
 
 public class EMSLayoutOperationHandler
-   extends EMSBasicOperationHandler<LayoutOperation, EMSNotationModelState, EMSNotationModelServerAccess> {
+   extends EMSBasicOperationHandler<LayoutOperation, EMSNotationModelServerAccess> {
 
    @Inject
    protected LayoutEngine layoutEngine;
@@ -33,13 +33,12 @@ public class EMSLayoutOperationHandler
    protected DiagramConfiguration diagramConfiguration;
 
    @Override
-   public void executeOperation(final LayoutOperation operation, final EMSNotationModelState modelState,
-      final EMSNotationModelServerAccess modelServerAccess) {
-
+   public void executeOperation(final LayoutOperation operation, final EMSNotationModelServerAccess modelServerAccess) {
       if (diagramConfiguration.getLayoutKind() == ServerLayoutKind.MANUAL) {
          if (layoutEngine != null && layoutEngine instanceof EMSLayoutEngine) {
-            GModelElement layoutedRoot = ((EMSLayoutEngine) layoutEngine).layoutRoot(modelState);
-            modelServerAccess.setLayout(modelState, layoutedRoot);
+            GModelElement layoutedRoot = ((EMSLayoutEngine) layoutEngine).layoutRoot(gModelState);
+            EMSNotationModelState emsModelState = EMSNotationModelState.getModelState(gModelState);
+            modelServerAccess.setLayout(emsModelState, layoutedRoot);
          }
       }
    }

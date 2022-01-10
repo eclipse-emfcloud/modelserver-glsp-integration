@@ -11,10 +11,10 @@
 package org.eclipse.emfcloud.modelserver.glsp.notation.integration;
 
 import org.eclipse.emfcloud.modelserver.glsp.EMSGLSPModule;
+import org.eclipse.emfcloud.modelserver.glsp.model.EMSModelState;
 import org.eclipse.emfcloud.modelserver.glsp.operations.handlers.EMSChangeBoundsOperationHandler;
 import org.eclipse.emfcloud.modelserver.glsp.operations.handlers.EMSLayoutOperationHandler;
 import org.eclipse.glsp.server.di.MultiBinding;
-import org.eclipse.glsp.server.model.GModelState;
 import org.eclipse.glsp.server.operations.OperationHandler;
 import org.eclipse.glsp.server.operations.gmodel.ChangeBoundsOperationHandler;
 import org.eclipse.glsp.server.operations.gmodel.LayoutOperationHandler;
@@ -29,7 +29,7 @@ public abstract class EMSNotationGLSPModule extends EMSGLSPModule {
    }
 
    @Override
-   protected Class<? extends GModelState> bindGModelState() {
+   protected Class<? extends EMSModelState> bindGModelState() {
       return EMSNotationModelState.class;
    }
 

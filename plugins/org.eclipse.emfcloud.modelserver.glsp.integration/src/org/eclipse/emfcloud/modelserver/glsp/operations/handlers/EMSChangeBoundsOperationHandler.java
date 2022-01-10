@@ -21,17 +21,19 @@ import org.eclipse.glsp.server.types.ElementAndBounds;
 import org.eclipse.glsp.server.types.GLSPServerException;
 
 public class EMSChangeBoundsOperationHandler
-   extends EMSBasicOperationHandler<ChangeBoundsOperation, EMSNotationModelState, EMSNotationModelServerAccess> {
+   extends EMSBasicOperationHandler<ChangeBoundsOperation, EMSNotationModelServerAccess> {
 
    @Override
-   public void executeOperation(final ChangeBoundsOperation operation, final EMSNotationModelState modelState,
+   public void executeOperation(final ChangeBoundsOperation operation,
       final EMSNotationModelServerAccess modelServerAccess) {
 
+      EMSNotationModelState emsModelState = EMSNotationModelState.getModelState(gModelState);
       Map<Shape, ElementAndBounds> changeBoundsMap = new HashMap<>();
       for (ElementAndBounds element : operation.getNewBounds()) {
-         modelState.getIndex().getNotation(element.getElementId(), Shape.class).ifPresent(notationElement -> {
-            changeBoundsMap.put(notationElement, element);
-         });
+         emsModelState.getIndex().getNotation(element.getElementId(), Shape.class)
+            .ifPresent(notationElement -> {
+               changeBoundsMap.put(notationElement, element);
+            });
       }
       modelServerAccess.changeBounds(changeBoundsMap).thenAccept(response -> {
          if (!response.body()) {

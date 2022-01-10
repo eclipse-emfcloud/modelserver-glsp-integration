@@ -24,15 +24,12 @@ import org.eclipse.glsp.server.features.core.model.RequestModelAction;
 import org.eclipse.glsp.server.model.GModelState;
 import org.eclipse.glsp.server.types.GLSPServerException;
 import org.eclipse.glsp.server.utils.ClientOptionsUtil;
-import org.eclipse.glsp.server.utils.MapUtil;
 
 import com.google.inject.Inject;
 
 public abstract class EMSModelSourceLoader implements ModelSourceLoader {
 
    private static Logger LOGGER = Logger.getLogger(EMSModelSourceLoader.class.getSimpleName());
-
-   public static final String WORKSPACE_ROOT_OPTION = "workspaceRoot";
 
    @Inject
    protected ModelServerClientProvider modelServerClientProvider;
@@ -88,10 +85,7 @@ public abstract class EMSModelSourceLoader implements ModelSourceLoader {
    protected String getSourceURI(final Map<String, String> clientOptions) {
       String sourceURI = ClientOptionsUtil.getSourceUri(clientOptions)
          .orElseThrow(() -> new GLSPServerException("No source URI given to load model!"));
-      String workspaceRoot = MapUtil.getValue(clientOptions, WORKSPACE_ROOT_OPTION)
-         .orElseThrow(() -> new GLSPServerException("No workspace URI given to load model!"));
-
-      return sourceURI.replace(ClientOptionsUtil.adaptUri(workspaceRoot), "").replaceFirst("/", "");
+      return sourceURI;
    }
 
 }

@@ -22,18 +22,16 @@ import org.eclipse.glsp.server.model.GModelState;
 import com.google.inject.Inject;
 
 @SuppressWarnings("restriction")
-public abstract class EMSBasicActionHandler<T extends Action, U extends EMSModelState, V extends EMSModelServerAccess>
-   extends AbstractActionHandler<T> implements EMSActionHandler<T, U, V> {
+public abstract class EMSBasicActionHandler<T extends Action, U extends EMSModelServerAccess>
+   extends AbstractActionHandler<T> implements EMSActionHandler<T, U> {
 
-   protected final Class<U> modelStateType;
-   protected final Class<V> modelServerAccessType;
+   protected final Class<U> modelServerAccessType;
 
    @Inject
    protected GModelState gModelState;
 
    public EMSBasicActionHandler() {
       super();
-      this.modelStateType = deriveModelStateType();
       this.modelServerAccessType = deriveModelServerAccessType();
    }
 
@@ -45,25 +43,20 @@ public abstract class EMSBasicActionHandler<T extends Action, U extends EMSModel
    }
 
    @SuppressWarnings("unchecked")
-   protected Class<U> deriveModelStateType() {
+   protected Class<U> deriveModelServerAccessType() {
       return (Class<U>) (GenericsUtil.getParametrizedType(getClass(), EMSBasicActionHandler.class))
          .getActualTypeArguments()[1];
-   }
-
-   @SuppressWarnings("unchecked")
-   protected Class<V> deriveModelServerAccessType() {
-      return (Class<V>) (GenericsUtil.getParametrizedType(getClass(), EMSBasicActionHandler.class))
-         .getActualTypeArguments()[2];
    }
 
    @Override
    public List<Action> executeAction(final T actualAction) {
       if (handles(actualAction)) {
          EMSModelServerAccess modelServerAccess = EMSModelState.getModelServerAccess(gModelState);
-         return executeAction(actionType.cast(actualAction), modelStateType.cast(gModelState),
-            modelServerAccessType.cast(modelServerAccess));
+         return executeAction(actionType.cast(actualAction), modelServerAccessType.cast(modelServerAccess));
       }
       return none();
    }
+
+   protected EMSModelState getEMSModelState() { return EMSModelState.getModelState(gModelState); }
 
 }
