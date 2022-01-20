@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
+import org.eclipse.emfcloud.modelserver.glsp.notation.Diagram;
 import org.eclipse.glsp.server.model.DefaultGModelState;
 import org.eclipse.glsp.server.model.GModelState;
 import org.eclipse.glsp.server.types.GLSPServerException;
@@ -28,7 +29,7 @@ public abstract class EMSModelState extends DefaultGModelState {
 
    public abstract EObject getSemanticModel();
 
-   public abstract EObject getNotationModel();
+   public abstract Diagram getNotationModel();
 
    public static EMSModelState getModelState(final GModelState state) {
       if (!(state instanceof EMSModelState)) {

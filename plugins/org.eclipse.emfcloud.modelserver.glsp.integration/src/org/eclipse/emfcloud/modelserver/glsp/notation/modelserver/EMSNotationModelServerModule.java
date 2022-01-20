@@ -8,11 +8,12 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR MIT
  ********************************************************************************/
-package org.eclipse.emfcloud.modelserver.glsp.notation.integration;
+package org.eclipse.emfcloud.modelserver.glsp.notation.modelserver;
 
 import org.eclipse.emfcloud.modelserver.common.utils.MapBinding;
 import org.eclipse.emfcloud.modelserver.common.utils.MultiBinding;
 import org.eclipse.emfcloud.modelserver.edit.CommandContribution;
+import org.eclipse.emfcloud.modelserver.emf.common.ModelResourceManager;
 import org.eclipse.emfcloud.modelserver.emf.configuration.EPackageConfiguration;
 import org.eclipse.emfcloud.modelserver.emf.di.DefaultModelServerModule;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.contribution.ChangeBoundsCommandContribution;
@@ -38,5 +39,8 @@ public abstract class EMSNotationModelServerModule extends DefaultModelServerMod
       // Layout
       binding.put(LayoutCommandContribution.TYPE, LayoutCommandContribution.class);
    }
+
+   @Override
+   protected abstract Class<? extends ModelResourceManager> bindModelResourceManager();
 
 }

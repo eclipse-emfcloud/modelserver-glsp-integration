@@ -19,14 +19,18 @@ Require-Bundle: org.eclipse.glsp.server,
  org.eclipse.elk.alg.layered;bundle-version="0.7.0",
  org.eclipse.emf.ecore,
  org.eclipse.emfcloud.modelserver.glsp.notation.model,
- org.eclipse.emfcloud.modelserver.glsp.notation.commands
+ org.eclipse.emfcloud.modelserver.glsp.notation.commands,
+ com.fasterxml.jackson.core.jackson-databind,
+ org.eclipse.emf.ecore.xmi
 Bundle-ClassPath: .
 Export-Package: org.eclipse.emfcloud.modelserver.glsp,
  org.eclipse.emfcloud.modelserver.glsp.actions,
  org.eclipse.emfcloud.modelserver.glsp.actions.handlers,
  org.eclipse.emfcloud.modelserver.glsp.client,
+ org.eclipse.emfcloud.modelserver.glsp.ids,
  org.eclipse.emfcloud.modelserver.glsp.layout,
  org.eclipse.emfcloud.modelserver.glsp.model,
  org.eclipse.emfcloud.modelserver.glsp.notation.integration,
+ org.eclipse.emfcloud.modelserver.glsp.notation.modelserver,
  org.eclipse.emfcloud.modelserver.glsp.operations.handlers
 Import-Package: org.apache.log4j;version="1.2.15"

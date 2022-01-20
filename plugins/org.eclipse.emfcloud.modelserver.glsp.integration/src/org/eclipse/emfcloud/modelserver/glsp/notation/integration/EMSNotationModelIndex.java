@@ -31,8 +31,13 @@ public abstract class EMSNotationModelIndex extends GModelIndexImpl {
 
    public abstract void indexNotation(NotationElement notationElement);
 
+   public abstract Optional<String> getSemanticId(final EObject semanticElement);
+
    public abstract <T extends EObject> Optional<T> getSemantic(String id, Class<T> clazz);
 
    public abstract <T extends NotationElement> Optional<T> getNotation(String id, Class<T> clazz);
+
+   public abstract <T extends NotationElement> Optional<T> getNotation(final EObject semanticElement,
+      final Class<T> clazz);
 
 }

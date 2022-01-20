@@ -38,7 +38,9 @@ import org.eclipse.glsp.server.types.ElementAndBounds;
 import org.eclipse.glsp.server.types.ElementAndRoutingPoints;
 import org.eclipse.glsp.server.types.GLSPServerException;
 
-public abstract class EMSNotationModelServerAccess extends EMSModelServerAccess {
+public class EMSNotationModelServerAccess extends EMSModelServerAccess {
+
+   private static final String FORMAT_XMI = "xmi";
 
    protected String notationFileExtension;
 

@@ -29,8 +29,6 @@ public class EMSModelServerAccess {
 
    private static Logger LOGGER = Logger.getLogger(EMSModelServerAccess.class);
 
-   protected static final String FORMAT_XMI = "xmi";
-
    protected final URI baseSourceUri;
    protected String semanticFileExtension;
 
@@ -51,7 +49,7 @@ public class EMSModelServerAccess {
 
    public EObject getSemanticModel() {
       try {
-         return modelServerClient.get(getSemanticURI(), FORMAT_XMI).thenApply(res -> res.body()).get();
+         return modelServerClient.get(getSemanticURI(), semanticFileExtension).thenApply(res -> res.body()).get();
       } catch (InterruptedException | ExecutionException e) {
          LOGGER.error(e);
          throw new GLSPServerException("Error during model loading", e);
@@ -60,7 +58,7 @@ public class EMSModelServerAccess {
 
    public void subscribe(final NotificationSubscriptionListener<EObject> subscriptionListener) {
       this.subscriptionListener = subscriptionListener;
-      this.modelServerClient.subscribe(getSemanticURI(), subscriptionListener, FORMAT_XMI);
+      this.modelServerClient.subscribe(getSemanticURI(), subscriptionListener, semanticFileExtension);
    }
 
    public void unsubscribe() {
@@ -70,7 +68,7 @@ public class EMSModelServerAccess {
    }
 
    protected CompletableFuture<Response<Boolean>> edit(final CCommand command) {
-      return this.modelServerClient.edit(getSemanticURI(), command, FORMAT_XMI);
+      return this.modelServerClient.edit(getSemanticURI(), command, semanticFileExtension);
    }
 
    public CompletableFuture<Response<Boolean>> save() {

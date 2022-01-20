@@ -39,11 +39,6 @@ public abstract class EMSGLSPModule extends GModelJsonDiagramModule {
    }
 
    @Override
-   protected void configureAdditionals() {
-      super.configureAdditionals();
-   }
-
-   @Override
    protected Class<? extends LayoutEngine> bindLayoutEngine() {
       return EMSLayoutEngine.class;
    }

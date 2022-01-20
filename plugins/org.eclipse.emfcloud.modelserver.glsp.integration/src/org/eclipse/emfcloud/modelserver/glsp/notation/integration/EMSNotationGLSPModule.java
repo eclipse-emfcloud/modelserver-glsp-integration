@@ -13,10 +13,12 @@ package org.eclipse.emfcloud.modelserver.glsp.notation.integration;
 import org.eclipse.emfcloud.modelserver.glsp.EMSGLSPModule;
 import org.eclipse.emfcloud.modelserver.glsp.model.EMSModelState;
 import org.eclipse.emfcloud.modelserver.glsp.operations.handlers.EMSChangeBoundsOperationHandler;
+import org.eclipse.emfcloud.modelserver.glsp.operations.handlers.EMSCompoundOperationHandler;
 import org.eclipse.emfcloud.modelserver.glsp.operations.handlers.EMSLayoutOperationHandler;
 import org.eclipse.glsp.server.di.MultiBinding;
 import org.eclipse.glsp.server.operations.OperationHandler;
 import org.eclipse.glsp.server.operations.gmodel.ChangeBoundsOperationHandler;
+import org.eclipse.glsp.server.operations.gmodel.CompoundOperationHandler;
 import org.eclipse.glsp.server.operations.gmodel.LayoutOperationHandler;
 
 public abstract class EMSNotationGLSPModule extends EMSGLSPModule {
@@ -25,6 +27,7 @@ public abstract class EMSNotationGLSPModule extends EMSGLSPModule {
    protected void configureOperationHandlers(final MultiBinding<OperationHandler> binding) {
       super.configureOperationHandlers(binding);
       binding.rebind(ChangeBoundsOperationHandler.class, EMSChangeBoundsOperationHandler.class);
+      binding.rebind(CompoundOperationHandler.class, EMSCompoundOperationHandler.class);
       binding.rebind(LayoutOperationHandler.class, EMSLayoutOperationHandler.class);
    }
 
