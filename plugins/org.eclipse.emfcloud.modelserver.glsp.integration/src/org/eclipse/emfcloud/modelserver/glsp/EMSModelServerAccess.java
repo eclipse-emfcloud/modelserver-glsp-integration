@@ -13,13 +13,14 @@ package org.eclipse.emfcloud.modelserver.glsp;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emfcloud.modelserver.client.ModelServerClient;
-import org.eclipse.emfcloud.modelserver.client.ModelServerClientApi;
+import org.eclipse.emfcloud.modelserver.client.ModelServerClientApiV1;
 import org.eclipse.emfcloud.modelserver.client.NotificationSubscriptionListener;
 import org.eclipse.emfcloud.modelserver.client.Response;
+import org.eclipse.emfcloud.modelserver.client.v1.ModelServerClientV1;
 import org.eclipse.emfcloud.modelserver.command.CCommand;
 import org.eclipse.glsp.server.types.GLSPServerException;
 
@@ -27,17 +28,17 @@ import com.google.common.base.Preconditions;
 
 public class EMSModelServerAccess {
 
-   private static Logger LOGGER = Logger.getLogger(EMSModelServerAccess.class);
+   private static Logger LOGGER = LogManager.getLogger(EMSModelServerAccess.class);
 
    protected static final String FORMAT_XMI = "xmi";
 
    protected final URI baseSourceUri;
    protected String semanticFileExtension;
 
-   protected final ModelServerClient modelServerClient;
+   protected final ModelServerClientV1 modelServerClient;
    protected NotificationSubscriptionListener<EObject> subscriptionListener;
 
-   public EMSModelServerAccess(final String sourceURI, final ModelServerClient modelServerClient,
+   public EMSModelServerAccess(final String sourceURI, final ModelServerClientV1 modelServerClient,
       final String semanticFileExtension) {
       Preconditions.checkNotNull(modelServerClient);
       this.baseSourceUri = URI.createURI(sourceURI, true).trimFileExtension();
@@ -47,7 +48,7 @@ public class EMSModelServerAccess {
 
    public String getSemanticURI() { return baseSourceUri.appendFileExtension(this.semanticFileExtension).toString(); }
 
-   public ModelServerClientApi<EObject> getModelServerClient() { return modelServerClient; }
+   public ModelServerClientApiV1<EObject> getModelServerClient() { return modelServerClient; }
 
    public EObject getSemanticModel() {
       try {

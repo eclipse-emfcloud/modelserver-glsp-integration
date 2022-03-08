@@ -12,20 +12,20 @@ package org.eclipse.emfcloud.modelserver.glsp.client;
 
 import java.util.Optional;
 
-import org.eclipse.emfcloud.modelserver.client.ModelServerClient;
+import org.eclipse.emfcloud.modelserver.client.v1.ModelServerClientV1;
 
 import com.google.inject.Singleton;
 
 @Singleton
 public class ModelServerClientProvider {
 
-   private ModelServerClient modelServerClient;
+   private ModelServerClientV1 modelServerClient;
 
-   public Optional<ModelServerClient> get() {
+   public Optional<ModelServerClientV1> get() {
       return Optional.ofNullable(modelServerClient);
    }
 
-   public void setModelServerClient(final ModelServerClient modelServerClient) {
+   public void setModelServerClient(final ModelServerClientV1 modelServerClient) {
       this.modelServerClient = modelServerClient;
    }
 

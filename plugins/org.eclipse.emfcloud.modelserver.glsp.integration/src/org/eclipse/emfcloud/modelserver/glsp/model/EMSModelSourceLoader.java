@@ -13,8 +13,9 @@ package org.eclipse.emfcloud.modelserver.glsp.model;
 import java.util.Map;
 import java.util.Optional;
 
-import org.apache.log4j.Logger;
-import org.eclipse.emfcloud.modelserver.client.ModelServerClient;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.eclipse.emfcloud.modelserver.client.v1.ModelServerClientV1;
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
 import org.eclipse.emfcloud.modelserver.glsp.client.ModelServerClientProvider;
 import org.eclipse.glsp.server.actions.ActionDispatcher;
@@ -29,7 +30,7 @@ import com.google.inject.Inject;
 
 public abstract class EMSModelSourceLoader implements ModelSourceLoader {
 
-   private static Logger LOGGER = Logger.getLogger(EMSModelSourceLoader.class.getSimpleName());
+   private static Logger LOGGER = LogManager.getLogger(EMSModelSourceLoader.class.getSimpleName());
 
    @Inject
    protected ModelServerClientProvider modelServerClientProvider;
@@ -50,7 +51,7 @@ public abstract class EMSModelSourceLoader implements ModelSourceLoader {
          LOGGER.error("No source URI given to load source models");
          return;
       }
-      Optional<ModelServerClient> modelServerClient = modelServerClientProvider.get();
+      Optional<ModelServerClientV1> modelServerClient = modelServerClientProvider.get();
       if (modelServerClient.isEmpty()) {
          LOGGER.error("Connection to modelserver could not be initialized");
          return;
@@ -73,7 +74,7 @@ public abstract class EMSModelSourceLoader implements ModelSourceLoader {
    }
 
    public abstract EMSModelServerAccess createModelServerAccess(String sourceURI,
-      ModelServerClient modelServerClient);
+      ModelServerClientV1 modelServerClient);
 
    public abstract EMSModelState createModelState(GModelState gModelState);
 

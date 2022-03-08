@@ -12,7 +12,8 @@ package org.eclipse.emfcloud.modelserver.glsp.model;
 
 import java.util.Optional;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emfcloud.modelserver.client.XmiToEObjectSubscriptionListener;
 import org.eclipse.emfcloud.modelserver.command.CCommandExecutionResult;
@@ -23,7 +24,7 @@ import org.eclipse.glsp.server.features.core.model.ModelSubmissionHandler;
 
 public class EMSSubscriptionListener extends XmiToEObjectSubscriptionListener {
 
-   private static final Logger LOGGER = Logger.getLogger(EMSSubscriptionListener.class.getSimpleName());
+   private static final Logger LOGGER = LogManager.getLogger(EMSSubscriptionListener.class.getSimpleName());
 
    protected final ActionDispatcher actionDispatcher;
    protected final EMSModelState modelState;
