@@ -18,9 +18,10 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-import org.apache.log4j.Logger;
-import org.eclipse.emfcloud.modelserver.client.ModelServerClient;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.emfcloud.modelserver.client.Response;
+import org.eclipse.emfcloud.modelserver.client.v1.ModelServerClientV1;
 import org.eclipse.emfcloud.modelserver.glsp.client.ModelServerClientProvider;
 import org.eclipse.glsp.server.protocol.DefaultGLSPServer;
 import org.eclipse.glsp.server.protocol.DisposeClientSessionParameters;
@@ -31,7 +32,7 @@ import com.google.inject.Inject;
 
 public class EMSGLSPServer extends DefaultGLSPServer {
 
-   private static Logger LOGGER = Logger.getLogger(EMSGLSPServer.class.getSimpleName());
+   private static Logger LOGGER = LogManager.getLogger(EMSGLSPServer.class.getSimpleName());
    private static final String TIMESTAMP_KEY = "timestamp";
    private static final String MODELSERVER_URL_KEY = "modelServerURL";
    private static final String MODEL_URI_KEY = "modelUri";
@@ -59,7 +60,7 @@ public class EMSGLSPServer extends DefaultGLSPServer {
       LOGGER.debug(String.format("[%s] Pinging modelserver", timestamp));
 
       try {
-         ModelServerClient client = createModelServerClient(modelServerURL);
+         ModelServerClientV1 client = createModelServerClient(modelServerURL);
          boolean alive = client.ping().thenApply(Response<Boolean>::body).get();
          if (alive) {
             modelServerClientProvider.setModelServerClient(client);
@@ -72,13 +73,13 @@ public class EMSGLSPServer extends DefaultGLSPServer {
       return completableResult;
    }
 
-   protected ModelServerClient createModelServerClient(final String modelServerURL) throws MalformedURLException {
-      return new ModelServerClient(modelServerURL);
+   protected ModelServerClientV1 createModelServerClient(final String modelServerURL) throws MalformedURLException {
+      return new ModelServerClientV1(modelServerURL);
    }
 
    @Override
    public CompletableFuture<Void> disposeClientSession(final DisposeClientSessionParameters params) {
-      Optional<ModelServerClient> modelServerClient = modelServerClientProvider.get();
+      Optional<ModelServerClientV1> modelServerClient = modelServerClientProvider.get();
       Optional<String> modelUri = MapUtil.getValue(params.getArgs(), MODEL_URI_KEY);
       if (modelServerClient.isPresent() && modelUri.isPresent()) {
          modelServerClient.get().unsubscribe(modelUri.get());

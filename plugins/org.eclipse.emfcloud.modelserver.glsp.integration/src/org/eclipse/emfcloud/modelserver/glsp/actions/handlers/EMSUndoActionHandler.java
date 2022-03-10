@@ -16,7 +16,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
 import org.eclipse.glsp.server.actions.Action;
 import org.eclipse.glsp.server.features.undoredo.UndoAction;
@@ -24,7 +25,7 @@ import org.eclipse.glsp.server.features.undoredo.UndoAction;
 public class EMSUndoActionHandler
    extends EMSBasicActionHandler<UndoAction, EMSModelServerAccess> {
 
-   private static final Logger LOGGER = Logger.getLogger(EMSUndoActionHandler.class.getSimpleName());
+   private static final Logger LOGGER = LogManager.getLogger(EMSUndoActionHandler.class.getSimpleName());
 
    @Override
    public List<Action> executeAction(final UndoAction action, final EMSModelServerAccess modelServerAccess) {

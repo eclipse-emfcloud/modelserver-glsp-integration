@@ -16,10 +16,11 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emfcloud.modelserver.client.ModelServerClient;
 import org.eclipse.emfcloud.modelserver.client.Response;
+import org.eclipse.emfcloud.modelserver.client.v1.ModelServerClientV1;
 import org.eclipse.emfcloud.modelserver.command.CCommand;
 import org.eclipse.emfcloud.modelserver.command.CCommandFactory;
 import org.eclipse.emfcloud.modelserver.command.CCompoundCommand;
@@ -42,9 +43,9 @@ public abstract class EMSNotationModelServerAccess extends EMSModelServerAccess 
 
    protected String notationFileExtension;
 
-   private static Logger LOGGER = Logger.getLogger(EMSNotationModelServerAccess.class);
+   private static Logger LOGGER = LogManager.getLogger(EMSNotationModelServerAccess.class);
 
-   public EMSNotationModelServerAccess(final String sourceURI, final ModelServerClient modelServerClient,
+   public EMSNotationModelServerAccess(final String sourceURI, final ModelServerClientV1 modelServerClient,
       final String semanticFileExtension, final String notationFileExtension) {
       super(sourceURI, modelServerClient, semanticFileExtension);
       this.notationFileExtension = notationFileExtension;
