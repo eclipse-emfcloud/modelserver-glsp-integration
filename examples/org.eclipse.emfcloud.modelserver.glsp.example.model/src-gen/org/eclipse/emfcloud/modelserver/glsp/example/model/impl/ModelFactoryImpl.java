@@ -27,79 +27,103 @@ import org.eclipse.emfcloud.modelserver.glsp.example.model.*;
  * @generated
  */
 public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
-	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static ModelFactory init() {
-		try {
-			ModelFactory theModelFactory = (ModelFactory)EPackage.Registry.INSTANCE.getEFactory(ModelPackage.eNS_URI);
-			if (theModelFactory != null) {
-				return theModelFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new ModelFactoryImpl();
-	}
+   /**
+    * Creates the default factory implementation.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   public static ModelFactory init() {
+      try {
+         ModelFactory theModelFactory = (ModelFactory)EPackage.Registry.INSTANCE.getEFactory(ModelPackage.eNS_URI);
+         if (theModelFactory != null) {
+            return theModelFactory;
+         }
+      }
+      catch (Exception exception) {
+         EcorePlugin.INSTANCE.log(exception);
+      }
+      return new ModelFactoryImpl();
+   }
 
-	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ModelFactoryImpl() {
-		super();
-	}
+   /**
+    * Creates an instance of the factory.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   public ModelFactoryImpl() {
+      super();
+   }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case ModelPackage.TASK: return createTask();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   @Override
+   public EObject create(EClass eClass) {
+      switch (eClass.getClassifierID()) {
+         case ModelPackage.TASK_LIST: return createTaskList();
+         case ModelPackage.TASK: return createTask();
+         case ModelPackage.TRANSITION: return createTransition();
+         default:
+            throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+      }
+   }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Task createTask() {
-		TaskImpl task = new TaskImpl();
-		return task;
-	}
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   @Override
+   public TaskList createTaskList() {
+      TaskListImpl taskList = new TaskListImpl();
+      return taskList;
+   }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ModelPackage getModelPackage() {
-		return (ModelPackage)getEPackage();
-	}
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   @Override
+   public Task createTask() {
+      TaskImpl task = new TaskImpl();
+      return task;
+   }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
-	@Deprecated
-	public static ModelPackage getPackage() {
-		return ModelPackage.eINSTANCE;
-	}
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   @Override
+   public Transition createTransition() {
+      TransitionImpl transition = new TransitionImpl();
+      return transition;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   @Override
+   public ModelPackage getModelPackage() {
+      return (ModelPackage)getEPackage();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @deprecated
+    * @generated
+    */
+   @Deprecated
+   public static ModelPackage getPackage() {
+      return ModelPackage.eINSTANCE;
+   }
 
 } //ModelFactoryImpl

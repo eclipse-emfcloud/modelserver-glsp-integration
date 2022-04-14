@@ -4,15 +4,24 @@
     modelDirectory="/org.eclipse.emfcloud.modelserver.glsp.example.model/src-gen"
     editDirectory="" editorDirectory="" modelPluginID="org.eclipse.emfcloud.modelserver.glsp.example.model"
     modelName="Integration Example Model" editPluginClass="" editorPluginClass=""
-    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    testsDirectory="" testSuiteClass="" importerID="org.eclipse.emf.importer.ecore"
-    bundleManifest="false" complianceLevel="8.0" copyrightFields="false"
-    operationReflection="true" importOrganizing="true">
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory=""
+    testSuiteClass="" importerID="org.eclipse.emf.importer.ecore" bundleManifest="false"
+    complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
   <foreignModel>model.ecore</foreignModel>
-  <genPackages prefix="Model" basePackage="org.eclipse.emfcloud.modelserver.glsp.example" resource="XMI"
-      disposableProviderFactory="true" ecorePackage="model.ecore#/">
-    <genClasses ecoreClass="model.ecore#//Task">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Task/name"/>
+  <genPackages prefix="Model" basePackage="org.eclipse.emfcloud.modelserver.glsp.example"
+      resource="XMI" disposableProviderFactory="true" ecorePackage="model.ecore#/">
+    <genClasses image="false" ecoreClass="model.ecore#//Identifiable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Identifiable/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Identifiable/name"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//TaskList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//TaskList/tasks"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//TaskList/transitions"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Task"/>
+    <genClasses ecoreClass="model.ecore#//Transition">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference model.ecore#//Transition/source"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference model.ecore#//Transition/target"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
