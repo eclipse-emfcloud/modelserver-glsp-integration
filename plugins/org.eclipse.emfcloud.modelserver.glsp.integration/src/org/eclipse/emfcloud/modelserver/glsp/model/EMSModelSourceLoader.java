@@ -19,16 +19,16 @@ import org.eclipse.emfcloud.modelserver.client.v1.ModelServerClientV1;
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
 import org.eclipse.emfcloud.modelserver.glsp.client.ModelServerClientProvider;
 import org.eclipse.glsp.server.actions.ActionDispatcher;
-import org.eclipse.glsp.server.features.core.model.ModelSourceLoader;
 import org.eclipse.glsp.server.features.core.model.ModelSubmissionHandler;
 import org.eclipse.glsp.server.features.core.model.RequestModelAction;
+import org.eclipse.glsp.server.features.core.model.SourceModelStorage;
 import org.eclipse.glsp.server.model.GModelState;
 import org.eclipse.glsp.server.types.GLSPServerException;
 import org.eclipse.glsp.server.utils.ClientOptionsUtil;
 
 import com.google.inject.Inject;
 
-public abstract class EMSModelSourceLoader implements ModelSourceLoader {
+public abstract class EMSModelSourceLoader implements SourceModelStorage {
 
    private static Logger LOGGER = LogManager.getLogger(EMSModelSourceLoader.class.getSimpleName());
 

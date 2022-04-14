@@ -16,17 +16,18 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//NotationElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NotationElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="semanticElement" eType="#//SemanticProxy"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="semanticElement" eType="#//SemanticElementReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Diagram" eSuperTypes="#//NotationElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="#//NotationElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="diagramType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SemanticProxy">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="resolvedElement" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
-        transient="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SemanticElementReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resolvedSemanticElement"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" transient="true"/>
   </eClassifiers>
 </ecore:EPackage>

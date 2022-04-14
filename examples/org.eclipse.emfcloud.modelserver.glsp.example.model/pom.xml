@@ -1,0 +1,114 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>org.eclipse.emfcloud.modelserver.glsp.example.model</artifactId>
+	<packaging>${package.type}</packaging>
+	<parent>
+		<groupId>org.eclipse.emfcloud.modelserver.glsp</groupId>
+		<artifactId>org.eclipse.emfcloud.modelserver.glsp.parent</artifactId>
+		<version>0.7.0-SNAPSHOT</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+
+	<url>https://www.eclipse.org/emfcloud/</url>
+
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v2.0</name>
+			<url>http://www.eclipse.org/legal/epl-v20.html</url>
+			<distribution>repo</distribution>
+		</license>
+		<license>
+			<name>MIT License</name>
+			<url>https://opensource.org/licenses/MIT</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Eclipse emf.cloud Project</name>
+			<email>https://accounts.eclipse.org/mailing-list/emfcloud-dev</email>
+			<organization>Eclipse emf.cloud</organization>
+			<organizationUrl>https://projects.eclipse.org/projects/ecd.emfcloud</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<url>https://github.com/eclipse-emfcloud/modelserver-glsp-integration</url>
+		<connection>scm:git@github.com:eclipse-emfcloud/modelserver-glsp-integration.git</connection>
+		<developerConnection>scm:git@github.com:eclipse-emfcloud/modelserver-glsp-integration.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<profiles>
+		<profile>
+			<id>m2</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			
+			<dependencies>
+				<dependency>
+					<groupId>org.eclipse.emf</groupId>
+					<artifactId>org.eclipse.emf.ecore</artifactId>
+					<version>${emf.ecore.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.core</groupId>
+					<artifactId>org.eclipse.core.runtime</artifactId>
+					<version>${eclipse.core.runtime.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.core</groupId>
+					<artifactId>org.eclipse.core.resources</artifactId>
+					<version>${eclipse.core.resources.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.emf</groupId>
+					<artifactId>org.eclipse.emf.common</artifactId>
+					<version>${emf.common.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.emf</groupId>
+					<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+					<version>${emf.ecore.xmi.version}</version>
+				</dependency>
+			</dependencies>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<version>${codehaus.mojo.maven.version}</version>
+						<executions>
+							<execution>
+								<id>add-source</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>add-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>src-gen</source>
+									</sources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<version>${maven.deploy.version}</version>
+						<configuration>
+							<skip>false</skip>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>
