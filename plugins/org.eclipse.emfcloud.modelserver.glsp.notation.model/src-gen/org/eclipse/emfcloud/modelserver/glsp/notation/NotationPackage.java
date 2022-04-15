@@ -285,13 +285,22 @@ public interface NotationPackage extends EPackage {
    int DIAGRAM__ELEMENTS = NOTATION_ELEMENT_FEATURE_COUNT + 0;
 
    /**
+    * The feature id for the '<em><b>Diagram Type</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    * @ordered
+    */
+   int DIAGRAM__DIAGRAM_TYPE = NOTATION_ELEMENT_FEATURE_COUNT + 1;
+
+   /**
     * The number of structural features of the '<em>Diagram</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * @generated
     * @ordered
     */
-   int DIAGRAM_FEATURE_COUNT = NOTATION_ELEMENT_FEATURE_COUNT + 1;
+   int DIAGRAM_FEATURE_COUNT = NOTATION_ELEMENT_FEATURE_COUNT + 2;
 
    /**
     * The number of operations of the '<em>Diagram</em>' class.
@@ -303,50 +312,50 @@ public interface NotationPackage extends EPackage {
    int DIAGRAM_OPERATION_COUNT = NOTATION_ELEMENT_OPERATION_COUNT + 0;
 
    /**
-    * The meta object id for the '{@link org.eclipse.emfcloud.modelserver.glsp.notation.impl.SemanticProxyImpl <em>Semantic Proxy</em>}' class.
+    * The meta object id for the '{@link org.eclipse.emfcloud.modelserver.glsp.notation.impl.SemanticElementReferenceImpl <em>Semantic Element Reference</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @see org.eclipse.emfcloud.modelserver.glsp.notation.impl.SemanticProxyImpl
-    * @see org.eclipse.emfcloud.modelserver.glsp.notation.impl.NotationPackageImpl#getSemanticProxy()
+    * @see org.eclipse.emfcloud.modelserver.glsp.notation.impl.SemanticElementReferenceImpl
+    * @see org.eclipse.emfcloud.modelserver.glsp.notation.impl.NotationPackageImpl#getSemanticElementReference()
     * @generated
     */
-   int SEMANTIC_PROXY = 4;
+   int SEMANTIC_ELEMENT_REFERENCE = 4;
 
    /**
-    * The feature id for the '<em><b>Uri</b></em>' attribute.
+    * The feature id for the '<em><b>Element Id</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * @generated
     * @ordered
     */
-   int SEMANTIC_PROXY__URI = 0;
+   int SEMANTIC_ELEMENT_REFERENCE__ELEMENT_ID = 0;
 
    /**
-    * The feature id for the '<em><b>Resolved Element</b></em>' reference.
+    * The feature id for the '<em><b>Resolved Semantic Element</b></em>' reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * @generated
     * @ordered
     */
-   int SEMANTIC_PROXY__RESOLVED_ELEMENT = 1;
+   int SEMANTIC_ELEMENT_REFERENCE__RESOLVED_SEMANTIC_ELEMENT = 1;
 
    /**
-    * The number of structural features of the '<em>Semantic Proxy</em>' class.
+    * The number of structural features of the '<em>Semantic Element Reference</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * @generated
     * @ordered
     */
-   int SEMANTIC_PROXY_FEATURE_COUNT = 2;
+   int SEMANTIC_ELEMENT_REFERENCE_FEATURE_COUNT = 2;
 
    /**
-    * The number of operations of the '<em>Semantic Proxy</em>' class.
+    * The number of operations of the '<em>Semantic Element Reference</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * @generated
     * @ordered
     */
-   int SEMANTIC_PROXY_OPERATION_COUNT = 0;
+   int SEMANTIC_ELEMENT_REFERENCE_OPERATION_COUNT = 0;
 
 
    /**
@@ -478,36 +487,47 @@ public interface NotationPackage extends EPackage {
    EReference getDiagram_Elements();
 
    /**
-    * Returns the meta object for class '{@link org.eclipse.emfcloud.modelserver.glsp.notation.SemanticProxy <em>Semantic Proxy</em>}'.
+    * Returns the meta object for the attribute '{@link org.eclipse.emfcloud.modelserver.glsp.notation.Diagram#getDiagramType <em>Diagram Type</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @return the meta object for class '<em>Semantic Proxy</em>'.
-    * @see org.eclipse.emfcloud.modelserver.glsp.notation.SemanticProxy
+    * @return the meta object for the attribute '<em>Diagram Type</em>'.
+    * @see org.eclipse.emfcloud.modelserver.glsp.notation.Diagram#getDiagramType()
+    * @see #getDiagram()
     * @generated
     */
-   EClass getSemanticProxy();
+   EAttribute getDiagram_DiagramType();
 
    /**
-    * Returns the meta object for the attribute '{@link org.eclipse.emfcloud.modelserver.glsp.notation.SemanticProxy#getUri <em>Uri</em>}'.
+    * Returns the meta object for class '{@link org.eclipse.emfcloud.modelserver.glsp.notation.SemanticElementReference <em>Semantic Element Reference</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @return the meta object for the attribute '<em>Uri</em>'.
-    * @see org.eclipse.emfcloud.modelserver.glsp.notation.SemanticProxy#getUri()
-    * @see #getSemanticProxy()
+    * @return the meta object for class '<em>Semantic Element Reference</em>'.
+    * @see org.eclipse.emfcloud.modelserver.glsp.notation.SemanticElementReference
     * @generated
     */
-   EAttribute getSemanticProxy_Uri();
+   EClass getSemanticElementReference();
 
    /**
-    * Returns the meta object for the reference '{@link org.eclipse.emfcloud.modelserver.glsp.notation.SemanticProxy#getResolvedElement <em>Resolved Element</em>}'.
+    * Returns the meta object for the attribute '{@link org.eclipse.emfcloud.modelserver.glsp.notation.SemanticElementReference#getElementId <em>Element Id</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @return the meta object for the reference '<em>Resolved Element</em>'.
-    * @see org.eclipse.emfcloud.modelserver.glsp.notation.SemanticProxy#getResolvedElement()
-    * @see #getSemanticProxy()
+    * @return the meta object for the attribute '<em>Element Id</em>'.
+    * @see org.eclipse.emfcloud.modelserver.glsp.notation.SemanticElementReference#getElementId()
+    * @see #getSemanticElementReference()
     * @generated
     */
-   EReference getSemanticProxy_ResolvedElement();
+   EAttribute getSemanticElementReference_ElementId();
+
+   /**
+    * Returns the meta object for the reference '{@link org.eclipse.emfcloud.modelserver.glsp.notation.SemanticElementReference#getResolvedSemanticElement <em>Resolved Semantic Element</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @return the meta object for the reference '<em>Resolved Semantic Element</em>'.
+    * @see org.eclipse.emfcloud.modelserver.glsp.notation.SemanticElementReference#getResolvedSemanticElement()
+    * @see #getSemanticElementReference()
+    * @generated
+    */
+   EReference getSemanticElementReference_ResolvedSemanticElement();
 
    /**
     * Returns the factory that creates the instances of the model.
@@ -637,30 +657,38 @@ public interface NotationPackage extends EPackage {
       EReference DIAGRAM__ELEMENTS = eINSTANCE.getDiagram_Elements();
 
       /**
-       * The meta object literal for the '{@link org.eclipse.emfcloud.modelserver.glsp.notation.impl.SemanticProxyImpl <em>Semantic Proxy</em>}' class.
+       * The meta object literal for the '<em><b>Diagram Type</b></em>' attribute feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * @see org.eclipse.emfcloud.modelserver.glsp.notation.impl.SemanticProxyImpl
-       * @see org.eclipse.emfcloud.modelserver.glsp.notation.impl.NotationPackageImpl#getSemanticProxy()
        * @generated
        */
-      EClass SEMANTIC_PROXY = eINSTANCE.getSemanticProxy();
+      EAttribute DIAGRAM__DIAGRAM_TYPE = eINSTANCE.getDiagram_DiagramType();
 
       /**
-       * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+       * The meta object literal for the '{@link org.eclipse.emfcloud.modelserver.glsp.notation.impl.SemanticElementReferenceImpl <em>Semantic Element Reference</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
+       * @see org.eclipse.emfcloud.modelserver.glsp.notation.impl.SemanticElementReferenceImpl
+       * @see org.eclipse.emfcloud.modelserver.glsp.notation.impl.NotationPackageImpl#getSemanticElementReference()
        * @generated
        */
-      EAttribute SEMANTIC_PROXY__URI = eINSTANCE.getSemanticProxy_Uri();
+      EClass SEMANTIC_ELEMENT_REFERENCE = eINSTANCE.getSemanticElementReference();
 
       /**
-       * The meta object literal for the '<em><b>Resolved Element</b></em>' reference feature.
+       * The meta object literal for the '<em><b>Element Id</b></em>' attribute feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
        * @generated
        */
-      EReference SEMANTIC_PROXY__RESOLVED_ELEMENT = eINSTANCE.getSemanticProxy_ResolvedElement();
+      EAttribute SEMANTIC_ELEMENT_REFERENCE__ELEMENT_ID = eINSTANCE.getSemanticElementReference_ElementId();
+
+      /**
+       * The meta object literal for the '<em><b>Resolved Semantic Element</b></em>' reference feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * @generated
+       */
+      EReference SEMANTIC_ELEMENT_REFERENCE__RESOLVED_SEMANTIC_ELEMENT = eINSTANCE.getSemanticElementReference_ResolvedSemanticElement();
 
    }
 

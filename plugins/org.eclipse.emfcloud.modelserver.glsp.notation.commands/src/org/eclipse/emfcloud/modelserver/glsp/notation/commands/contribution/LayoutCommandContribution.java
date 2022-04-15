@@ -40,13 +40,14 @@ public class LayoutCommandContribution extends NotationCommandContribution {
       CCompoundCommand compoundCommand = CCommandFactory.eINSTANCE.createCompoundCommand();
       compoundCommand.setType(LayoutCommandContribution.TYPE);
       changeBoundsMap.forEach((shape, elementAndBounds) -> {
-         CCommand changeBoundsCommand = ChangeBoundsCommandContribution.create(shape.getSemanticElement().getUri(),
+         CCommand changeBoundsCommand = ChangeBoundsCommandContribution.create(
+            shape.getSemanticElement().getElementId(),
             elementAndBounds.getNewPosition(), elementAndBounds.getNewSize());
          compoundCommand.getCommands().add(changeBoundsCommand);
       });
       routingPointsMap.forEach((edge, routingPoints) -> {
          CCommand changeRoutingPointsCommand = ChangeRoutingPointsCommandContribution.create(
-            edge.getSemanticElement().getUri(),
+            edge.getSemanticElement().getElementId(),
             routingPoints);
          compoundCommand.getCommands().add(changeRoutingPointsCommand);
       });

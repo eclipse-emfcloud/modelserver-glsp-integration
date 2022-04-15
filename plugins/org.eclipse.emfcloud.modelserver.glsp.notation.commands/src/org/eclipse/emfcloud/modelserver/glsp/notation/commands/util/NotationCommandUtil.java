@@ -52,7 +52,7 @@ public final class NotationCommandUtil {
    public static NotationElement getNotationElement(final URI modelUri, final EditingDomain domain,
       final String semanticUri) {
       Optional<NotationElement> notationElement = getDiagram(modelUri, domain).getElements().stream()
-         .filter(el -> el.getSemanticElement().getUri().equals(semanticUri)).findFirst();
+         .filter(el -> el.getSemanticElement().getElementId().equals(semanticUri)).findFirst();
       return notationElement.orElse(null);
    }
 

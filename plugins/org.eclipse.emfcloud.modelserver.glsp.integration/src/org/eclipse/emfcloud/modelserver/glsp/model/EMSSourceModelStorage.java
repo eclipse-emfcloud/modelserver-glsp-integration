@@ -28,9 +28,9 @@ import org.eclipse.glsp.server.utils.ClientOptionsUtil;
 
 import com.google.inject.Inject;
 
-public abstract class EMSModelSourceLoader implements SourceModelStorage {
+public abstract class EMSSourceModelStorage implements SourceModelStorage {
 
-   private static Logger LOGGER = LogManager.getLogger(EMSModelSourceLoader.class.getSimpleName());
+   private static Logger LOGGER = LogManager.getLogger(EMSSourceModelStorage.class.getSimpleName());
 
    @Inject
    protected ModelServerClientProvider modelServerClientProvider;

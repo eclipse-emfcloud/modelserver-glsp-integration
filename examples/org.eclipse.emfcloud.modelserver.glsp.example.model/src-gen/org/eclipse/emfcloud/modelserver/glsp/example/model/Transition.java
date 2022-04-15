@@ -34,21 +34,43 @@ public interface Transition extends Identifiable {
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * @return the value of the '<em>Source</em>' reference.
+    * @see #setSource(Task)
     * @see org.eclipse.emfcloud.modelserver.glsp.example.model.ModelPackage#getTransition_Source()
-    * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+    * @model required="true"
     * @generated
     */
    Task getSource();
+
+   /**
+    * Sets the value of the '{@link org.eclipse.emfcloud.modelserver.glsp.example.model.Transition#getSource <em>Source</em>}' reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @param value the new value of the '<em>Source</em>' reference.
+    * @see #getSource()
+    * @generated
+    */
+   void setSource(Task value);
 
    /**
     * Returns the value of the '<em><b>Target</b></em>' reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * @return the value of the '<em>Target</em>' reference.
+    * @see #setTarget(Task)
     * @see org.eclipse.emfcloud.modelserver.glsp.example.model.ModelPackage#getTransition_Target()
-    * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+    * @model required="true"
     * @generated
     */
    Task getTarget();
+
+   /**
+    * Sets the value of the '{@link org.eclipse.emfcloud.modelserver.glsp.example.model.Transition#getTarget <em>Target</em>}' reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @param value the new value of the '<em>Target</em>' reference.
+    * @see #getTarget()
+    * @generated
+    */
+   void setTarget(Task value);
 
 } // Transition

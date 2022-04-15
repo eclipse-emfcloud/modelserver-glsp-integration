@@ -10,9 +10,11 @@
  */
 package org.eclipse.emfcloud.modelserver.glsp.example.model.impl;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emfcloud.modelserver.glsp.example.model.ModelPackage;
 import org.eclipse.emfcloud.modelserver.glsp.example.model.Task;
 import org.eclipse.emfcloud.modelserver.glsp.example.model.Transition;
@@ -32,6 +34,25 @@ import org.eclipse.emfcloud.modelserver.glsp.example.model.Transition;
  * @generated
  */
 public class TransitionImpl extends IdentifiableImpl implements Transition {
+   /**
+    * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @see #getSource()
+    * @generated
+    * @ordered
+    */
+   protected Task source;
+   /**
+    * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @see #getTarget()
+    * @generated
+    * @ordered
+    */
+   protected Task target;
+
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -58,8 +79,15 @@ public class TransitionImpl extends IdentifiableImpl implements Transition {
     */
    @Override
    public Task getSource() {
-      Task source = basicGetSource();
-      return source != null && source.eIsProxy() ? (Task)eResolveProxy((InternalEObject)source) : source;
+      if (source != null && source.eIsProxy()) {
+         InternalEObject oldSource = (InternalEObject)source;
+         source = (Task)eResolveProxy(oldSource);
+         if (source != oldSource) {
+            if (eNotificationRequired())
+               eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.TRANSITION__SOURCE, oldSource, source));
+         }
+      }
+      return source;
    }
 
    /**
@@ -68,10 +96,20 @@ public class TransitionImpl extends IdentifiableImpl implements Transition {
     * @generated
     */
    public Task basicGetSource() {
-      // TODO: implement this method to return the 'Source' reference
-      // -> do not perform proxy resolution
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
+      return source;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   @Override
+   public void setSource(Task newSource) {
+      Task oldSource = source;
+      source = newSource;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TRANSITION__SOURCE, oldSource, source));
    }
 
    /**
@@ -81,8 +119,15 @@ public class TransitionImpl extends IdentifiableImpl implements Transition {
     */
    @Override
    public Task getTarget() {
-      Task target = basicGetTarget();
-      return target != null && target.eIsProxy() ? (Task)eResolveProxy((InternalEObject)target) : target;
+      if (target != null && target.eIsProxy()) {
+         InternalEObject oldTarget = (InternalEObject)target;
+         target = (Task)eResolveProxy(oldTarget);
+         if (target != oldTarget) {
+            if (eNotificationRequired())
+               eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.TRANSITION__TARGET, oldTarget, target));
+         }
+      }
+      return target;
    }
 
    /**
@@ -91,10 +136,20 @@ public class TransitionImpl extends IdentifiableImpl implements Transition {
     * @generated
     */
    public Task basicGetTarget() {
-      // TODO: implement this method to return the 'Target' reference
-      // -> do not perform proxy resolution
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
+      return target;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   @Override
+   public void setTarget(Task newTarget) {
+      Task oldTarget = target;
+      target = newTarget;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TRANSITION__TARGET, oldTarget, target));
    }
 
    /**
@@ -121,12 +176,48 @@ public class TransitionImpl extends IdentifiableImpl implements Transition {
     * @generated
     */
    @Override
+   public void eSet(int featureID, Object newValue) {
+      switch (featureID) {
+         case ModelPackage.TRANSITION__SOURCE:
+            setSource((Task)newValue);
+            return;
+         case ModelPackage.TRANSITION__TARGET:
+            setTarget((Task)newValue);
+            return;
+      }
+      super.eSet(featureID, newValue);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   @Override
+   public void eUnset(int featureID) {
+      switch (featureID) {
+         case ModelPackage.TRANSITION__SOURCE:
+            setSource((Task)null);
+            return;
+         case ModelPackage.TRANSITION__TARGET:
+            setTarget((Task)null);
+            return;
+      }
+      super.eUnset(featureID);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   @Override
    public boolean eIsSet(int featureID) {
       switch (featureID) {
          case ModelPackage.TRANSITION__SOURCE:
-            return basicGetSource() != null;
+            return source != null;
          case ModelPackage.TRANSITION__TARGET:
-            return basicGetTarget() != null;
+            return target != null;
       }
       return super.eIsSet(featureID);
    }

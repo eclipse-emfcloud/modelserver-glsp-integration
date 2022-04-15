@@ -71,19 +71,20 @@ public abstract class EMSNotationModelServerAccess extends EMSModelServerAccess 
    }
 
    public CompletableFuture<Response<Boolean>> changeBounds(final Shape shape, final ElementAndBounds changedBounds) {
-      CCommand changeBoundsCommand = ChangeBoundsCommandContribution.create(shape.getSemanticElement().getUri(),
+      CCommand changeBoundsCommand = ChangeBoundsCommandContribution.create(shape.getSemanticElement().getElementId(),
          changedBounds.getNewPosition(), changedBounds.getNewSize());
       return this.edit(changeBoundsCommand);
    }
 
    public CompletableFuture<Response<Boolean>> changePosition(final Shape shape, final GPoint position) {
-      CCommand changePositionCommand = ChangeBoundsCommandContribution.create(shape.getSemanticElement().getUri(),
+      CCommand changePositionCommand = ChangeBoundsCommandContribution.create(shape.getSemanticElement().getElementId(),
          position);
       return this.edit(changePositionCommand);
    }
 
    public CompletableFuture<Response<Boolean>> changeSize(final Shape shape, final GDimension size) {
-      CCommand changeSizeCommand = ChangeBoundsCommandContribution.create(shape.getSemanticElement().getUri(), size);
+      CCommand changeSizeCommand = ChangeBoundsCommandContribution.create(shape.getSemanticElement().getElementId(),
+         size);
       return this.edit(changeSizeCommand);
    }
 
@@ -97,7 +98,7 @@ public abstract class EMSNotationModelServerAccess extends EMSModelServerAccess 
 
       changeBendPointsMap.forEach((edge, elementAndRoutingPoints) -> {
          CCommand changeRoutingPointsCommand = ChangeRoutingPointsCommandContribution
-            .create(edge.getSemanticElement().getUri(), elementAndRoutingPoints.getNewRoutingPoints());
+            .create(edge.getSemanticElement().getElementId(), elementAndRoutingPoints.getNewRoutingPoints());
          compoundCommand.getCommands().add(changeRoutingPointsCommand);
       });
       return this.edit(compoundCommand);

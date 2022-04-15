@@ -67,7 +67,7 @@ public class NotationFactoryImpl extends EFactoryImpl implements NotationFactory
          case NotationPackage.SHAPE: return createShape();
          case NotationPackage.EDGE: return createEdge();
          case NotationPackage.DIAGRAM: return createDiagram();
-         case NotationPackage.SEMANTIC_PROXY: return createSemanticProxy();
+         case NotationPackage.SEMANTIC_ELEMENT_REFERENCE: return createSemanticElementReference();
          default:
             throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
       }
@@ -112,9 +112,9 @@ public class NotationFactoryImpl extends EFactoryImpl implements NotationFactory
     * @generated
     */
    @Override
-   public SemanticProxy createSemanticProxy() {
-      SemanticProxyImpl semanticProxy = new SemanticProxyImpl();
-      return semanticProxy;
+   public SemanticElementReference createSemanticElementReference() {
+      SemanticElementReferenceImpl semanticElementReference = new SemanticElementReferenceImpl();
+      return semanticElementReference;
    }
 
    /**

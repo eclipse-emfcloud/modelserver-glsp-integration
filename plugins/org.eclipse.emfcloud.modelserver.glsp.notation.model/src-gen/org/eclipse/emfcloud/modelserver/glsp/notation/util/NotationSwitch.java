@@ -101,9 +101,9 @@ public class NotationSwitch<T> extends Switch<T> {
             if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case NotationPackage.SEMANTIC_PROXY: {
-            SemanticProxy semanticProxy = (SemanticProxy)theEObject;
-            T result = caseSemanticProxy(semanticProxy);
+         case NotationPackage.SEMANTIC_ELEMENT_REFERENCE: {
+            SemanticElementReference semanticElementReference = (SemanticElementReference)theEObject;
+            T result = caseSemanticElementReference(semanticElementReference);
             if (result == null) result = defaultCase(theEObject);
             return result;
          }
@@ -172,17 +172,17 @@ public class NotationSwitch<T> extends Switch<T> {
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Semantic Proxy</em>'.
+    * Returns the result of interpreting the object as an instance of '<em>Semantic Element Reference</em>'.
     * <!-- begin-user-doc -->
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Semantic Proxy</em>'.
+    * @return the result of interpreting the object as an instance of '<em>Semantic Element Reference</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseSemanticProxy(SemanticProxy object) {
+   public T caseSemanticElementReference(SemanticElementReference object) {
       return null;
    }
 

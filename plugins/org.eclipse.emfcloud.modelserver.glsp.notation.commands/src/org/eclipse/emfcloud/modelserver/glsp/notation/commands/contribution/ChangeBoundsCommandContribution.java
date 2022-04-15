@@ -65,7 +65,8 @@ public class ChangeBoundsCommandContribution extends NotationCommandContribution
       CCompoundCommand compoundCommand = CCommandFactory.eINSTANCE.createCompoundCommand();
       compoundCommand.setType(ChangeBoundsCommandContribution.TYPE);
       changeBoundsMap.forEach((shape, elementAndBounds) -> {
-         CCommand changeBoundsCommand = ChangeBoundsCommandContribution.create(shape.getSemanticElement().getUri(),
+         CCommand changeBoundsCommand = ChangeBoundsCommandContribution.create(
+            shape.getSemanticElement().getElementId(),
             elementAndBounds.getNewPosition(), elementAndBounds.getNewSize());
          compoundCommand.getCommands().add(changeBoundsCommand);
       });
