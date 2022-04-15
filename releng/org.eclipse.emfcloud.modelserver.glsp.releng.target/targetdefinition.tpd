@@ -1,6 +1,6 @@
 target "EMF.cloud Model Server GLSP Integration Targetplatform" with source requirements
 
-location "https://download.eclipse.org/glsp/server/p2/nightly/0.10/0.10.0.202203070850" {
+location "https://download.eclipse.org/glsp/server/p2/nightly/0.10/0.10.0.202203251548" {
 	org.eclipse.glsp.feature.feature.group [0.10.0,1.0.0)
 	org.eclipse.glsp.layout [0.10.0,1.0.0)
 	org.eclipse.glsp.graph [0.10.0,1.0.0)

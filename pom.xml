@@ -88,6 +88,7 @@
 		<eclipse.core.resources.version>3.7.100</eclipse.core.resources.version>
 		<emf.common.version>2.23.0</emf.common.version>
 		<emf.ecore.change.version>2.14.0</emf.ecore.change.version>
+		<emf.ecore.xmi.version>2.16.0</emf.ecore.xmi.version>
 		<emf.transaction.version>1.8.0.201405281451</emf.transaction.version>
 		<emf.validation.version>1.8.0.201405281429</emf.validation.version>
 		<apache.logging.log4j.version>2.17.1</apache.logging.log4j.version>
@@ -97,6 +98,7 @@
 		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
 		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.model</module>
 		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.commands</module>
+		<module>examples/org.eclipse.emfcloud.modelserver.glsp.example.model</module>
 	</modules>
 
 	<build>
@@ -306,6 +308,7 @@
 				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
 				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.model</module>
 				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.commands</module>
+				<module>examples/org.eclipse.emfcloud.modelserver.glsp.example.model</module>
 			</modules>
 
 			<build>

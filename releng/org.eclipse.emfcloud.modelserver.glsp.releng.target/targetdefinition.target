@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="EMF.cloud Model Server GLSP Integration Targetplatform" sequenceNumber="1646833931">
+<target name="EMF.cloud Model Server GLSP Integration Targetplatform" sequenceNumber="1649941891">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.glsp.feature.feature.group" version="0.10.0.202203070850"/>
-      <unit id="org.eclipse.glsp.layout" version="0.10.0.202203070850"/>
-      <unit id="org.eclipse.glsp.graph" version="0.10.0.202203070850"/>
-      <repository location="https://download.eclipse.org/glsp/server/p2/nightly/0.10/0.10.0.202203070850"/>
+      <unit id="org.eclipse.glsp.feature.feature.group" version="0.10.0.202203251548"/>
+      <unit id="org.eclipse.glsp.layout" version="0.10.0.202203251548"/>
+      <unit id="org.eclipse.glsp.graph" version="0.10.0.202203251548"/>
+      <repository location="https://download.eclipse.org/glsp/server/p2/nightly/0.10/0.10.0.202203251548"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.emfcloud.modelserver.feature.feature.group" version="0.7.0.202203091127"/>

@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.emfcloud.modelserver.glsp.example.model;singleton:=true
+Automatic-Module-Name: org.eclipse.emfcloud.modelserver.glsp.example.model
+Bundle-ActivationPolicy: lazy
+Bundle-Version: 0.7.0.qualifier
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: org.eclipse.emfcloud.modelserver.glsp.example.model,
+ org.eclipse.emfcloud.modelserver.glsp.example.model.impl,
+ org.eclipse.emfcloud.modelserver.glsp.example.model.util
+Require-Bundle: org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.xmi;bundle-version="2.16.0"
+Bundle-ClassPath: .
