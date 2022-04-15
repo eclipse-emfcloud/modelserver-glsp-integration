@@ -57,13 +57,13 @@ public interface NotationFactory extends EFactory {
    Diagram createDiagram();
 
    /**
-    * Returns a new object of class '<em>Semantic Proxy</em>'.
+    * Returns a new object of class '<em>Semantic Element Reference</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @return a new object of class '<em>Semantic Proxy</em>'.
+    * @return a new object of class '<em>Semantic Element Reference</em>'.
     * @generated
     */
-   SemanticProxy createSemanticProxy();
+   SemanticElementReference createSemanticElementReference();
 
    /**
     * Returns the package supported by this factory.

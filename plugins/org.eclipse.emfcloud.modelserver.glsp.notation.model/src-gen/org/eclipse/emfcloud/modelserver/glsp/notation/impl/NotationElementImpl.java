@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emfcloud.modelserver.glsp.notation.NotationElement;
 import org.eclipse.emfcloud.modelserver.glsp.notation.NotationPackage;
-import org.eclipse.emfcloud.modelserver.glsp.notation.SemanticProxy;
+import org.eclipse.emfcloud.modelserver.glsp.notation.SemanticElementReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,7 +46,7 @@ public abstract class NotationElementImpl extends MinimalEObjectImpl.Container i
     * @generated
     * @ordered
     */
-   protected SemanticProxy semanticElement;
+   protected SemanticElementReference semanticElement;
 
    /**
     * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -93,7 +93,7 @@ public abstract class NotationElementImpl extends MinimalEObjectImpl.Container i
     * @generated
     */
    @Override
-   public SemanticProxy getSemanticElement() {
+   public SemanticElementReference getSemanticElement() {
       return semanticElement;
    }
 
@@ -102,8 +102,8 @@ public abstract class NotationElementImpl extends MinimalEObjectImpl.Container i
     * <!-- end-user-doc -->
     * @generated
     */
-   public NotificationChain basicSetSemanticElement(SemanticProxy newSemanticElement, NotificationChain msgs) {
-      SemanticProxy oldSemanticElement = semanticElement;
+   public NotificationChain basicSetSemanticElement(SemanticElementReference newSemanticElement, NotificationChain msgs) {
+      SemanticElementReference oldSemanticElement = semanticElement;
       semanticElement = newSemanticElement;
       if (eNotificationRequired()) {
          ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NotationPackage.NOTATION_ELEMENT__SEMANTIC_ELEMENT, oldSemanticElement, newSemanticElement);
@@ -118,7 +118,7 @@ public abstract class NotationElementImpl extends MinimalEObjectImpl.Container i
     * @generated
     */
    @Override
-   public void setSemanticElement(SemanticProxy newSemanticElement) {
+   public void setSemanticElement(SemanticElementReference newSemanticElement) {
       if (newSemanticElement != semanticElement) {
          NotificationChain msgs = null;
          if (semanticElement != null)
@@ -194,7 +194,7 @@ public abstract class NotationElementImpl extends MinimalEObjectImpl.Container i
    public void eSet(int featureID, Object newValue) {
       switch (featureID) {
          case NotationPackage.NOTATION_ELEMENT__SEMANTIC_ELEMENT:
-            setSemanticElement((SemanticProxy)newValue);
+            setSemanticElement((SemanticElementReference)newValue);
             return;
          case NotationPackage.NOTATION_ELEMENT__TYPE:
             setType((String)newValue);
@@ -212,7 +212,7 @@ public abstract class NotationElementImpl extends MinimalEObjectImpl.Container i
    public void eUnset(int featureID) {
       switch (featureID) {
          case NotationPackage.NOTATION_ELEMENT__SEMANTIC_ELEMENT:
-            setSemanticElement((SemanticProxy)null);
+            setSemanticElement((SemanticElementReference)null);
             return;
          case NotationPackage.NOTATION_ELEMENT__TYPE:
             setType(TYPE_EDEFAULT);

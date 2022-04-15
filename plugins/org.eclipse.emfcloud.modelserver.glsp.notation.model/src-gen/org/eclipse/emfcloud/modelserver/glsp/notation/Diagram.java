@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.emfcloud.modelserver.glsp.notation.Diagram#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.eclipse.emfcloud.modelserver.glsp.notation.Diagram#getDiagramType <em>Diagram Type</em>}</li>
  * </ul>
  *
  * @see org.eclipse.emfcloud.modelserver.glsp.notation.NotationPackage#getDiagram()
@@ -40,5 +41,27 @@ public interface Diagram extends NotationElement {
     * @generated
     */
    EList<NotationElement> getElements();
+
+   /**
+    * Returns the value of the '<em><b>Diagram Type</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @return the value of the '<em>Diagram Type</em>' attribute.
+    * @see #setDiagramType(String)
+    * @see org.eclipse.emfcloud.modelserver.glsp.notation.NotationPackage#getDiagram_DiagramType()
+    * @model
+    * @generated
+    */
+   String getDiagramType();
+
+   /**
+    * Sets the value of the '{@link org.eclipse.emfcloud.modelserver.glsp.notation.Diagram#getDiagramType <em>Diagram Type</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @param value the new value of the '<em>Diagram Type</em>' attribute.
+    * @see #getDiagramType()
+    * @generated
+    */
+   void setDiagramType(String value);
 
 } // Diagram

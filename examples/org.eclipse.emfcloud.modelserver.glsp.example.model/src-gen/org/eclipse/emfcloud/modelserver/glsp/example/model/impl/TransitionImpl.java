@@ -80,6 +80,18 @@ public class TransitionImpl extends IdentifiableImpl implements Transition {
     * @generated
     */
    @Override
+   public void setSource(Task newSource) {
+      // TODO: implement this method to set the 'Source' reference
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   @Override
    public Task getTarget() {
       Task target = basicGetTarget();
       return target != null && target.eIsProxy() ? (Task)eResolveProxy((InternalEObject)target) : target;
@@ -103,6 +115,18 @@ public class TransitionImpl extends IdentifiableImpl implements Transition {
     * @generated
     */
    @Override
+   public void setTarget(Task newTarget) {
+      // TODO: implement this method to set the 'Target' reference
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   @Override
    public Object eGet(int featureID, boolean resolve, boolean coreType) {
       switch (featureID) {
          case ModelPackage.TRANSITION__SOURCE:
@@ -113,6 +137,42 @@ public class TransitionImpl extends IdentifiableImpl implements Transition {
             return basicGetTarget();
       }
       return super.eGet(featureID, resolve, coreType);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   @Override
+   public void eSet(int featureID, Object newValue) {
+      switch (featureID) {
+         case ModelPackage.TRANSITION__SOURCE:
+            setSource((Task)newValue);
+            return;
+         case ModelPackage.TRANSITION__TARGET:
+            setTarget((Task)newValue);
+            return;
+      }
+      super.eSet(featureID, newValue);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   @Override
+   public void eUnset(int featureID) {
+      switch (featureID) {
+         case ModelPackage.TRANSITION__SOURCE:
+            setSource((Task)null);
+            return;
+         case ModelPackage.TRANSITION__TARGET:
+            setTarget((Task)null);
+            return;
+      }
+      super.eUnset(featureID);
    }
 
    /**

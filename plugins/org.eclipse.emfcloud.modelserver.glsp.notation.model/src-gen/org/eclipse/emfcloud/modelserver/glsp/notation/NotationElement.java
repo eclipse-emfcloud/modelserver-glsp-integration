@@ -35,12 +35,12 @@ public interface NotationElement extends EObject {
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * @return the value of the '<em>Semantic Element</em>' containment reference.
-    * @see #setSemanticElement(SemanticProxy)
+    * @see #setSemanticElement(SemanticElementReference)
     * @see org.eclipse.emfcloud.modelserver.glsp.notation.NotationPackage#getNotationElement_SemanticElement()
     * @model containment="true"
     * @generated
     */
-   SemanticProxy getSemanticElement();
+   SemanticElementReference getSemanticElement();
 
    /**
     * Sets the value of the '{@link org.eclipse.emfcloud.modelserver.glsp.notation.NotationElement#getSemanticElement <em>Semantic Element</em>}' containment reference.
@@ -50,7 +50,7 @@ public interface NotationElement extends EObject {
     * @see #getSemanticElement()
     * @generated
     */
-   void setSemanticElement(SemanticProxy value);
+   void setSemanticElement(SemanticElementReference value);
 
    /**
     * Returns the value of the '<em><b>Type</b></em>' attribute.

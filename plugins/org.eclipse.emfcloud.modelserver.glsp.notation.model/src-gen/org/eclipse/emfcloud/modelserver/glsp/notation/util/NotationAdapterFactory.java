@@ -92,8 +92,8 @@ public class NotationAdapterFactory extends AdapterFactoryImpl {
             return createDiagramAdapter();
          }
          @Override
-         public Adapter caseSemanticProxy(SemanticProxy object) {
-            return createSemanticProxyAdapter();
+         public Adapter caseSemanticElementReference(SemanticElementReference object) {
+            return createSemanticElementReferenceAdapter();
          }
          @Override
          public Adapter defaultCase(EObject object) {
@@ -172,16 +172,16 @@ public class NotationAdapterFactory extends AdapterFactoryImpl {
    }
 
    /**
-    * Creates a new adapter for an object of class '{@link org.eclipse.emfcloud.modelserver.glsp.notation.SemanticProxy <em>Semantic Proxy</em>}'.
+    * Creates a new adapter for an object of class '{@link org.eclipse.emfcloud.modelserver.glsp.notation.SemanticElementReference <em>Semantic Element Reference</em>}'.
     * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
     * it's useful to ignore a case when inheritance will catch all the cases anyway.
     * <!-- end-user-doc -->
     * @return the new adapter.
-    * @see org.eclipse.emfcloud.modelserver.glsp.notation.SemanticProxy
+    * @see org.eclipse.emfcloud.modelserver.glsp.notation.SemanticElementReference
     * @generated
     */
-   public Adapter createSemanticProxyAdapter() {
+   public Adapter createSemanticElementReferenceAdapter() {
       return null;
    }
 

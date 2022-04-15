@@ -22,7 +22,7 @@ import org.eclipse.emfcloud.modelserver.glsp.notation.Edge;
 import org.eclipse.emfcloud.modelserver.glsp.notation.NotationElement;
 import org.eclipse.emfcloud.modelserver.glsp.notation.NotationFactory;
 import org.eclipse.emfcloud.modelserver.glsp.notation.NotationPackage;
-import org.eclipse.emfcloud.modelserver.glsp.notation.SemanticProxy;
+import org.eclipse.emfcloud.modelserver.glsp.notation.SemanticElementReference;
 import org.eclipse.emfcloud.modelserver.glsp.notation.Shape;
 
 import org.eclipse.glsp.graph.GraphPackage;
@@ -67,7 +67,7 @@ public class NotationPackageImpl extends EPackageImpl implements NotationPackage
     * <!-- end-user-doc -->
     * @generated
     */
-   private EClass semanticProxyEClass = null;
+   private EClass semanticElementReferenceEClass = null;
 
    /**
     * Creates an instance of the model <b>Package</b>, registered with
@@ -259,8 +259,8 @@ public class NotationPackageImpl extends EPackageImpl implements NotationPackage
     * @generated
     */
    @Override
-   public EClass getSemanticProxy() {
-      return semanticProxyEClass;
+   public EAttribute getDiagram_DiagramType() {
+      return (EAttribute)diagramEClass.getEStructuralFeatures().get(1);
    }
 
    /**
@@ -269,8 +269,8 @@ public class NotationPackageImpl extends EPackageImpl implements NotationPackage
     * @generated
     */
    @Override
-   public EAttribute getSemanticProxy_Uri() {
-      return (EAttribute)semanticProxyEClass.getEStructuralFeatures().get(0);
+   public EClass getSemanticElementReference() {
+      return semanticElementReferenceEClass;
    }
 
    /**
@@ -279,8 +279,18 @@ public class NotationPackageImpl extends EPackageImpl implements NotationPackage
     * @generated
     */
    @Override
-   public EReference getSemanticProxy_ResolvedElement() {
-      return (EReference)semanticProxyEClass.getEStructuralFeatures().get(1);
+   public EAttribute getSemanticElementReference_ElementId() {
+      return (EAttribute)semanticElementReferenceEClass.getEStructuralFeatures().get(0);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   @Override
+   public EReference getSemanticElementReference_ResolvedSemanticElement() {
+      return (EReference)semanticElementReferenceEClass.getEStructuralFeatures().get(1);
    }
 
    /**
@@ -327,10 +337,11 @@ public class NotationPackageImpl extends EPackageImpl implements NotationPackage
 
       diagramEClass = createEClass(DIAGRAM);
       createEReference(diagramEClass, DIAGRAM__ELEMENTS);
+      createEAttribute(diagramEClass, DIAGRAM__DIAGRAM_TYPE);
 
-      semanticProxyEClass = createEClass(SEMANTIC_PROXY);
-      createEAttribute(semanticProxyEClass, SEMANTIC_PROXY__URI);
-      createEReference(semanticProxyEClass, SEMANTIC_PROXY__RESOLVED_ELEMENT);
+      semanticElementReferenceEClass = createEClass(SEMANTIC_ELEMENT_REFERENCE);
+      createEAttribute(semanticElementReferenceEClass, SEMANTIC_ELEMENT_REFERENCE__ELEMENT_ID);
+      createEReference(semanticElementReferenceEClass, SEMANTIC_ELEMENT_REFERENCE__RESOLVED_SEMANTIC_ELEMENT);
    }
 
    /**
@@ -379,15 +390,16 @@ public class NotationPackageImpl extends EPackageImpl implements NotationPackage
       initEReference(getEdge_Target(), this.getNotationElement(), null, "target", null, 0, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
       initEClass(notationElementEClass, NotationElement.class, "NotationElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-      initEReference(getNotationElement_SemanticElement(), this.getSemanticProxy(), null, "semanticElement", null, 0, 1, NotationElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEReference(getNotationElement_SemanticElement(), this.getSemanticElementReference(), null, "semanticElement", null, 0, 1, NotationElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
       initEAttribute(getNotationElement_Type(), ecorePackage.getEString(), "type", null, 0, 1, NotationElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
       initEClass(diagramEClass, Diagram.class, "Diagram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
       initEReference(getDiagram_Elements(), this.getNotationElement(), null, "elements", null, 0, -1, Diagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEAttribute(getDiagram_DiagramType(), ecorePackage.getEString(), "diagramType", null, 0, 1, Diagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-      initEClass(semanticProxyEClass, SemanticProxy.class, "SemanticProxy", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-      initEAttribute(getSemanticProxy_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, SemanticProxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEReference(getSemanticProxy_ResolvedElement(), ecorePackage.getEObject(), null, "resolvedElement", null, 0, 1, SemanticProxy.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEClass(semanticElementReferenceEClass, SemanticElementReference.class, "SemanticElementReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+      initEAttribute(getSemanticElementReference_ElementId(), ecorePackage.getEString(), "elementId", null, 0, 1, SemanticElementReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEReference(getSemanticElementReference_ResolvedSemanticElement(), ecorePackage.getEObject(), null, "resolvedSemanticElement", null, 0, 1, SemanticElementReference.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
       // Create resource
       createResource(eNS_URI);
