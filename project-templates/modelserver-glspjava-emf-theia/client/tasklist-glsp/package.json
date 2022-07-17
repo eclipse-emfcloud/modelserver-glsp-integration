@@ -1,0 +1,49 @@
+{
+  "private": "true",
+  "name": "@eclipse-emfcloud/tasklist-glsp",
+  "version": "0.7.0",
+  "description": "GLSP sprotty diagrams for the EMF model TaskList DSL",
+  "license": "(EPL-2.0 OR MIT)",
+  "keywords": [
+    "glsp",
+    "tasklist",
+    "diagram"
+  ],
+  "author": {
+    "name": "Eclipse emf.cloud Project"
+  },
+  "homepage": "https://www.eclipse.org/emfcloud/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eclipse-emfcloud/modelserver-glsp-integration"
+  },
+  "bugs": "https://github.com/eclipse-emfcloud/modelserver-glsp-integration/issues",
+  "contributors": [
+    {
+      "name": "Eclipse emf.cloud Project",
+      "email": "emfcloud-dev@eclipse.org",
+      "url": "https://projects.eclipse.org/projects/ecd.emfcloud"
+    }
+  ],
+  "files": [
+    "lib",
+    "src",
+    "css"
+  ],
+  "dependencies": {
+    "@eclipse-glsp/client": "next"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.1",
+    "typescript": "~4.5.5"
+  },
+  "scripts": {
+    "prepare": "yarn clean && yarn build && yarn lint",
+    "clean": "rimraf tsconfig.tsbuildinfo lib",
+    "build": "tsc",
+    "lint": "eslint -c ../.eslintrc.js --ext .ts,.tsx ./src",
+    "watch": "tsc -w"
+  },
+  "main": "lib/index",
+  "types": "lib/index"
+}

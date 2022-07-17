@@ -1,0 +1,32 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build TaskList Model Server",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "command": "mvn clean verify",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start TaskList Model Server",
+      "type": "shell",
+      "group": "test",
+      "command": "java -jar target/org.eclipse.emfcloud.integration.example.modelserver-0.7.0-SNAPSHOT-standalone.jar -l=log4j2.xml",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch TaskList Model Server [DEBUG]",
+      "request": "launch",
+      "mainClass": "org.eclipse.emfcloud.integration.example.modelserver.launch.TaskListModelServerLauncher",
+      "projectName": "org.eclipse.emfcloud.integration.example.modelserver",
+      "args": ["-l", "log4j2.xml"],
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart"
+    }
+  ]
+}
