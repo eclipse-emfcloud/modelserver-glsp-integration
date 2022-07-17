@@ -1,37 +1,107 @@
-pipeline {
-    agent any
+def kubernetes_config = """
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: ci
+    image: eclipseglsp/ci:latest
+    tty: true
+    resources:
+      limits:
+        memory: "2Gi"
+        cpu: "1"
+      requests:
+        memory: "2Gi"
+        cpu: "1"
+    command:
+    - cat
+    volumeMounts:
+    - mountPath: "/home/jenkins"
+      name: "jenkins-home"
+      readOnly: false
+    - mountPath: "/.yarn"
+      name: "yarn-global"
+      readOnly: false
+  volumes:
+  - name: "jenkins-home"
+    emptyDir: {}
+  - name: "yarn-global"
+    emptyDir: {}
+"""
 
-    tools {
-        maven 'apache-maven-latest'
-        jdk 'openjdk-jdk11-latest'
+pipeline {
+    agent {
+        kubernetes {
+            label "emfcloud-agent-pod"
+            yaml kubernetes_config
+        }
+    }
+
+    options {
+        buildDiscarder logRotator(numToKeepStr: "15")
     }
 
     environment {
+        MAVEN_LOCAL_REPO = "/home/jenkins/.m2/repository"
         EMAIL_TO = "ndoschek+eclipseci@eclipsesource.com, eneufeld+eclipseci@eclipsesource.com"
     }
 
     stages {
-        stage ('Build: Eclipse-based (P2)') {
+        stage ("Build: modelserver-glsp-integration (P2)") {
             steps {
-                sh 'mvn clean verify -Pp2 -B' 
+                timeout(30) {
+                    container("ci") {
+                        sh "mvn clean verify -Pp2 -B -Dmaven.repo.local=${MAVEN_LOCAL_REPO}" 
+                    }
+                }
             }
         }
         
-        stage ('Build: Plain Maven (M2)') {
-        	steps {
-           		sh 'mvn clean verify -Pm2 -B' 
+        stage ("Build: modelserver-glsp-integration (M2)") {
+            steps {
+                timeout(30) {
+                    container("ci") {
+                        sh "mvn clean verify -Pm2 -B -Dmaven.repo.local=${MAVEN_LOCAL_REPO}" 
+                    }
+                }
             }
         }
 
-        stage('Deploy (main only)') {
-            when { branch 'main' }
+        stage ("Build: modelserver-glsp-integration example - server") {
+            steps {
+                timeout(30) {
+                    container("ci") {
+                        // Do not use dir(..) as it causes problems with mvn
+                        sh "cd project-templates/modelserver-glspjava-emf-theia/server"
+                        sh "mvn clean verify -B -Dmaven.repo.local=${MAVEN_LOCAL_REPO}" 
+                    }
+                }
+            }
+        }
+        
+        stage ("Build: modelserver-glsp-integration example - client") {
+            steps {
+                timeout(30){
+                    container("ci") {
+                        dir("project-templates/modelserver-glspjava-emf-theia") {
+                            withCredentials([string(credentialsId: "github-bot-token", variable: "GITHUB_TOKEN")]) {
+                                sh "yarn build:client"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        stage("Deploy (main only)") {
+            when { branch "main" }
             steps {
                 parallel(
                     p2: {
-                        build job: 'deploy-emfcloud-modelserver-glsp-integration-p2', wait: false	               
+                        build job: "deploy-emfcloud-modelserver-glsp-integration-p2", wait: false	               
                     },
                     m2: {
-                        build job: 'deploy-emfcloud-modelserver-glsp-integration-m2', wait: false
+                        build job: "deploy-emfcloud-modelserver-glsp-integration-m2", wait: false
                     }
                 )
             }

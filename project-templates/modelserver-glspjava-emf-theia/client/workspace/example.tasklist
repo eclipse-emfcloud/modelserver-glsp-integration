@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<example-model:TaskList xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:example-model="http://www.eclipse.org/emfcloud/modelserver/glsp/integration/example/model" id="root" name="Task List">
+  <tasks id="61bcc27a-3e93-4847-89e4-1d2433371b4b" name="NewTask0"/>
+  <tasks id="8204461f-8451-46c7-a258-b9ffb976182e" name="NewTask1"/>
+  <tasks id="7c68e6a2-1288-484c-ad01-454232adeb9f" name="NewTask2"/>
+  <tasks id="4995cbb1-9640-4d6f-9348-bc4dc8ed7537" name="NewTask3"/>
+  <tasks id="11850d16-a392-4596-8398-4b97e21b9a71" name="NewTask4"/>
+  <transitions id="7ac9bd61-4ebb-41ed-88fa-e05388de2c4b" source="61bcc27a-3e93-4847-89e4-1d2433371b4b" target="8204461f-8451-46c7-a258-b9ffb976182e"/>
+  <transitions id="bc68a4dc-1e98-4f94-a9c9-6e16504dc762" source="8204461f-8451-46c7-a258-b9ffb976182e" target="7c68e6a2-1288-484c-ad01-454232adeb9f"/>
+  <transitions id="c52b74d8-a3fc-44f6-b3a9-6a65aea878ea" source="7c68e6a2-1288-484c-ad01-454232adeb9f" target="11850d16-a392-4596-8398-4b97e21b9a71"/>
+  <transitions id="62cbc650-869b-4771-8435-febcfd9676a4" source="7c68e6a2-1288-484c-ad01-454232adeb9f" target="4995cbb1-9640-4d6f-9348-bc4dc8ed7537"/>
+</example-model:TaskList>
