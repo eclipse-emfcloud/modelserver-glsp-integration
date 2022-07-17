@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021 EclipseSource and others.
+ * Copyright (c) 2021-2022 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -13,30 +13,34 @@ package org.eclipse.emfcloud.modelserver.glsp.operations.handlers;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emfcloud.modelserver.glsp.notation.Shape;
 import org.eclipse.emfcloud.modelserver.glsp.notation.integration.EMSNotationModelServerAccess;
 import org.eclipse.emfcloud.modelserver.glsp.notation.integration.EMSNotationModelState;
+import org.eclipse.glsp.server.emf.model.notation.Shape;
 import org.eclipse.glsp.server.operations.ChangeBoundsOperation;
 import org.eclipse.glsp.server.types.ElementAndBounds;
 import org.eclipse.glsp.server.types.GLSPServerException;
 
-public class EMSChangeBoundsOperationHandler
-   extends EMSBasicOperationHandler<ChangeBoundsOperation, EMSNotationModelServerAccess> {
+import com.google.inject.Inject;
+
+public class EMSChangeBoundsOperationHandler extends AbstractEMSOperationHandler<ChangeBoundsOperation> {
+
+   @Inject
+   protected EMSNotationModelState modelState;
+   @Inject
+   protected EMSNotationModelServerAccess modelServerAccess;
 
    @Override
-   public void executeOperation(final ChangeBoundsOperation operation,
-      final EMSNotationModelServerAccess modelServerAccess) {
+   public void executeOperation(final ChangeBoundsOperation operation) {
 
-      EMSNotationModelState emsModelState = EMSNotationModelState.getModelState(gModelState);
       Map<Shape, ElementAndBounds> changeBoundsMap = new HashMap<>();
       for (ElementAndBounds element : operation.getNewBounds()) {
-         emsModelState.getIndex().getNotation(element.getElementId(), Shape.class)
-            .ifPresent(notationElement -> {
-               changeBoundsMap.put(notationElement, element);
+         modelState.getIndex().getNotation(element.getElementId(), Shape.class)
+            .ifPresent(shape -> {
+               changeBoundsMap.put(shape, element);
             });
       }
       modelServerAccess.changeBounds(changeBoundsMap).thenAccept(response -> {
-         if (!response.body()) {
+         if (response.body().isEmpty()) {
             throw new GLSPServerException("Could not change bounds: " + changeBoundsMap.toString());
          }
       });
