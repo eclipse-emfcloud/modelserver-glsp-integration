@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021 EclipseSource and others.
+ * Copyright (c) 2021-2022 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -29,10 +29,10 @@ public class ChangeRoutingPointsCommandContribution extends NotationCommandContr
 
    public static final String TYPE = "changeRoutingPoints";
 
-   public static CCommand create(final String semanticUri, final List<GPoint> routingPoints) {
+   public static CCommand create(final String semanticElementId, final List<GPoint> routingPoints) {
       CCompoundCommand changeRoutingPointsCommand = CCommandFactory.eINSTANCE.createCompoundCommand();
       changeRoutingPointsCommand.setType(TYPE);
-      changeRoutingPointsCommand.getProperties().put(SEMANTIC_PROXI_URI, semanticUri);
+      changeRoutingPointsCommand.getProperties().put(SEMANTIC_ELEMENT_ID, semanticElementId);
 
       routingPoints.forEach(point -> {
          CCommand childCommand = CCommandFactory.eINSTANCE.createCommand();
@@ -53,7 +53,7 @@ public class ChangeRoutingPointsCommandContribution extends NotationCommandContr
       if (command instanceof CCompoundCommand) {
 
          ((CCompoundCommand) command).getCommands().forEach(changeRoutingPointCommand -> {
-            String semanticProxyUri = changeRoutingPointCommand.getProperties().get(SEMANTIC_PROXI_URI);
+            String semanticElementId = changeRoutingPointCommand.getProperties().get(SEMANTIC_ELEMENT_ID);
             List<GPoint> newRoutingPoints = new ArrayList<>();
             ((CCompoundCommand) changeRoutingPointCommand).getCommands().forEach(cmd -> {
                GPoint routingPoint = NotationCommandUtil.getGPoint(
@@ -61,7 +61,7 @@ public class ChangeRoutingPointsCommandContribution extends NotationCommandContr
                newRoutingPoints.add(routingPoint);
             });
             compoundCommand.append(
-               new ChangeRoutingPointsCommand(domain, modelUri, semanticProxyUri, newRoutingPoints));
+               new ChangeRoutingPointsCommand(domain, modelUri, semanticElementId, newRoutingPoints));
          });
 
       }

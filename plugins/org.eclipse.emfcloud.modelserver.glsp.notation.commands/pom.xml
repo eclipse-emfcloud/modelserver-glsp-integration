@@ -51,11 +51,6 @@
 
 			<dependencies>
 				<dependency>
-					<groupId>org.eclipse.emfcloud.modelserver.glsp</groupId>
-					<artifactId>org.eclipse.emfcloud.modelserver.glsp.notation.model</artifactId>
-					<version>${project.version}</version>
-				</dependency>
-				<dependency>
 					<groupId>org.eclipse.emfcloud.modelserver</groupId>
 					<artifactId>org.eclipse.emfcloud.modelserver.emf</artifactId>
 					<version>${modelserver.version}</version>
@@ -73,6 +68,11 @@
 				<dependency>
 					<groupId>org.eclipse.glsp</groupId>
 					<artifactId>org.eclipse.glsp.server</artifactId>
+					<version>${glsp.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.glsp</groupId>
+					<artifactId>org.eclipse.glsp.server.emf</artifactId>
 					<version>${glsp.version}</version>
 				</dependency>
 				<dependency>

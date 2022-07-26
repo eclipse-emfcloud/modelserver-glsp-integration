@@ -63,8 +63,8 @@
 		<maven.compiler.version>3.8.1</maven.compiler.version>
 		<maven.clean.version>3.1.0</maven.clean.version>
 		<maven.checkstyle.version>3.1.1</maven.checkstyle.version>
-		<puppycrawl.checkstyle.version>8.39</puppycrawl.checkstyle.version>
-		<emfcloud.checkstyle.version>0.1.0-RC1</emfcloud.checkstyle.version>
+		<puppycrawl.checkstyle.version>8.44</puppycrawl.checkstyle.version>
+		<emfcloud.checkstyle.version>0.1.0-SNAPSHOT</emfcloud.checkstyle.version>
 
 		<maven.resources.version>3.2.0</maven.resources.version>
 		<maven.surefire.version>3.0.0-M5</maven.surefire.version>
@@ -80,23 +80,28 @@
 		<nexus.maven.version>1.6.8</nexus.maven.version>
 		<maven.gpg.version>1.6</maven.gpg.version>
 
-		<emf.ecore.version>2.24.0</emf.ecore.version>
-		<emf.edit.version>2.16.0</emf.edit.version>
-		<glsp.version>0.10.0-SNAPSHOT</glsp.version>
-		<modelserver.version>0.7.0-SNAPSHOT</modelserver.version>
-		<eclipse.core.runtime.version>3.7.0</eclipse.core.runtime.version>
 		<eclipse.core.resources.version>3.7.100</eclipse.core.resources.version>
+		<eclipse.core.runtime.version>3.7.0</eclipse.core.runtime.version>
+		<emf.ecore.version>2.26.0</emf.ecore.version>
 		<emf.common.version>2.23.0</emf.common.version>
 		<emf.ecore.change.version>2.14.0</emf.ecore.change.version>
 		<emf.ecore.xmi.version>2.16.0</emf.ecore.xmi.version>
+		<emf.edit.version>2.16.0</emf.edit.version>
 		<emf.transaction.version>1.8.0.201405281451</emf.transaction.version>
 		<emf.validation.version>1.8.0.201405281429</emf.validation.version>
+		<emfjson.jackson.version>2.0.0</emfjson.jackson.version>
+		<fasterxml.jackson.version>2.12.6.1</fasterxml.jackson.version>
+		<google.guice.version>5.0.1</google.guice.version>
+		<google.guice.multibindings.version>4.2.3</google.guice.multibindings.version>
+		<google.guava.version>30.1-jre</google.guava.version>
+		<glsp.version>1.1.0-SNAPSHOT</glsp.version>
+		<modelserver.version>0.7.0-SNAPSHOT</modelserver.version>
 		<apache.logging.log4j.version>2.17.1</apache.logging.log4j.version>
+		<eclipse.elk.version>0.8.1</eclipse.elk.version>
 	</properties>
 
 	<modules>
 		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
-		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.model</module>
 		<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.commands</module>
 		<module>examples/org.eclipse.emfcloud.modelserver.glsp.example.model</module>
 	</modules>
@@ -300,13 +305,12 @@
 				<repository>
 					<id>wso2</id>
 					<name>WSO2</name>
-					<url>http://dist.wso2.org/maven2/</url>
+					<url>https://maven.wso2.org/nexus/content/groups/wso2-public</url>
 				</repository>
 			</repositories>
 
 			<modules>
 				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.integration</module>
-				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.model</module>
 				<module>plugins/org.eclipse.emfcloud.modelserver.glsp.notation.commands</module>
 				<module>examples/org.eclipse.emfcloud.modelserver.glsp.example.model</module>
 			</modules>

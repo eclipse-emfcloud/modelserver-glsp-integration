@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021 EclipseSource and others.
+ * Copyright (c) 2021-2022 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -20,42 +20,50 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emfcloud.modelserver.client.Response;
-import org.eclipse.emfcloud.modelserver.client.v1.ModelServerClientV1;
 import org.eclipse.emfcloud.modelserver.command.CCommand;
 import org.eclipse.emfcloud.modelserver.command.CCommandFactory;
 import org.eclipse.emfcloud.modelserver.command.CCompoundCommand;
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
-import org.eclipse.emfcloud.modelserver.glsp.notation.Edge;
-import org.eclipse.emfcloud.modelserver.glsp.notation.Shape;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.contribution.ChangeBoundsCommandContribution;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.contribution.ChangeRoutingPointsCommandContribution;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.contribution.LayoutCommandContribution;
+import org.eclipse.emfcloud.modelserver.notation.integration.NotationFileExtension;
+import org.eclipse.emfcloud.modelserver.notation.integration.NotationModelFormat;
 import org.eclipse.glsp.graph.GDimension;
 import org.eclipse.glsp.graph.GEdge;
 import org.eclipse.glsp.graph.GModelElement;
 import org.eclipse.glsp.graph.GNode;
 import org.eclipse.glsp.graph.GPoint;
+import org.eclipse.glsp.server.emf.model.notation.Diagram;
+import org.eclipse.glsp.server.emf.model.notation.Edge;
+import org.eclipse.glsp.server.emf.model.notation.Shape;
 import org.eclipse.glsp.server.types.ElementAndBounds;
 import org.eclipse.glsp.server.types.ElementAndRoutingPoints;
 import org.eclipse.glsp.server.types.GLSPServerException;
 
-public abstract class EMSNotationModelServerAccess extends EMSModelServerAccess {
+import com.google.inject.Inject;
 
-   protected String notationFileExtension;
+public class EMSNotationModelServerAccess extends EMSModelServerAccess {
 
    private static Logger LOGGER = LogManager.getLogger(EMSNotationModelServerAccess.class);
 
-   public EMSNotationModelServerAccess(final String sourceURI, final ModelServerClientV1 modelServerClient,
-      final String semanticFileExtension, final String notationFileExtension) {
-      super(sourceURI, modelServerClient, semanticFileExtension);
-      this.notationFileExtension = notationFileExtension;
-   }
+   @Inject
+   @NotationFileExtension
+   protected String notationFileExtension;
+   @Inject
+   @NotationModelFormat
+   protected String notationFormat;
 
    public String getNotationURI() { return baseSourceUri.appendFileExtension(this.notationFileExtension).toString(); }
 
-   public EObject getNotationModel() {
+   public Diagram getNotationModel() {
       try {
-         return modelServerClient.get(getNotationURI(), FORMAT_XMI).thenApply(res -> res.body()).get();
+         EObject notationModel = getModelServerClient().get(getNotationURI(), notationFormat)
+            .thenApply(res -> res.body()).get();
+         if (notationModel instanceof Diagram) {
+            return (Diagram) notationModel;
+         }
+         throw new GLSPServerException("Error during model loading, notation model is not a Diagram!");
       } catch (InterruptedException | ExecutionException e) {
          LOGGER.error(e);
          throw new GLSPServerException("Error during model loading", e);
@@ -65,24 +73,24 @@ public abstract class EMSNotationModelServerAccess extends EMSModelServerAccess 
    /*
     * Change Bounds
     */
-   public CompletableFuture<Response<Boolean>> changeBounds(final Map<Shape, ElementAndBounds> changeBoundsMap) {
+   public CompletableFuture<Response<String>> changeBounds(final Map<Shape, ElementAndBounds> changeBoundsMap) {
       CCompoundCommand compoundCommand = ChangeBoundsCommandContribution.create(changeBoundsMap);
       return this.edit(compoundCommand);
    }
 
-   public CompletableFuture<Response<Boolean>> changeBounds(final Shape shape, final ElementAndBounds changedBounds) {
+   public CompletableFuture<Response<String>> changeBounds(final Shape shape, final ElementAndBounds changedBounds) {
       CCommand changeBoundsCommand = ChangeBoundsCommandContribution.create(shape.getSemanticElement().getElementId(),
          changedBounds.getNewPosition(), changedBounds.getNewSize());
       return this.edit(changeBoundsCommand);
    }
 
-   public CompletableFuture<Response<Boolean>> changePosition(final Shape shape, final GPoint position) {
+   public CompletableFuture<Response<String>> changePosition(final Shape shape, final GPoint position) {
       CCommand changePositionCommand = ChangeBoundsCommandContribution.create(shape.getSemanticElement().getElementId(),
          position);
       return this.edit(changePositionCommand);
    }
 
-   public CompletableFuture<Response<Boolean>> changeSize(final Shape shape, final GDimension size) {
+   public CompletableFuture<Response<String>> changeSize(final Shape shape, final GDimension size) {
       CCommand changeSizeCommand = ChangeBoundsCommandContribution.create(shape.getSemanticElement().getElementId(),
          size);
       return this.edit(changeSizeCommand);
@@ -91,7 +99,7 @@ public abstract class EMSNotationModelServerAccess extends EMSModelServerAccess 
    /*
     * Change Routing Points
     */
-   public CompletableFuture<Response<Boolean>> changeRoutingPoints(
+   public CompletableFuture<Response<String>> changeRoutingPoints(
       final Map<Edge, ElementAndRoutingPoints> changeBendPointsMap) {
       CCompoundCommand compoundCommand = CCommandFactory.eINSTANCE.createCompoundCommand();
       compoundCommand.setType(ChangeRoutingPointsCommandContribution.TYPE);
@@ -107,7 +115,7 @@ public abstract class EMSNotationModelServerAccess extends EMSModelServerAccess 
    /*
     * Auto layouting
     */
-   public CompletableFuture<Response<Boolean>> setLayout(final EMSNotationModelState modelState,
+   public CompletableFuture<Response<String>> setLayout(final EMSNotationModelState modelState,
       final GModelElement layoutedRoot) {
       Map<Shape, ElementAndBounds> changeBoundsMap = new HashMap<>();
       Map<Edge, List<GPoint>> changeBendPointsMap = new HashMap<>();

@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021 EclipseSource and others.
+ * Copyright (c) 2021-2022 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -10,6 +10,7 @@
  ********************************************************************************/
 package org.eclipse.emfcloud.modelserver.glsp;
 
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -17,73 +18,122 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emfcloud.modelserver.client.ModelServerClientApiV1;
-import org.eclipse.emfcloud.modelserver.client.NotificationSubscriptionListener;
 import org.eclipse.emfcloud.modelserver.client.Response;
-import org.eclipse.emfcloud.modelserver.client.v1.ModelServerClientV1;
+import org.eclipse.emfcloud.modelserver.client.SubscriptionListener;
+import org.eclipse.emfcloud.modelserver.client.v2.ModelServerClientV2;
 import org.eclipse.emfcloud.modelserver.command.CCommand;
+import org.eclipse.emfcloud.modelserver.glsp.client.ModelServerClientProvider;
+import org.eclipse.emfcloud.modelserver.integration.SemanticFileExtension;
+import org.eclipse.emfcloud.modelserver.integration.SemanticModelFormat;
+import org.eclipse.glsp.server.emf.EMFIdGenerator;
 import org.eclipse.glsp.server.types.GLSPServerException;
+import org.eclipse.glsp.server.utils.ClientOptionsUtil;
 
-import com.google.common.base.Preconditions;
+import com.google.inject.Inject;
 
-public class EMSModelServerAccess {
+public class EMSModelServerAccess implements ModelServerAccess {
 
    private static Logger LOGGER = LogManager.getLogger(EMSModelServerAccess.class);
 
-   protected static final String FORMAT_XMI = "xmi";
-
-   protected final URI baseSourceUri;
+   @Inject
+   @SemanticFileExtension
    protected String semanticFileExtension;
+   @Inject
+   @SemanticModelFormat
+   protected String semanticFormat;
+   @Inject
+   protected ModelServerClientProvider modelServerClientProvider;
+   @Inject
+   protected EMFIdGenerator idGenerator;
 
-   protected final ModelServerClientV1 modelServerClient;
-   protected NotificationSubscriptionListener<EObject> subscriptionListener;
+   protected Map<String, String> clientOptions;
+   protected URI baseSourceUri;
+   protected ModelServerClientV2 modelServerClient;
+   protected SubscriptionListener subscriptionListener;
 
-   public EMSModelServerAccess(final String sourceURI, final ModelServerClientV1 modelServerClient,
-      final String semanticFileExtension) {
-      Preconditions.checkNotNull(modelServerClient);
-      this.baseSourceUri = URI.createURI(sourceURI, true).trimFileExtension();
-      this.modelServerClient = modelServerClient;
-      this.semanticFileExtension = semanticFileExtension;
+   protected ModelServerClientV2 getModelServerClient() {
+      if (modelServerClient == null) {
+         modelServerClient = modelServerClientProvider.get().orElseThrow();
+      }
+      return modelServerClient;
    }
 
-   public String getSemanticURI() { return baseSourceUri.appendFileExtension(this.semanticFileExtension).toString(); }
+   @Override
+   public Map<String, String> getClientOptions() { return clientOptions; }
 
-   public ModelServerClientApiV1<EObject> getModelServerClient() { return modelServerClient; }
+   @Override
+   public void setClientOptions(final Map<String, String> clientOptions) {
+      this.clientOptions = clientOptions;
+      String sourceURI = ClientOptionsUtil.getSourceUri(clientOptions)
+         .orElseThrow(() -> new GLSPServerException("No source URI given to load model!"));
+      this.baseSourceUri = URI.createURI(sourceURI, true).trimFileExtension();
+   }
 
+   protected String getSemanticURI() {
+      return baseSourceUri.appendFileExtension(this.semanticFileExtension).toString();
+   }
+
+   @Override
    public EObject getSemanticModel() {
       try {
-         return modelServerClient.get(getSemanticURI(), FORMAT_XMI).thenApply(res -> res.body()).get();
+         return getModelServerClient().get(getSemanticURI(), semanticFormat).thenApply(res -> res.body()).get();
       } catch (InterruptedException | ExecutionException e) {
          LOGGER.error(e);
          throw new GLSPServerException("Error during model loading", e);
       }
    }
 
-   public void subscribe(final NotificationSubscriptionListener<EObject> subscriptionListener) {
+   @Override
+   public void subscribe(final SubscriptionListener subscriptionListener) {
       this.subscriptionListener = subscriptionListener;
-      this.modelServerClient.subscribe(getSemanticURI(), subscriptionListener, FORMAT_XMI);
+      getModelServerClient().subscribe(getSemanticURI(), subscriptionListener);
    }
 
+   @Override
    public void unsubscribe() {
       if (subscriptionListener != null) {
-         this.modelServerClient.unsubscribe(getSemanticURI());
+         getModelServerClient().unsubscribe(getSemanticURI());
+         subscriptionListener = null;
       }
    }
 
-   protected CompletableFuture<Response<Boolean>> edit(final CCommand command) {
-      return this.modelServerClient.edit(getSemanticURI(), command, FORMAT_XMI);
-   }
-
+   @Override
    public CompletableFuture<Response<Boolean>> save() {
-      return this.modelServerClient.save(getSemanticURI());
+      return getModelServerClient().save(getSemanticURI());
    }
 
-   public CompletableFuture<Response<Boolean>> undo() {
-      return this.modelServerClient.undo(getSemanticURI());
+   @Override
+   public CompletableFuture<Response<Boolean>> saveAll() {
+      return getModelServerClient().saveAll();
    }
 
-   public CompletableFuture<Response<Boolean>> redo() {
-      return this.modelServerClient.redo(getSemanticURI());
+   @Override
+   public CompletableFuture<Response<String>> undo() {
+      return getModelServerClient().undo(getSemanticURI());
+   }
+
+   @Override
+   public CompletableFuture<Response<String>> redo() {
+      return getModelServerClient().redo(getSemanticURI());
+   }
+
+   @Override
+   public CompletableFuture<Response<Boolean>> close() {
+      return getModelServerClient().close(getSemanticURI());
+   }
+
+   @Override
+   public CompletableFuture<Response<String>> validate() {
+      return getModelServerClient().validate(getSemanticURI());
+   }
+
+   @Override
+   public CompletableFuture<Response<String>> getValidationConstraints() {
+      return getModelServerClient().getValidationConstraints(getSemanticURI());
+   }
+
+   protected CompletableFuture<Response<String>> edit(final CCommand command) {
+      return getModelServerClient().edit(getSemanticURI(), command, semanticFormat);
    }
 
 }

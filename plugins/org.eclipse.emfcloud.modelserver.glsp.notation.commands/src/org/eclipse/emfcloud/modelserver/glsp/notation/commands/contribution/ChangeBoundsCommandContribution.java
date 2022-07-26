@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021 EclipseSource and others.
+ * Copyright (c) 2021-2022 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -20,26 +20,26 @@ import org.eclipse.emfcloud.modelserver.command.CCommand;
 import org.eclipse.emfcloud.modelserver.command.CCommandFactory;
 import org.eclipse.emfcloud.modelserver.command.CCompoundCommand;
 import org.eclipse.emfcloud.modelserver.common.codecs.DecodingException;
-import org.eclipse.emfcloud.modelserver.glsp.notation.Shape;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.ChangeBoundsCommand;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.util.NotationCommandUtil;
 import org.eclipse.glsp.graph.GDimension;
 import org.eclipse.glsp.graph.GPoint;
+import org.eclipse.glsp.server.emf.model.notation.Shape;
 import org.eclipse.glsp.server.types.ElementAndBounds;
 
 public class ChangeBoundsCommandContribution extends NotationCommandContribution {
 
    public static final String TYPE = "changeBounds";
 
-   protected static CCommand create(final String semanticUri) {
+   protected static CCommand create(final String semanticElementId) {
       CCommand changeBoundsCommand = CCommandFactory.eINSTANCE.createCommand();
       changeBoundsCommand.setType(TYPE);
-      changeBoundsCommand.getProperties().put(SEMANTIC_PROXI_URI, semanticUri);
+      changeBoundsCommand.getProperties().put(SEMANTIC_ELEMENT_ID, semanticElementId);
       return changeBoundsCommand;
    }
 
-   public static CCommand create(final String semanticUri, final GPoint position, final GDimension size) {
-      CCommand changeBoundsCommand = create(semanticUri);
+   public static CCommand create(final String semanticElementId, final GPoint position, final GDimension size) {
+      CCommand changeBoundsCommand = create(semanticElementId);
       changeBoundsCommand.getProperties().put(POSITION_X, String.valueOf(position.getX()));
       changeBoundsCommand.getProperties().put(POSITION_Y, String.valueOf(position.getY()));
       changeBoundsCommand.getProperties().put(HEIGHT, String.valueOf(size.getHeight()));
@@ -47,15 +47,15 @@ public class ChangeBoundsCommandContribution extends NotationCommandContribution
       return changeBoundsCommand;
    }
 
-   public static CCommand create(final String semanticUri, final GPoint position) {
-      CCommand changeBoundsCommand = create(semanticUri);
+   public static CCommand create(final String semanticElementId, final GPoint position) {
+      CCommand changeBoundsCommand = create(semanticElementId);
       changeBoundsCommand.getProperties().put(POSITION_X, String.valueOf(position.getX()));
       changeBoundsCommand.getProperties().put(POSITION_Y, String.valueOf(position.getY()));
       return changeBoundsCommand;
    }
 
-   public static CCommand create(final String semanticUri, final GDimension size) {
-      CCommand changeBoundsCommand = create(semanticUri);
+   public static CCommand create(final String semanticElementId, final GDimension size) {
+      CCommand changeBoundsCommand = create(semanticElementId);
       changeBoundsCommand.getProperties().put(HEIGHT, String.valueOf(size.getHeight()));
       changeBoundsCommand.getProperties().put(WIDTH, String.valueOf(size.getWidth()));
       return changeBoundsCommand;
@@ -63,7 +63,7 @@ public class ChangeBoundsCommandContribution extends NotationCommandContribution
 
    public static CCompoundCommand create(final Map<Shape, ElementAndBounds> changeBoundsMap) {
       CCompoundCommand compoundCommand = CCommandFactory.eINSTANCE.createCompoundCommand();
-      compoundCommand.setType(ChangeBoundsCommandContribution.TYPE);
+      compoundCommand.setType(TYPE);
       changeBoundsMap.forEach((shape, elementAndBounds) -> {
          CCommand changeBoundsCommand = ChangeBoundsCommandContribution.create(
             shape.getSemanticElement().getElementId(),
@@ -81,19 +81,19 @@ public class ChangeBoundsCommandContribution extends NotationCommandContribution
          CompoundCommand changeBoundsCommand = new CompoundCommand();
 
          ((CCompoundCommand) command).getCommands().forEach(childCommand -> {
-            String semanticProxyUri = childCommand.getProperties().get(SEMANTIC_PROXI_URI);
+            String semanticElementId = childCommand.getProperties().get(SEMANTIC_ELEMENT_ID);
             GPoint elementPosition = getElementPosition(childCommand);
             GDimension elementSize = getElementSize(childCommand);
             changeBoundsCommand
-               .append(new ChangeBoundsCommand(domain, modelUri, semanticProxyUri, elementPosition, elementSize));
+               .append(new ChangeBoundsCommand(domain, modelUri, semanticElementId, elementPosition, elementSize));
          });
          return changeBoundsCommand;
       }
 
-      String semanticProxyUri = command.getProperties().get(SEMANTIC_PROXI_URI);
+      String semanticElementId = command.getProperties().get(SEMANTIC_ELEMENT_ID);
       GPoint elementPosition = getElementPosition(command);
       GDimension elementSize = getElementSize(command);
-      return new ChangeBoundsCommand(domain, modelUri, semanticProxyUri, elementPosition, elementSize);
+      return new ChangeBoundsCommand(domain, modelUri, semanticElementId, elementPosition, elementSize);
    }
 
    protected GPoint getElementPosition(final CCommand command) {

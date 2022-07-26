@@ -53,13 +53,18 @@
 			<dependencies>
 				<dependency>
 					<groupId>org.eclipse.emfcloud.modelserver</groupId>
-					<artifactId>org.eclipse.emfcloud.modelserver.emf</artifactId>
+					<artifactId>org.eclipse.emfcloud.modelserver.client</artifactId>
 					<version>${modelserver.version}</version>
 				</dependency>
 				<dependency>
-					<groupId>org.eclipse.emfcloud.modelserver.glsp</groupId>
-					<artifactId>org.eclipse.emfcloud.modelserver.glsp.notation.model</artifactId>
-					<version>${project.version}</version>
+					<groupId>org.eclipse.emfcloud.modelserver</groupId>
+					<artifactId>org.eclipse.emfcloud.modelserver.common</artifactId>
+					<version>${modelserver.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.emfcloud.modelserver</groupId>
+					<artifactId>org.eclipse.emfcloud.modelserver.emf</artifactId>
+					<version>${modelserver.version}</version>
 				</dependency>
 				<dependency>
 					<groupId>org.eclipse.emfcloud.modelserver.glsp</groupId>
@@ -77,9 +82,34 @@
 					<version>${glsp.version}</version>
 				</dependency>
 				<dependency>
+					<groupId>org.eclipse.glsp</groupId>
+					<artifactId>org.eclipse.glsp.server.emf</artifactId>
+					<version>${glsp.version}</version>
+				</dependency>
+				<dependency>
 					<groupId>org.apache.logging.log4j</groupId>
 					<artifactId>log4j-core</artifactId>
 					<version>${apache.logging.log4j.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.elk</groupId>
+					<artifactId>org.eclipse.elk.core</artifactId>
+					<version>${eclipse.elk.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.elk</groupId>
+					<artifactId>org.eclipse.elk.graph</artifactId>
+					<version>${eclipse.elk.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.elk</groupId>
+					<artifactId>org.eclipse.elk.graph.text</artifactId>
+					<version>${eclipse.elk.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.elk</groupId>
+					<artifactId>org.eclipse.elk.alg.layered</artifactId>
+					<version>${eclipse.elk.version}</version>
 				</dependency>
 			</dependencies>
 

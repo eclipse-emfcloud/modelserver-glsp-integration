@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021 EclipseSource and others.
+ * Copyright (c) 2021-2022 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -15,30 +15,29 @@ import org.eclipse.emfcloud.modelserver.glsp.notation.integration.EMSNotationMod
 import org.eclipse.emfcloud.modelserver.glsp.notation.integration.EMSNotationModelState;
 import org.eclipse.glsp.graph.GModelElement;
 import org.eclipse.glsp.server.diagram.DiagramConfiguration;
-import org.eclipse.glsp.server.features.core.model.ModelSubmissionHandler;
 import org.eclipse.glsp.server.layout.LayoutEngine;
 import org.eclipse.glsp.server.layout.ServerLayoutKind;
 import org.eclipse.glsp.server.operations.LayoutOperation;
 
 import com.google.inject.Inject;
 
-public class EMSLayoutOperationHandler
-   extends EMSBasicOperationHandler<LayoutOperation, EMSNotationModelServerAccess> {
+public class EMSLayoutOperationHandler extends AbstractEMSOperationHandler<LayoutOperation> {
 
    @Inject
    protected LayoutEngine layoutEngine;
    @Inject
-   protected ModelSubmissionHandler modelSubmissionHandler;
-   @Inject
    protected DiagramConfiguration diagramConfiguration;
+   @Inject
+   protected EMSNotationModelState modelState;
+   @Inject
+   protected EMSNotationModelServerAccess modelServerAccess;
 
    @Override
-   public void executeOperation(final LayoutOperation operation, final EMSNotationModelServerAccess modelServerAccess) {
+   public void executeOperation(final LayoutOperation operation) {
       if (diagramConfiguration.getLayoutKind() == ServerLayoutKind.MANUAL) {
          if (layoutEngine != null && layoutEngine instanceof EMSLayoutEngine) {
-            GModelElement layoutedRoot = ((EMSLayoutEngine) layoutEngine).layoutRoot(gModelState);
-            EMSNotationModelState emsModelState = EMSNotationModelState.getModelState(gModelState);
-            modelServerAccess.setLayout(emsModelState, layoutedRoot);
+            GModelElement layoutedRoot = ((EMSLayoutEngine) layoutEngine).layoutRoot(modelState);
+            modelServerAccess.setLayout(modelState, layoutedRoot);
          }
       }
    }

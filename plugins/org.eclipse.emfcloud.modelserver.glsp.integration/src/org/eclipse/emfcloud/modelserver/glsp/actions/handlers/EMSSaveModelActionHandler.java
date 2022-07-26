@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021 EclipseSource and others.
+ * Copyright (c) 2021-2022 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -12,16 +12,14 @@ package org.eclipse.emfcloud.modelserver.glsp.actions.handlers;
 
 import java.util.List;
 
-import org.eclipse.emfcloud.modelserver.glsp.EMSModelServerAccess;
 import org.eclipse.glsp.server.actions.Action;
 import org.eclipse.glsp.server.actions.SaveModelAction;
 import org.eclipse.glsp.server.types.GLSPServerException;
 
-public class EMSSaveModelActionHandler
-   extends EMSBasicActionHandler<SaveModelAction, EMSModelServerAccess> {
+public class EMSSaveModelActionHandler extends AbstractEMSActionHandler<SaveModelAction> {
 
    @Override
-   public List<Action> executeAction(final SaveModelAction action, final EMSModelServerAccess modelServerAccess) {
+   public List<Action> executeAction(final SaveModelAction action) {
 
       modelServerAccess.save().thenAccept(response -> {
          if (!response.body()) {

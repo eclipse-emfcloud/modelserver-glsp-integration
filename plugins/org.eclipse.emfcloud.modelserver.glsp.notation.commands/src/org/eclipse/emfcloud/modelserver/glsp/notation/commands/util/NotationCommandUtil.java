@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021 EclipseSource and others.
+ * Copyright (c) 2021-2022 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -16,14 +16,15 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emfcloud.modelserver.glsp.notation.Diagram;
-import org.eclipse.emfcloud.modelserver.glsp.notation.NotationElement;
-import org.eclipse.emfcloud.modelserver.glsp.notation.epackage.NotationUtil;
 import org.eclipse.glsp.graph.GDimension;
 import org.eclipse.glsp.graph.GPoint;
 import org.eclipse.glsp.graph.util.GraphUtil;
+import org.eclipse.glsp.server.emf.model.notation.Diagram;
+import org.eclipse.glsp.server.emf.model.notation.NotationElement;
 
 public final class NotationCommandUtil {
+
+   public final static String FILE_EXTENSION = "notation";
 
    private NotationCommandUtil() {}
 
@@ -43,22 +44,23 @@ public final class NotationCommandUtil {
 
    public static Diagram getDiagram(final URI modelUri, final EditingDomain domain) {
       Resource notationResource = domain.getResourceSet()
-         .getResource(modelUri.trimFileExtension().appendFileExtension(NotationUtil.NOTATION_EXTENSION), false);
+         .getResource(modelUri.trimFileExtension().appendFileExtension(FILE_EXTENSION),
+            false);
       EObject notationRoot = notationResource.getContents().get(0);
       if (!(notationRoot instanceof Diagram)) {}
       return (Diagram) notationRoot;
    }
 
    public static NotationElement getNotationElement(final URI modelUri, final EditingDomain domain,
-      final String semanticUri) {
+      final String semanticElementId) {
       Optional<NotationElement> notationElement = getDiagram(modelUri, domain).getElements().stream()
-         .filter(el -> el.getSemanticElement().getElementId().equals(semanticUri)).findFirst();
+         .filter(el -> el.getSemanticElement().getElementId().equals(semanticElementId)).findFirst();
       return notationElement.orElse(null);
    }
 
    public static <C extends NotationElement> C getNotationElement(final URI modelUri, final EditingDomain domain,
-      final String semanticUri, final Class<C> clazz) {
-      NotationElement element = getNotationElement(modelUri, domain, semanticUri);
+      final String semanticElementId, final Class<C> clazz) {
+      NotationElement element = getNotationElement(modelUri, domain, semanticElementId);
       return clazz.cast(element);
    }
 

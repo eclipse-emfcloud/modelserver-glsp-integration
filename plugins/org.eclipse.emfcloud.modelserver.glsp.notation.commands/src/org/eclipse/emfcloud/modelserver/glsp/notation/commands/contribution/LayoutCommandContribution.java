@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021 EclipseSource and others.
+ * Copyright (c) 2021-2022 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -22,13 +22,13 @@ import org.eclipse.emfcloud.modelserver.command.CCommand;
 import org.eclipse.emfcloud.modelserver.command.CCommandFactory;
 import org.eclipse.emfcloud.modelserver.command.CCompoundCommand;
 import org.eclipse.emfcloud.modelserver.common.codecs.DecodingException;
-import org.eclipse.emfcloud.modelserver.glsp.notation.Edge;
-import org.eclipse.emfcloud.modelserver.glsp.notation.Shape;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.ChangeBoundsCommand;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.ChangeRoutingPointsCommand;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.util.NotationCommandUtil;
 import org.eclipse.glsp.graph.GDimension;
 import org.eclipse.glsp.graph.GPoint;
+import org.eclipse.glsp.server.emf.model.notation.Edge;
+import org.eclipse.glsp.server.emf.model.notation.Shape;
 import org.eclipse.glsp.server.types.ElementAndBounds;
 
 public class LayoutCommandContribution extends NotationCommandContribution {
@@ -65,19 +65,19 @@ public class LayoutCommandContribution extends NotationCommandContribution {
       CompoundCommand layoutCommand = new CompoundCommand();
       ((CCompoundCommand) command).getCommands().forEach(childCommand -> {
          if (childCommand.getType().equals(ChangeBoundsCommandContribution.TYPE)) {
-            String semanticProxyUri = childCommand.getProperties().get(SEMANTIC_PROXI_URI);
+            String semanticElementId = childCommand.getProperties().get(SEMANTIC_ELEMENT_ID);
             GPoint elementPosition = getGPoint(childCommand);
             GDimension elementSize = getGDimension(childCommand);
             layoutCommand
-               .append(new ChangeBoundsCommand(domain, modelUri, semanticProxyUri, elementPosition, elementSize));
+               .append(new ChangeBoundsCommand(domain, modelUri, semanticElementId, elementPosition, elementSize));
          } else if (childCommand.getType().equals(ChangeRoutingPointsCommandContribution.TYPE)) {
-            String semanticProxyUri = childCommand.getProperties().get(SEMANTIC_PROXI_URI);
+            String semanticElementId = childCommand.getProperties().get(SEMANTIC_ELEMENT_ID);
             List<GPoint> newRoutingPoints = new ArrayList<>();
             ((CCompoundCommand) childCommand).getCommands().forEach(cmd -> {
                GPoint routingPoint = getGPoint(cmd);
                newRoutingPoints.add(routingPoint);
             });
-            layoutCommand.append(new ChangeRoutingPointsCommand(domain, modelUri, semanticProxyUri, newRoutingPoints));
+            layoutCommand.append(new ChangeRoutingPointsCommand(domain, modelUri, semanticElementId, newRoutingPoints));
          }
       });
       return layoutCommand;
