@@ -1,0 +1,53 @@
+{
+  "private": "true",
+  "name": "@eclipse-emfcloud/tasklist-theia",
+  "version": "0.7.0",
+  "description": "Theia extension for the TaskList GLSP example",
+"license": "(EPL-2.0 OR MIT)",
+  "keywords": [
+    "theia-extension"
+  ],
+  "author": {
+    "name": "Eclipse emf.cloud Project"
+  },
+  "homepage": "https://www.eclipse.org/emfcloud/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eclipse-emfcloud/modelserver-glsp-integration"
+  },
+  "bugs": "https://github.com/eclipse-emfcloud/modelserver-glsp-integration/issues",
+  "contributors": [
+    {
+      "name": "Eclipse emf.cloud Project",
+      "email": "emfcloud-dev@eclipse.org",
+      "url": "https://projects.eclipse.org/projects/ecd.emfcloud"
+    }
+  ],
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@eclipse-emfcloud/tasklist-glsp": "0.7.0",
+    "@eclipse-emfcloud/modelserver-theia": "next",
+    "@eclipse-glsp/theia-integration": "next",
+    "@eclipse-glsp/client": "next"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.1",
+    "typescript": "~4.5.5"
+  },
+  "scripts": {
+    "prepare": "yarn  clean && yarn build && yarn lint",
+    "clean": "rimraf tsconfig.tsbuildinfo lib",
+    "build": "tsc",
+    "lint": "eslint -c ../.eslintrc.js --ext .ts,.tsx ./src",
+    "watch": "tsc -w"
+  },
+  "theiaExtensions": [
+    {
+      "frontend": "lib/browser/frontend-module",
+      "backend": "lib/node/backend-module"
+    }
+  ]
+}

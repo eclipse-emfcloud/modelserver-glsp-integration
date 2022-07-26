@@ -1,0 +1,14 @@
+{
+  "private": "true",
+  "name": "root",
+  "license": "(EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0)",
+  "scripts": {
+    "build": "yarn install && concurrently \"yarn build:client\" \"yarn build:servers\"",
+    "build:client": "yarn --cwd client",
+    "build:servers": "cd model-server && mvn clean verify && cd ../glsp-server && mvn clean verify",
+    "start": "yarn --cwd client start"
+  },
+  "devDependencies": {
+    "concurrently": "^6.4.0"
+  }
+}
