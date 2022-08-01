@@ -13,20 +13,21 @@ package org.eclipse.emfcloud.modelserver.glsp.notation.commands;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emfcloud.modelserver.glsp.notation.commands.util.NotationCommandUtil;
-import org.eclipse.glsp.server.emf.model.notation.Edge;
+import org.eclipse.glsp.server.emf.model.notation.NotationElement;
 
-public class RemoveEdgeCommand extends NotationElementCommand {
+public class RemoveNotationElementCommand extends NotationElementCommand {
 
-   protected Edge edgeToRemove;
+   protected NotationElement shapeToRemove;
 
-   public RemoveEdgeCommand(final EditingDomain domain, final URI modelUri, final String semanticElementId) {
+   public RemoveNotationElementCommand(final EditingDomain domain, final URI modelUri, final String semanticElementId) {
       super(domain, modelUri);
-      this.edgeToRemove = NotationCommandUtil.getNotationElement(modelUri, domain, semanticElementId, Edge.class);
+      this.shapeToRemove = NotationCommandUtil.getNotationElement(modelUri, domain, semanticElementId,
+         NotationElement.class);
    }
 
    @Override
    protected void doExecute() {
-      notationDiagram.getElements().remove(edgeToRemove);
+      notationDiagram.getElements().remove(shapeToRemove);
    }
 
 }

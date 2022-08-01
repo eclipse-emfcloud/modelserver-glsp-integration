@@ -66,8 +66,7 @@ public abstract class EMSGLSPDiagramModule extends DiagramModule {
    }
 
    protected void configureEMFIdGenerator(final Class<? extends EMFIdGenerator> generatorClass) {
-      bind(generatorClass).in(Singleton.class);
-      bind(EMFIdGenerator.class).to(generatorClass);
+      bind(EMFIdGenerator.class).to(generatorClass).in(Singleton.class);
    }
 
    protected Class<? extends EMFSemanticIdConverter> bindEMFSemanticIdConverter() {

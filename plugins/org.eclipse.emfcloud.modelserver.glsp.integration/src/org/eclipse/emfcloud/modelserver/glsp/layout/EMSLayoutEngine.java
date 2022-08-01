@@ -31,14 +31,17 @@ public class EMSLayoutEngine extends ElkLayoutEngine {
       GModelElement newRoot = EcoreUtil.copy(modelState.getRoot());
       if (newRoot instanceof GGraph) {
          GLSPLayoutConfigurator configurator = new GLSPLayoutConfigurator();
-         // ELK Layered Algorithm Reference:
-         // https://www.eclipse.org/elk/reference/algorithms/org-eclipse-elk-layered.html
-         configurator.configureByType(DefaultTypes.GRAPH)
-            .setProperty(LayeredOptions.NODE_PLACEMENT_BK_FIXED_ALIGNMENT,
-               FixedAlignment.BALANCED);
+         configureLayoutOptions(configurator);
          this.layout((GGraph) newRoot, configurator);
       }
       return newRoot;
+   }
+
+   protected void configureLayoutOptions(final GLSPLayoutConfigurator configurator) {
+      // ELK Layered Algorithm Reference:
+      // https://www.eclipse.org/elk/reference/algorithms/org-eclipse-elk-layered.html
+      configurator.configureByType(DefaultTypes.GRAPH)
+         .setProperty(LayeredOptions.NODE_PLACEMENT_BK_FIXED_ALIGNMENT, FixedAlignment.BALANCED);
    }
 
 }

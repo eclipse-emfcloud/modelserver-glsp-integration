@@ -28,12 +28,12 @@ public class EMSSubscriptionListener extends JsonToStringSubscriptionListener {
    protected final ActionDispatcher actionDispatcher;
 
    public EMSSubscriptionListener(final String modelUri, final ActionDispatcher actionDispatcher) {
-      this.modelUri = URI.createURI(modelUri).lastSegment();
+      this.modelUri = modelUri;
       this.actionDispatcher = actionDispatcher;
    }
 
    protected void logResponse(final String message) {
-      LOGGER.info(this.modelUri + ": " + message);
+      LOGGER.debug("[" + URI.createURI(modelUri).lastSegment() + "]: " + message);
    }
 
    @Override

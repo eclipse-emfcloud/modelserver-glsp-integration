@@ -39,7 +39,7 @@ public class EMSChangeRoutingPointsOperationHandler extends AbstractEMSOperation
             });
       }
       modelServerAccess.changeRoutingPoints(changeRoutingPointsMap).thenAccept(response -> {
-         if (response.body().isEmpty()) {
+         if (response.body() == null || response.body().isEmpty()) {
             throw new GLSPServerException("Could not change bounds: " + changeRoutingPointsMap.toString());
          }
       });

@@ -37,11 +37,11 @@ public abstract class EMSNotationGModelFactory extends EMSGModelFactory {
 
    @Override
    protected void fillRootElement(final EObject semanticModel, final GModelRoot newRoot) {
-      // no-op
+      // no-op, is replaced by fillRootElement(EObject, Diagram, GModelRoot) for the notation use case
    }
 
    /**
-    * Fills the new root element with a graph model drived from the semantic and the notation model.
+    * Fills the new root element with a graph model derived from the semantic and the notation model.
     *
     * @param semanticModel semantic model root
     * @param notationModel notation model root

@@ -40,7 +40,7 @@ public class EMSChangeBoundsOperationHandler extends AbstractEMSOperationHandler
             });
       }
       modelServerAccess.changeBounds(changeBoundsMap).thenAccept(response -> {
-         if (response.body().isEmpty()) {
+         if (response.body() == null || response.body().isEmpty()) {
             throw new GLSPServerException("Could not change bounds: " + changeBoundsMap.toString());
          }
       });

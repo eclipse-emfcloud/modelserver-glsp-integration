@@ -15,6 +15,6 @@ import org.eclipse.emfcloud.modelserver.edit.command.BasicCommandContribution;
 
 public abstract class EMSCompoundCommandContribution extends BasicCommandContribution<CompoundCommand> {
 
-   public static final String SEMANTIC_ELEMENT_ID = "semanticElementId";
+   public static final String SEMANTIC_ELEMENT_ID = NotationCommandContribution.SEMANTIC_ELEMENT_ID;
 
 }
