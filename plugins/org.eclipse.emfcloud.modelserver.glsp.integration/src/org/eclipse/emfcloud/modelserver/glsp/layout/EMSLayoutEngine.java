@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021 EclipseSource and others.
+ * Copyright (c) 2021-2022 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -10,14 +10,15 @@
  ********************************************************************************/
 package org.eclipse.emfcloud.modelserver.glsp.layout;
 
-import org.eclipse.elk.graph.ElkGraphElement;
+import org.eclipse.elk.alg.layered.options.FixedAlignment;
+import org.eclipse.elk.alg.layered.options.LayeredOptions;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.glsp.graph.GEdge;
+import org.eclipse.emfcloud.modelserver.glsp.notation.integration.EMSNotationModelState;
+import org.eclipse.glsp.graph.DefaultTypes;
 import org.eclipse.glsp.graph.GGraph;
-import org.eclipse.glsp.graph.GLabel;
 import org.eclipse.glsp.graph.GModelElement;
 import org.eclipse.glsp.layout.ElkLayoutEngine;
-import org.eclipse.glsp.server.model.GModelState;
+import org.eclipse.glsp.layout.GLSPLayoutConfigurator;
 
 public class EMSLayoutEngine extends ElkLayoutEngine {
 
@@ -26,24 +27,21 @@ public class EMSLayoutEngine extends ElkLayoutEngine {
       // no-op
    }
 
-   public GModelElement layoutRoot(final GModelState modelState) {
+   public GModelElement layoutRoot(final EMSNotationModelState modelState) {
       GModelElement newRoot = EcoreUtil.copy(modelState.getRoot());
       if (newRoot instanceof GGraph) {
-         this.layout((GGraph) newRoot, null);
+         GLSPLayoutConfigurator configurator = new GLSPLayoutConfigurator();
+         configureLayoutOptions(configurator);
+         this.layout((GGraph) newRoot, configurator);
       }
       return newRoot;
    }
 
-   @Override
-   protected boolean shouldInclude(final GModelElement element, final GModelElement parent,
-      final ElkGraphElement elkParent, final LayoutContext context) {
-
-      if (element.getType().equals("label:icon")) {
-         return false;
-      } else if (element instanceof GLabel && parent instanceof GEdge) {
-         return false;
-      }
-      return super.shouldInclude(element, parent, elkParent, context);
+   protected void configureLayoutOptions(final GLSPLayoutConfigurator configurator) {
+      // ELK Layered Algorithm Reference:
+      // https://www.eclipse.org/elk/reference/algorithms/org-eclipse-elk-layered.html
+      configurator.configureByType(DefaultTypes.GRAPH)
+         .setProperty(LayeredOptions.NODE_PLACEMENT_BK_FIXED_ALIGNMENT, FixedAlignment.BALANCED);
    }
 
 }

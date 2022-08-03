@@ -1,12 +1,12 @@
 target "EMF.cloud Model Server GLSP Integration Targetplatform" with source requirements
 
-location "https://download.eclipse.org/glsp/server/p2/nightly/0.10/0.10.0.202203251548" {
-	org.eclipse.glsp.feature.feature.group [0.10.0,1.0.0)
-	org.eclipse.glsp.layout [0.10.0,1.0.0)
-	org.eclipse.glsp.graph [0.10.0,1.0.0)
+location "https://download.eclipse.org/glsp/server/p2/nightly/1.1/1.1.0.202207140749/" {
+	org.eclipse.glsp.feature.feature.group [1.0.0, 2.0.0)
+	org.eclipse.glsp.layout [1.0.0, 2.0.0)
+	org.eclipse.glsp.server.emf [1.0.0, 2.0.0)
 }
 
-location "https://download.eclipse.org/emfcloud/modelserver/p2/nightly/0.7/0.7.0.202203091127/" {
+location "https://download.eclipse.org/emfcloud/modelserver/p2/nightly/0.7/0.7.0.202207081452/" {
 	org.eclipse.emfcloud.modelserver.feature.feature.group [0.7.0,1.0.0)
 }
 
@@ -19,7 +19,7 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202203021722
 	org.apache.commons.io [2.6.0,3.0.0)
 }
 
-location "https://download.eclipse.org/elk/updates/releases/0.7.1/" {
+location "https://download.eclipse.org/elk/updates/releases/0.8.1/" {
 	org.eclipse.elk.core
 	org.eclipse.elk.graph
 	org.eclipse.elk.graph.text
