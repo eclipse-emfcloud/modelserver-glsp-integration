@@ -19,6 +19,9 @@ import org.eclipse.glsp.server.types.GLSPServerException;
 
 import com.google.inject.Inject;
 
+/**
+ * Handles {@link CreateNodeOperation}s and delegates to the Model Server via the {@link TaskListModelServerAccess}.
+ */
 public class CreateTaskNodeHandler extends AbstractEMSCreateNodeOperationHandler {
 
    @Inject

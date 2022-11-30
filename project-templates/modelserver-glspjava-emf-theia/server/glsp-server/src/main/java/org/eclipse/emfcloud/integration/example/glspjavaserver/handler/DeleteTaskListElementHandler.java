@@ -23,6 +23,9 @@ import org.eclipse.glsp.server.types.GLSPServerException;
 
 import com.google.inject.Inject;
 
+/**
+ * Handles {@link DeleteOperation}s and delegates to the Model Server via the {@link TaskListModelServerAccess}.
+ */
 public class DeleteTaskListElementHandler
    extends AbstractEMSOperationHandler<DeleteOperation> {
 

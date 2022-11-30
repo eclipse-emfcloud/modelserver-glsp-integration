@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "parent",
+  "name": "client-parent",
   "version": "0.7.0",
   "engines": {
     "yarn": ">=1.7.0",
