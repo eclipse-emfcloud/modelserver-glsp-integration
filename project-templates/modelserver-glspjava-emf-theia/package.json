@@ -1,0 +1,11 @@
+{
+  "private": "true",
+  "name": "root",
+  "license": "(EPL-2.0 OR MIT)",
+  "scripts": {
+    "build": "yarn build:servers && yarn build:client",
+    "build:client": "yarn --cwd client",
+    "build:servers": "cd server && mvn clean verify",
+    "start": "yarn --cwd client start"
+  }
+}

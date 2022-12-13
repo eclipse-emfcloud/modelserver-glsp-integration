@@ -1,0 +1,46 @@
+/********************************************************************************
+ * Copyright (c) 2022 EclipseSource and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * https://www.eclipse.org/legal/epl-2.0, or the MIT License which is
+ * available at https://opensource.org/licenses/MIT.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR MIT
+ ********************************************************************************/
+import { getPort, GLSPSocketServerContribution, GLSPSocketServerContributionOptions } from '@eclipse-glsp/theia-integration/lib/node';
+import { injectable } from '@theia/core/shared/inversify';
+import { join, resolve } from 'path';
+import { TaskListLanguage } from '../common/tasklist-language';
+
+export const DEFAULT_PORT = 5007;
+export const PORT_ARG_KEY = 'TASKLIST';
+export const LOG_DIR = join(__dirname, '..', '..', 'logs');
+const JAR_FILE = resolve(
+    join(
+        __dirname,
+        '..',
+        '..',
+        '..',
+        '..',
+        'server',
+        'glsp-server',
+        'target',
+        'org.eclipse.emfcloud.integration.example.glspjavaserver-0.7.0-SNAPSHOT-glsp.jar'
+    )
+);
+
+@injectable()
+export class TaskListGLSPServerContribution extends GLSPSocketServerContribution {
+    readonly id = TaskListLanguage.contributionId;
+
+    createContributionOptions(): Partial<GLSPSocketServerContributionOptions> {
+        return {
+            executable: JAR_FILE,
+            additionalArgs: ['--consoleLog', 'false', '--fileLog', 'true', '--logDir', LOG_DIR],
+            socketConnectionOptions: {
+                port: getPort(PORT_ARG_KEY, DEFAULT_PORT)
+            }
+        };
+    }
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/glsp/notation">
+  <semanticElement elementId="root"/>
+  <elements xsi:type="notation:Shape">
+    <semanticElement elementId="61bcc27a-3e93-4847-89e4-1d2433371b4b"/>
+    <position x="135.0" y="14.0"/>
+    <size width="67.0" height="56.0"/>
+  </elements>
+  <elements xsi:type="notation:Shape">
+    <semanticElement elementId="8204461f-8451-46c7-a258-b9ffb976182e"/>
+    <position x="245.0" y="84.0"/>
+    <size width="82.0" height="30.0"/>
+  </elements>
+  <elements xsi:type="notation:Shape">
+    <semanticElement elementId="7c68e6a2-1288-484c-ad01-454232adeb9f"/>
+    <position x="161.0" y="175.0"/>
+    <size width="80.0" height="40.0"/>
+  </elements>
+  <elements xsi:type="notation:Edge">
+    <semanticElement elementId="7ac9bd61-4ebb-41ed-88fa-e05388de2c4b"/>
+    <bendPoints x="286.0" y="42.0"/>
+  </elements>
+  <elements xsi:type="notation:Edge">
+    <semanticElement elementId="bc68a4dc-1e98-4f94-a9c9-6e16504dc762"/>
+  </elements>
+  <elements xsi:type="notation:Shape">
+    <semanticElement elementId="4995cbb1-9640-4d6f-9348-bc4dc8ed7537"/>
+    <position x="251.0" y="240.0"/>
+    <size width="60.0" height="22.0"/>
+  </elements>
+  <elements xsi:type="notation:Shape">
+    <semanticElement elementId="11850d16-a392-4596-8398-4b97e21b9a71"/>
+    <position x="155.0" y="295.0"/>
+    <size width="80.0" height="22.0"/>
+  </elements>
+  <elements xsi:type="notation:Edge">
+    <semanticElement elementId="c52b74d8-a3fc-44f6-b3a9-6a65aea878ea"/>
+  </elements>
+  <elements xsi:type="notation:Edge">
+    <semanticElement elementId="62cbc650-869b-4771-8435-febcfd9676a4"/>
+  </elements>
+</notation:Diagram>
