@@ -10,6 +10,15 @@ Throughout the repository the abbreviation `EMS` is used as a prefix for base cl
 ## Maven Repositories [![publish-status-m2](https://img.shields.io/jenkins/build?jobUrl=https://ci.eclipse.org/emfcloud/job/deploy-emfcloud-modelserver-glsp-integration-m2/&label=m2)](https://ci.eclipse.org/emfcloud/job/deploy-emfcloud-modelserver-glsp-integration-m2/)
 - <i>Snapshots: </i> https://oss.sonatype.org/content/repositories/snapshots/org/eclipse/emfcloud/modelserver/glsp/
 
+## Prerequisites
+
+The following libraries/frameworks need to be installed on your system:
+
+|                                                                              | Version   | Remark                                             |
+| ---------------------------------------------------------------------------- | --------- | -------------------------------------------------- |
+| [Java](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) | `>= 11`   | We support the two latest LTS versions (11 and 17) |
+| [Maven](https://maven.apache.org/)                                           | `>=3.6.0` |                                                    |
+
 ## Where to find the sources?
 In addition to this repository, the related source code can be found here:
 - https://github.com/eclipse-emfcloud/emfcloud-modelserver
