@@ -11,7 +11,7 @@
 import {
     configureDefaultModelElements,
     ConsoleLogger,
-    createClientContainer,
+    createDiagramContainer,
     LogLevel,
     overrideViewerOptions,
     TYPES
@@ -27,7 +27,7 @@ const tasklistDiagramModule = new ContainerModule((bind, unbind, isBound, rebind
 });
 
 export default function createContainer(widgetId: string): Container {
-    const container = createClientContainer(tasklistDiagramModule);
+    const container = createDiagramContainer(tasklistDiagramModule);
 
     overrideViewerOptions(container, {
         baseDiv: widgetId,
