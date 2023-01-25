@@ -13,8 +13,6 @@
 		<profile>
 			<id>p2</id>
 			<properties>
-				<tycho.version>2.2.0</tycho.version>
-				<tycho.extras.version>2.1.0</tycho.extras.version>
 				<targetPlatform.application.name>org.eclipse.cbi.targetplatform.tpd.converter</targetPlatform.application.name>
 				<targetPlatform.application.args>targetdefinition.tpd</targetPlatform.application.args>
 			</properties>
@@ -24,13 +22,13 @@
 					<plugin>
 						<groupId>org.eclipse.tycho.extras</groupId>
 						<artifactId>tycho-eclipserun-plugin</artifactId>
-						<version>${tycho.extras.version}</version>
+						<version>${tycho.version}</version>
 						<configuration>
 							<repositories>
 								<repository>
-									<id>2021-03</id>
+									<id>2022-03</id>
 									<layout>p2</layout>
-									<url>http://download.eclipse.org/releases/2021-03</url>
+									<url>http://download.eclipse.org/releases/2022-03</url>
 								</repository>
 								<repository>
 									<id>tpd</id>

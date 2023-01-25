@@ -18,19 +18,19 @@
 		<java.source>11</java.source>
 		<java.target>11</java.target>
 		<!-- Checkstyle Versions -->
-		<checkstyle>8.44</checkstyle>
-		<checkstyle.plugin>3.1.2</checkstyle.plugin>
+		<checkstyle.version>8.44</checkstyle.version>
+		<checkstyle.plugin.version>3.2.1</checkstyle.plugin.version>
 		<emfcloud.checkstyle.version>0.1.0-SNAPSHOT</emfcloud.checkstyle.version>
-		<!-- Maven Plugin Versions: General maven plugin versions -->
-		<maven.build.helper.plugin.version>3.3.0</maven.build.helper.plugin.version>
-		<maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
-		<maven.shade.plugin.version>3.2.4</maven.shade.plugin.version>
-		<maven.source.plugin.version>3.0.1</maven.source.plugin.version>
-		<maven.surefire.plugin.version>2.22.1</maven.surefire.plugin.version>
-		<addjars.maven.plugin.version>1.0.5</addjars.maven.plugin.version>
-		<versions.maven.plugin.version>2.7</versions.maven.plugin.version>
-		<tycho.version>1.6.0</tycho.version>
-		<maven.antrun.plugin.version>1.8</maven.antrun.plugin.version>
+		<!-- Build Plugin Versions -->
+		<tycho.version>2.7.5</tycho.version>
+		<maven.compiler.version>3.10.1</maven.compiler.version>
+		<maven.shade.version>3.3.0</maven.shade.version>
+		<maven.source.version>3.2.1</maven.source.version>
+		<maven.surefire.version>3.0.0-M6</maven.surefire.version>
+		<maven.dependency.version>3.5.0</maven.dependency.version>
+		<addjars.maven.version>1.0.5</addjars.maven.version>
+		<codehaus.mojo.maven.version>3.3.0</codehaus.mojo.maven.version>
+		<maven.antrun.version>3.1.0</maven.antrun.version>
 		<!-- Dependencies -->
 		<emf.ecore.version>2.26.0</emf.ecore.version>
 		<emf.common.version>2.23.0</emf.common.version>

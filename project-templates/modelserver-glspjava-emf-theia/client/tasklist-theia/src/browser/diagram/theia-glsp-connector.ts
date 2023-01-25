@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2022 EclipseSource and others.
+ * Copyright (c) 2022-2023 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -9,9 +9,10 @@
  * SPDX-License-Identifier: EPL-2.0 OR MIT
  ********************************************************************************/
 import { Args } from '@eclipse-glsp/protocol';
-import { GLSPDiagramLanguage, TheiaDiagramServer } from '@eclipse-glsp/theia-integration';
+import { GLSPDiagramLanguage } from '@eclipse-glsp/theia-integration';
 import { BaseTheiaGLSPConnector } from '@eclipse-glsp/theia-integration/lib/browser/diagram/base-theia-glsp-connector';
 import { injectable } from 'inversify';
+import { TheiaDiagramServer } from 'sprotty-theia';
 import { TaskListLanguage } from '../../common/tasklist-language';
 
 @injectable()

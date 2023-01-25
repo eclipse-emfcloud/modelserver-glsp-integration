@@ -3,7 +3,7 @@
   "name": "@eclipse-emfcloud/tasklist-theia",
   "version": "0.7.0",
   "description": "Theia extension for the TaskList GLSP example",
-"license": "(EPL-2.0 OR MIT)",
+  "license": "(EPL-2.0 OR MIT)",
   "keywords": [
     "theia-extension"
   ],
@@ -29,9 +29,10 @@
   ],
   "dependencies": {
     "@eclipse-emfcloud/tasklist-glsp": "0.7.0",
-    "@eclipse-emfcloud/modelserver-theia": "next",
-    "@eclipse-glsp/theia-integration": "next",
-    "@eclipse-glsp/client": "next"
+    "@eclipse-emfcloud/modelserver-theia": "0.8.0-next.e8752f2.87",
+    "@eclipse-glsp/theia-integration": "1.1.0-RC04",
+    "@eclipse-glsp/client": "1.1.0-RC04",
+    "sprotty-theia": "0.13.0-next.9cbedec"
   },
   "devDependencies": {
     "rimraf": "^2.6.1",
