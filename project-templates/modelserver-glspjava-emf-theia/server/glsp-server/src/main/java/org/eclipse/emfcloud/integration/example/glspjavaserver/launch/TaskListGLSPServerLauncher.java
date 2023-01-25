@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2022 EclipseSource and others.
+ * Copyright (c) 2022-2023 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -9,8 +9,6 @@
  * SPDX-License-Identifier: EPL-2.0 OR MIT
  ********************************************************************************/
 package org.eclipse.emfcloud.integration.example.glspjavaserver.launch;
-
-import java.io.IOException;
 
 import org.apache.commons.cli.ParseException;
 import org.eclipse.elk.alg.layered.options.LayeredMetaDataProvider;
@@ -40,7 +38,7 @@ public final class TaskListGLSPServerLauncher {
 
          GLSPServerLauncher launcher = new SocketGLSPServerLauncher(tasklistServerModule);
          launcher.start("localhost", port);
-      } catch (ParseException | IOException ex) {
+      } catch (ParseException ex) {
          ex.printStackTrace();
          LaunchUtil.printHelp(processName, DefaultCLIParser.getDefaultOptions());
       }

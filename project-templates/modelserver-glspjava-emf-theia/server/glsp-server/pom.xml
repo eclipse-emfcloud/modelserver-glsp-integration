@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.eclipse.emfcloud.modelserver.glsp</groupId>
 	<artifactId>org.eclipse.emfcloud.integration.example.glspjavaserver</artifactId>
 	<description>GLSP Server component for the ModelServer/GLSP Java Server/EMF/Theia example</description>
 	<url>https://github.com/eclipse-emfcloud/modelserver-glsp-integration</url>
@@ -191,11 +190,6 @@
 			<artifactId>org.eclipse.elk.alg.layered</artifactId>
 			<version>${eclipse.elk.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>${google.guava.version}</version>
-		</dependency>
 	</dependencies>
 
 	<repositories>
@@ -219,8 +213,9 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven.compiler.plugin.version}</version>
+				<version>${maven.compiler.version}</version>
 				<configuration>
 					<source>${java.source}</source>
 					<target>${java.target}</target>
@@ -229,12 +224,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${maven.surefire.plugin.version}</version>
+				<version>${maven.surefire.version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>${maven.source.plugin.version}</version>
+				<version>${maven.source.version}</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -247,13 +242,13 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>versions-maven-plugin</artifactId>
-				<version>${versions.maven.plugin.version}</version>
+				<version>${codehaus.mojo.maven.version}</version>
 			</plugin>
 			<!-- to disable use -Dcheckstyle.skip -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${checkstyle.plugin}</version>
+				<version>${checkstyle.plugin.version}</version>
 				<configuration>
 					<configLocation>emfcloud-checkstyle-8.44.xml</configLocation>
 					<consoleOutput>true</consoleOutput>
@@ -276,7 +271,7 @@
 					<dependency>
 						<groupId>com.puppycrawl.tools</groupId>
 						<artifactId>checkstyle</artifactId>
-						<version>${checkstyle}</version>
+						<version>${checkstyle.version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -295,6 +290,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-dependency-plugin</artifactId>
+						<version>${maven.dependency.version}</version>
 						<executions>
 							<execution>
 								<id>copy-dependencies</id>
@@ -315,7 +311,7 @@
 					<plugin>
 						<groupId>com.googlecode.addjars-maven-plugin</groupId>
 						<artifactId>addjars-maven-plugin</artifactId>
-						<version>${addjars.maven.plugin.version}</version>
+						<version>${addjars.maven.version}</version>
 						<executions>
 							<execution>
 								<phase>package</phase>
@@ -335,7 +331,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-shade-plugin</artifactId>
-						<version>${maven.shade.plugin.version}</version>
+						<version>${maven.shade.version}</version>
 						<configuration>
 							<transformers>
 								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
