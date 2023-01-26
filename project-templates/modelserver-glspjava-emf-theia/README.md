@@ -52,6 +52,8 @@ The following libraries/frameworks need to be installed on your system:
 
 The examples are heavily interweaved with Eclipse Theia, so please also check the [prerequisites of Theia](https://github.com/eclipse-theia/theia/blob/master/doc/Developing.md#prerequisites).
 
+> **Remark:** This project-template relies on the latest published versions of Model Server, GLSP and the Model Server GLSP integration. This means, it is built separately from the integration framework.
+
 ## VS Code workspace
 
 For both the client and the server part of this example we use [Visual Studio Code](https://code.visualstudio.com/).

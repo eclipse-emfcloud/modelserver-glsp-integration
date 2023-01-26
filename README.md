@@ -20,6 +20,13 @@ The following libraries/frameworks need to be installed on your system:
 | [Java](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) | `>= 11`   | We support the two latest LTS versions (11 and 17) |
 | [Maven](https://maven.apache.org/)                                           | `>=3.6.0` |                                                    |
 
+## Project Template
+
+This repository includes a project-template that combines Model Server, Java GLSP-Server, EMF model inside a Theia application.
+See its [README](./project-templates/modelserver-glspjava-emf-theia/README.md) for further details.
+
+> **Remark:** This project-template relies on the latest published versions of Model Server, GLSP and the Model Server GLSP integration. This means, it is built separately from the integration framework.
+
 ## Where to find the sources?
 
 In addition to this repository, the related source code can be found here:
