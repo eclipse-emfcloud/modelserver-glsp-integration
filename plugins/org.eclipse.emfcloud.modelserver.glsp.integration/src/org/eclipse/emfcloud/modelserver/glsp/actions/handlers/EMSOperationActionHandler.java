@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021 EclipseSource and others.
+ * Copyright (c) 2021-2023 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -25,7 +25,7 @@ public class EMSOperationActionHandler extends OperationActionHandler {
    public List<Action> executeAction(final Operation operation) {
       // Disable the special handling for CreateOperation, as we don't register
       // one handler per element type to create.
-      Optional<? extends OperationHandler> operationHandler = operationHandlerRegistry.get(operation);
+      Optional<? extends OperationHandler<?>> operationHandler = operationHandlerRegistry.get(operation);
       if (operationHandler.isPresent()) {
          return executeHandler(operation, operationHandler.get());
       }
@@ -33,7 +33,7 @@ public class EMSOperationActionHandler extends OperationActionHandler {
    }
 
    @Override
-   protected List<Action> executeHandler(final Operation operation, final OperationHandler handler) {
+   protected List<Action> executeHandler(final Operation operation, final OperationHandler<?> handler) {
       if (handler instanceof EMSOperationHandler) {
          handler.execute(operation);
       }
