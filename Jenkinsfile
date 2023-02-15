@@ -51,7 +51,7 @@ pipeline {
             steps {
                 timeout(30) {
                     container("ci") {
-                        sh "mvn clean verify -Pp2 -B -Dmaven.repo.local=${MAVEN_LOCAL_REPO}" 
+                        sh "mvn clean verify -Pp2 -B -Dmaven.repo.local=${MAVEN_LOCAL_REPO} --settings ./.mvn/custom-settings.xml" 
                     }
                 }
             }
@@ -61,38 +61,12 @@ pipeline {
             steps {
                 timeout(30) {
                     container("ci") {
-                        sh "mvn clean verify -Pm2 -B -Dmaven.repo.local=${MAVEN_LOCAL_REPO}" 
+                        sh "mvn clean verify -Pm2 -B -Dmaven.repo.local=${MAVEN_LOCAL_REPO} --settings ./.mvn/custom-settings.xml" 
                     }
                 }
             }
         }
 
-        stage ("Build: modelserver-glsp-integration example - server") {
-            steps {
-                timeout(30) {
-                    container("ci") {
-                        // Do not use dir(..) as it causes problems with mvn
-                        sh "cd project-templates/modelserver-glspjava-emf-theia/server"
-                        sh "mvn clean verify -B -Dmaven.repo.local=${MAVEN_LOCAL_REPO}" 
-                    }
-                }
-            }
-        }
-        
-        stage ("Build: modelserver-glsp-integration example - client") {
-            steps {
-                timeout(30){
-                    container("ci") {
-                        dir("project-templates/modelserver-glspjava-emf-theia") {
-                            withCredentials([string(credentialsId: "github-bot-token", variable: "GITHUB_TOKEN")]) {
-                                sh "yarn build:client"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
         stage("Deploy (main only)") {
             when { branch "main" }
             steps {

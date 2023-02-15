@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021-2022 EclipseSource and others.
+ * Copyright (c) 2021-2023 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -74,7 +74,7 @@ public abstract class EMSGLSPNotationDiagramModule extends EMSGLSPDiagramModule 
    }
 
    @Override
-   protected void configureOperationHandlers(final MultiBinding<OperationHandler> binding) {
+   protected void configureOperationHandlers(final MultiBinding<OperationHandler<?>> binding) {
       super.configureOperationHandlers(binding);
       binding.rebind(LayoutOperationHandler.class, EMSLayoutOperationHandler.class);
       binding.add(EMSChangeBoundsOperationHandler.class);

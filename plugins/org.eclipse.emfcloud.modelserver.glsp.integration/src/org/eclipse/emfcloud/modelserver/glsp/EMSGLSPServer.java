@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021-2022 EclipseSource and others.
+ * Copyright (c) 2021-2023 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,7 +14,6 @@ import static org.eclipse.glsp.server.types.GLSPServerException.getOrThrow;
 
 import java.net.MalformedURLException;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -24,10 +23,7 @@ import org.eclipse.emfcloud.modelserver.client.Response;
 import org.eclipse.emfcloud.modelserver.client.v2.ModelServerClientV2;
 import org.eclipse.emfcloud.modelserver.glsp.client.ModelServerClientProvider;
 import org.eclipse.glsp.server.protocol.DefaultGLSPServer;
-import org.eclipse.glsp.server.protocol.DisposeClientSessionParameters;
 import org.eclipse.glsp.server.protocol.InitializeResult;
-import org.eclipse.glsp.server.types.GLSPServerException;
-import org.eclipse.glsp.server.utils.ClientOptionsUtil;
 import org.eclipse.glsp.server.utils.MapUtil;
 
 import com.google.inject.Inject;
@@ -72,17 +68,6 @@ public class EMSGLSPServer extends DefaultGLSPServer {
 
    protected ModelServerClientV2 createModelServerClient(final String modelServerURL) throws MalformedURLException {
       return new ModelServerClientV2(modelServerURL);
-   }
-
-   @Override
-   public CompletableFuture<Void> disposeClientSession(final DisposeClientSessionParameters params) {
-      Optional<ModelServerClientV2> modelServerClient = modelServerClientProvider.get();
-      if (modelServerClient.isPresent()) {
-         String sourceURI = ClientOptionsUtil.getSourceUri(params.getArgs())
-            .orElseThrow(() -> new GLSPServerException("No source URI given to dispose client session!"));
-         modelServerClient.get().unsubscribe(sourceURI);
-      }
-      return super.disposeClientSession(params);
    }
 
 }
