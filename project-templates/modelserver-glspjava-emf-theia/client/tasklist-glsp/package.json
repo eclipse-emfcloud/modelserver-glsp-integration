@@ -31,7 +31,7 @@
     "css"
   ],
   "dependencies": {
-    "@eclipse-glsp/client": "1.1.0-RC04"
+    "@eclipse-glsp/client": "1.1.0-RC05"
   },
   "devDependencies": {
     "rimraf": "^2.6.1",

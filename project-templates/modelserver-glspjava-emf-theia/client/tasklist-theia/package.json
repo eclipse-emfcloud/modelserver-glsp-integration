@@ -29,9 +29,9 @@
   ],
   "dependencies": {
     "@eclipse-emfcloud/tasklist-glsp": "0.7.0",
-    "@eclipse-emfcloud/modelserver-theia": "0.8.0-next.e8752f2.87",
-    "@eclipse-glsp/theia-integration": "1.1.0-RC04",
-    "@eclipse-glsp/client": "1.1.0-RC04",
+    "@eclipse-emfcloud/modelserver-theia": "0.8.0-theia-cr02",
+    "@eclipse-glsp/theia-integration": "1.1.0-RC05",
+    "@eclipse-glsp/client": "1.1.0-RC05",
     "sprotty-theia": "0.13.0-next.9cbedec"
   },
   "devDependencies": {

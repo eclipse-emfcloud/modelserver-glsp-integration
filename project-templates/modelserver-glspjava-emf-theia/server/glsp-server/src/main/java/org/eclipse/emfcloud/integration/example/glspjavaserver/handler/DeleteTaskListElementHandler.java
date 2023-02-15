@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2022 EclipseSource and others.
+ * Copyright (c) 2022-2023 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -17,7 +17,7 @@ import org.eclipse.emfcloud.modelserver.glsp.example.model.Identifiable;
 import org.eclipse.emfcloud.modelserver.glsp.example.model.Task;
 import org.eclipse.emfcloud.modelserver.glsp.example.model.Transition;
 import org.eclipse.emfcloud.modelserver.glsp.notation.integration.EMSNotationModelState;
-import org.eclipse.emfcloud.modelserver.glsp.operations.handlers.AbstractEMSOperationHandler;
+import org.eclipse.emfcloud.modelserver.glsp.operations.handlers.EMSOperationHandler;
 import org.eclipse.glsp.server.operations.DeleteOperation;
 import org.eclipse.glsp.server.types.GLSPServerException;
 
@@ -26,8 +26,7 @@ import com.google.inject.Inject;
 /**
  * Handles {@link DeleteOperation}s and delegates to the Model Server via the {@link TaskListModelServerAccess}.
  */
-public class DeleteTaskListElementHandler
-   extends AbstractEMSOperationHandler<DeleteOperation> {
+public class DeleteTaskListElementHandler extends EMSOperationHandler<DeleteOperation> {
 
    @Inject
    protected EMSNotationModelState modelState;

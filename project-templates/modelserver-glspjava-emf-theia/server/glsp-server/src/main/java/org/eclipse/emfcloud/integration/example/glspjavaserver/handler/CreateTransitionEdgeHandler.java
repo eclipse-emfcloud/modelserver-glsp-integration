@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2022 EclipseSource and others.
+ * Copyright (c) 2022-2023 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -12,7 +12,7 @@ package org.eclipse.emfcloud.integration.example.glspjavaserver.handler;
 
 import org.eclipse.emfcloud.integration.example.glspjavaserver.TaskListModelServerAccess;
 import org.eclipse.emfcloud.integration.example.glspjavaserver.TaskListModelTypes;
-import org.eclipse.emfcloud.modelserver.glsp.operations.handlers.AbstractEMSCreateEdgeOperationHandler;
+import org.eclipse.emfcloud.modelserver.glsp.operations.handlers.EMSCreateOperationHandler;
 import org.eclipse.glsp.server.operations.CreateEdgeOperation;
 import org.eclipse.glsp.server.types.GLSPServerException;
 
@@ -21,7 +21,7 @@ import com.google.inject.Inject;
 /**
  * Handles {@link CreateEdgeOperation}s and delegates to the Model Server via the {@link TaskListModelServerAccess}.
  */
-public class CreateTransitionEdgeHandler extends AbstractEMSCreateEdgeOperationHandler {
+public class CreateTransitionEdgeHandler extends EMSCreateOperationHandler<CreateEdgeOperation> {
 
    @Inject
    protected TaskListModelServerAccess modelAccess;

@@ -1,40 +1,9 @@
-def kubernetes_config = """
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: ci
-    image: eclipseglsp/ci:latest
-    tty: true
-    resources:
-      limits:
-        memory: "4Gi"
-        cpu: "2"
-      requests:
-        memory: "4Gi"
-        cpu: "2"
-    command:
-    - cat
-    volumeMounts:
-    - mountPath: "/home/jenkins"
-      name: "jenkins-home"
-      readOnly: false
-    - mountPath: "/.yarn"
-      name: "yarn-global"
-      readOnly: false
-  volumes:
-  - name: "jenkins-home"
-    emptyDir: {}
-  - name: "yarn-global"
-    emptyDir: {}
-"""
-
 pipeline {
-    agent {
-        kubernetes {
-            label "emfcloud-agent-pod"
-            yaml kubernetes_config
-        }
+    agent any
+
+    tools {
+        maven 'apache-maven-3.8.6'
+        jdk 'openjdk-jdk11-latest'
     }
 
     options {
@@ -50,9 +19,7 @@ pipeline {
         stage ("Build: modelserver-glsp-integration (P2)") {
             steps {
                 timeout(30) {
-                    container("ci") {
-                        sh "mvn clean verify -Pp2 -B -Dmaven.repo.local=${MAVEN_LOCAL_REPO} --settings ./.mvn/custom-settings.xml" 
-                    }
+                    sh "mvn clean verify -Pp2 -B -Dmaven.repo.local=${MAVEN_LOCAL_REPO} --settings ./.mvn/custom-settings.xml"
                 }
             }
         }
@@ -60,9 +27,7 @@ pipeline {
         stage ("Build: modelserver-glsp-integration (M2)") {
             steps {
                 timeout(30) {
-                    container("ci") {
-                        sh "mvn clean verify -Pm2 -B -Dmaven.repo.local=${MAVEN_LOCAL_REPO} --settings ./.mvn/custom-settings.xml" 
-                    }
+                    sh "mvn clean verify -Pm2 -B -Dmaven.repo.local=${MAVEN_LOCAL_REPO} --settings ./.mvn/custom-settings.xml"
                 }
             }
         }
