@@ -63,7 +63,7 @@
 		<maven.compiler.version>3.10.1</maven.compiler.version>
 		<maven.clean.version>3.2.0</maven.clean.version>
 		<maven.checkstyle.version>3.2.1</maven.checkstyle.version>
-		<puppycrawl.checkstyle.version>8.44</puppycrawl.checkstyle.version>
+		<checkstyle.version>8.44</checkstyle.version>
 		<emfcloud.checkstyle.version>0.1.0-SNAPSHOT</emfcloud.checkstyle.version>
 
 		<maven.resources.version>3.2.0</maven.resources.version>
@@ -124,6 +124,14 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>sonatype</id>
+			<name>Sonatype</name>
+			<url>https://oss.sonatype.org/content/groups/public</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<profiles>
 		<!-- P2 Profile: Runs a Tycho-based build that generates Eclipse artifacts -->
@@ -337,6 +345,37 @@
 								</goals>
 							</execution>
 						</executions>
+					</plugin>
+					<!-- to disable use -Dcheckstyle.skip -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-checkstyle-plugin</artifactId>
+						<version>${maven.checkstyle.version}</version>
+						<configuration>
+							<configLocation>emfcloud-checkstyle-${checkstyle.version}.xml</configLocation>
+							<consoleOutput>true</consoleOutput>
+							<excludes>**/src-gen/**/*.java</excludes>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>validate</phase>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>org.eclipse.emfcloud</groupId>
+								<artifactId>org.eclipse.emfcloud.checkstyle</artifactId>
+								<version>${emfcloud.checkstyle.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>com.puppycrawl.tools</groupId>
+								<artifactId>checkstyle</artifactId>
+								<version>${checkstyle.version}</version>
+							</dependency>
+						</dependencies>
 					</plugin>
 				</plugins>
 			</build>

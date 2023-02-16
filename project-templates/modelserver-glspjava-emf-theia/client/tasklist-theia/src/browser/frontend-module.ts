@@ -9,12 +9,14 @@
  * SPDX-License-Identifier: EPL-2.0 OR MIT
  ********************************************************************************/
 import { ContainerContext, GLSPClientContribution, GLSPTheiaFrontendModule, TheiaGLSPConnector } from '@eclipse-glsp/theia-integration';
+import { LabelProviderContribution } from '@theia/core/lib/browser';
 import { DiagramConfiguration } from 'sprotty-theia';
 
 import { TaskListLanguage } from '../common/tasklist-language';
 import { TaskListDiagramConfiguration } from './diagram/diagram-configuration';
 import { TaskListTheiaGLSPConnector } from './diagram/theia-glsp-connector';
 import { TaskListGLSPClientContribution } from './glsp-client-contribution';
+import { TaskListTreeLabelProviderContribution } from './label-provider';
 
 export class TaskListTheiaFrontendModule extends GLSPTheiaFrontendModule {
     readonly diagramLanguage = TaskListLanguage;
@@ -33,6 +35,11 @@ export class TaskListTheiaFrontendModule extends GLSPTheiaFrontendModule {
 
     override bindGLSPClientContribution(context: ContainerContext): void {
         context.bind(GLSPClientContribution).to(TaskListGLSPClientContribution);
+    }
+
+    override configure(context: ContainerContext): void {
+        super.configure(context);
+        context.bind(LabelProviderContribution).to(TaskListTreeLabelProviderContribution).inSingletonScope();
     }
 }
 

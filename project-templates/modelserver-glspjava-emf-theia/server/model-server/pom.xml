@@ -261,9 +261,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${checkstyle.plugin.version}</version>
+				<version>${maven.checkstyle.version}</version>
 				<configuration>
-					<configLocation>emfcloud-checkstyle-8.44.xml</configLocation>
+					<configLocation>emfcloud-checkstyle-${checkstyle.version}.xml</configLocation>
 					<consoleOutput>true</consoleOutput>
 				</configuration>
 				<executions>

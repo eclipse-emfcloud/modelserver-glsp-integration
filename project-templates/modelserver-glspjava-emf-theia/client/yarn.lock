@@ -928,33 +928,33 @@
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
-"@eclipse-emfcloud/modelserver-client@0.8.0-next.e8752f2.87+e8752f2":
-  version "0.8.0-next.e8752f2.87"
-  resolved "https://registry.yarnpkg.com/@eclipse-emfcloud/modelserver-client/-/modelserver-client-0.8.0-next.e8752f2.87.tgz#1cdda80729e97d6cca6535a302726cd330dc3505"
-  integrity sha512-BIGTPISmkBPxaqKxrC7jy2IkQ/e61dwTidm+PhDzqYXyE10ncrSWMdCrLifVOuuNS1Slq5Jt542D2IeTZSeg4g==
+"@eclipse-emfcloud/modelserver-client@^0.8.0-theia-cr02":
+  version "0.8.0-theia-cr02"
+  resolved "https://registry.yarnpkg.com/@eclipse-emfcloud/modelserver-client/-/modelserver-client-0.8.0-theia-cr02.tgz#cb68ad0c3567f9daef535736e9eb8c1d051d4d60"
+  integrity sha512-qIAxUVDoN71Km0217ZooGQM9M0a7NZSmcGU1vc7sEhkpP/epgZ0/k1Y3HrlndtXqJffHBfXh5JomkEAHNsezyg==
   dependencies:
     axios "^0.24.0"
     events "^3.3.0"
     fast-json-patch "^3.1.0"
     isomorphic-ws "^4.0.1"
     urijs "^1.19.11"
-    ws "^7.4.6"
+    ws "^7.1.2"
 
-"@eclipse-emfcloud/modelserver-theia@0.8.0-next.e8752f2.87":
-  version "0.8.0-next.e8752f2.87"
-  resolved "https://registry.yarnpkg.com/@eclipse-emfcloud/modelserver-theia/-/modelserver-theia-0.8.0-next.e8752f2.87.tgz#487897fc0fa52a5f611e36d386cdb1575468881b"
-  integrity sha512-x43j89YfjnnJKnLOHBnRrXlLD/7+bvwyi1yK2GuaLcoDvtMOJIns+NTQL6adUMRyVw7TUh6u+JlRATFwop9RpA==
+"@eclipse-emfcloud/modelserver-theia@0.8.0-theia-cr02":
+  version "0.8.0-theia-cr02"
+  resolved "https://registry.yarnpkg.com/@eclipse-emfcloud/modelserver-theia/-/modelserver-theia-0.8.0-theia-cr02.tgz#eb715ffd57f7e72e9fd1376ea285f2ee1cf8a135"
+  integrity sha512-CVtzF6q0V0X/wm27rYN7nRW2uzkCxE6sRGZUzUfKZbO6ZYknUVV3RgHUtb4gmlHzHH3XM0xToHdylLPm6KC71w==
   dependencies:
-    "@eclipse-emfcloud/modelserver-client" "0.8.0-next.e8752f2.87+e8752f2"
+    "@eclipse-emfcloud/modelserver-client" "^0.8.0-theia-cr02"
     urijs "^1.19.11"
-    ws "8.5.0"
+    ws "^7.1.2"
 
-"@eclipse-glsp/client@1.1.0-RC04":
-  version "1.1.0-RC04"
-  resolved "https://registry.yarnpkg.com/@eclipse-glsp/client/-/client-1.1.0-RC04.tgz#47203752b97ab48026cfa61010e3281a26dbfecc"
-  integrity sha512-/apRDV0HGmGQPf4wy2SjzfTV4C7JX1RQAetJXu0FXq7l/l1rNsT/IVsIP9GSuJ6yYf+PttEYzLNv8hIOIPIYtw==
+"@eclipse-glsp/client@1.1.0-RC05":
+  version "1.1.0-RC05"
+  resolved "https://registry.yarnpkg.com/@eclipse-glsp/client/-/client-1.1.0-RC05.tgz#4215d8911a95e758ee3d533bedd3b769d56a967d"
+  integrity sha512-4lR2Y4TUbRZ7m0iopY/AiH+QkZwdXm9iryWWkdMgqK3VfptDk3eUSxkfU7xHiDL6tm+xGlJX1kuLyNuDPbQXOQ==
   dependencies:
-    "@eclipse-glsp/protocol" "1.1.0-RC04"
+    "@eclipse-glsp/protocol" "1.1.0-RC05"
     autocompleter "5.1.0"
     sprotty "0.13.0-next.f4445dd.342"
 
@@ -1004,21 +1004,21 @@
   resolved "https://registry.yarnpkg.com/@eclipse-glsp/prettier-config/-/prettier-config-1.0.0.tgz#8ff72c8709a4233af98e38535feb3415b699a4b9"
   integrity sha512-Fwzd2vRD5aspzY9VqUhRU11no1apVz6Pw4hvz4gLxFSoJIwE+tofux5jBOLQVFv3DmB7HJgksrTznCwEzta8kA==
 
-"@eclipse-glsp/protocol@1.1.0-RC04":
-  version "1.1.0-RC04"
-  resolved "https://registry.yarnpkg.com/@eclipse-glsp/protocol/-/protocol-1.1.0-RC04.tgz#a96c628aff909ab443261dbe289080513c18dbcf"
-  integrity sha512-Ds0aKL7CjAFMOiNY4MZd2HnXxlklvMhC+bxuH1ab0uj7ot6b9j3o8YrDZqLHqIYChNrEmoUEYRW71nFkWcrj3A==
+"@eclipse-glsp/protocol@1.1.0-RC05":
+  version "1.1.0-RC05"
+  resolved "https://registry.yarnpkg.com/@eclipse-glsp/protocol/-/protocol-1.1.0-RC05.tgz#acf047aede531e7c63715fa8fe27e2d991291e04"
+  integrity sha512-vwAgq0iesj59phCvrFNX8pJgVkq9gnspUEEe/0i72MWrI1hM7svH0GX9TW6nCBOC64Z4uBqT8+ts2IjtcWyRcg==
   dependencies:
     sprotty-protocol "0.13.0-next.f4445dd.342"
     uuid "7.0.3"
     vscode-ws-jsonrpc "^2.0.1"
 
-"@eclipse-glsp/theia-integration@1.1.0-RC04":
-  version "1.1.0-RC04"
-  resolved "https://registry.yarnpkg.com/@eclipse-glsp/theia-integration/-/theia-integration-1.1.0-RC04.tgz#0e9713e196d9a415e3ee3a5fccc563285680882f"
-  integrity sha512-YPlfYV0H8wie30CCp4ElL7Mj3O+pRvUe5sdGHM2FzPY9CS48HWY5Giw/Iymvn8kaSiP0a7zV7e7w1BnBnbadWA==
+"@eclipse-glsp/theia-integration@1.1.0-RC05":
+  version "1.1.0-RC05"
+  resolved "https://registry.yarnpkg.com/@eclipse-glsp/theia-integration/-/theia-integration-1.1.0-RC05.tgz#6e820e5641c51451a86e2565c6fb5914c52fcd58"
+  integrity sha512-ikiozLv6MMbRpnT4ewTZftlbTAWYBvnA0n2Xfj6qbFI4xwyx9wAFbX7iKmzNkUsDRF48rMjooMe9tVwcmCv6Lw==
   dependencies:
-    "@eclipse-glsp/client" "1.1.0-RC04"
+    "@eclipse-glsp/client" "1.1.0-RC05"
     vscode-jsonrpc "8.0.2"
 
 "@eclipse-glsp/ts-config@^1.0.0":
@@ -11027,11 +11027,6 @@ write-pkg@^4.0.0:
     type-fest "^0.4.1"
     write-json-file "^3.2.0"
 
-ws@8.5.0:
-  version "8.5.0"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-8.5.0.tgz#bfb4be96600757fe5382de12c670dab984a1ed4f"
-  integrity sha512-BWX0SWVgLPzYwF8lTzEy1egjhS4S4OEAHfsO8o65WOVsrnSRGaSiUaa9e0ggGlkMTtBlmOpEXiie9RUcBO86qg==
-
 ws@^6.1.0:
   version "6.2.2"
   resolved "https://registry.yarnpkg.com/ws/-/ws-6.2.2.tgz#dd5cdbd57a9979916097652d78f1cc5faea0c32e"
@@ -11039,7 +11034,7 @@ ws@^6.1.0:
   dependencies:
     async-limiter "~1.0.0"
 
-ws@^7.1.2, ws@^7.4.6:
+ws@^7.1.2:
   version "7.5.9"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.9.tgz#54fa7db29f4c7cec68b1ddd3a89de099942bb591"
   integrity sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==

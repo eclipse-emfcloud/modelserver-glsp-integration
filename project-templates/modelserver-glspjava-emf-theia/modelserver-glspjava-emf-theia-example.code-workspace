@@ -4,7 +4,10 @@
       "path": "./client"
     },
     {
-      "path": "./server"
+      "path": "./server/glsp-server"
+    },
+    {
+      "path": "./server/model-server"
     }
   ],
   "settings": {

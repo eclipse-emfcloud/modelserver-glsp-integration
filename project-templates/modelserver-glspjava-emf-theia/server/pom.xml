@@ -19,7 +19,7 @@
 		<java.target>11</java.target>
 		<!-- Checkstyle Versions -->
 		<checkstyle.version>8.44</checkstyle.version>
-		<checkstyle.plugin.version>3.2.1</checkstyle.plugin.version>
+		<maven.checkstyle.version>3.2.1</maven.checkstyle.version>
 		<emfcloud.checkstyle.version>0.1.0-SNAPSHOT</emfcloud.checkstyle.version>
 		<!-- Build Plugin Versions -->
 		<tycho.version>2.7.5</tycho.version>
@@ -54,5 +54,13 @@
 		<module>model-server</module>
 		<module>glsp-server</module>
 	</modules>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>sonatype</id>
+			<name>Sonatype</name>
+			<url>https://oss.sonatype.org/content/groups/public</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 </project>

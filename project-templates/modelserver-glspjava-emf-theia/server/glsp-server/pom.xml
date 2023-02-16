@@ -189,6 +189,13 @@
 			<groupId>org.eclipse.elk</groupId>
 			<artifactId>org.eclipse.elk.alg.layered</artifactId>
 			<version>${eclipse.elk.version}</version>
+			<exclusions>
+				<!--ELK still has a log4J 1.2 dependency. So we exclude it -->
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 
@@ -248,9 +255,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${checkstyle.plugin.version}</version>
+				<version>${maven.checkstyle.version}</version>
 				<configuration>
-					<configLocation>emfcloud-checkstyle-8.44.xml</configLocation>
+					<configLocation>emfcloud-checkstyle-${checkstyle.version}.xml</configLocation>
 					<consoleOutput>true</consoleOutput>
 				</configuration>
 				<executions>
