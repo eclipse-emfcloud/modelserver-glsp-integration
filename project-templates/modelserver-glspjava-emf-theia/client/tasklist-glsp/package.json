@@ -31,7 +31,7 @@
     "css"
   ],
   "dependencies": {
-    "@eclipse-glsp/client": "1.1.0-RC05"
+    "@eclipse-glsp/client": "1.1.0-RC08"
   },
   "devDependencies": {
     "rimraf": "^2.6.1",
@@ -42,7 +42,8 @@
     "clean": "rimraf tsconfig.tsbuildinfo lib",
     "build": "tsc",
     "lint": "eslint -c ../.eslintrc.js --ext .ts,.tsx ./src",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "upgrade:latest": "ncu @eclipse-glsp* --target @rc -u"
   },
   "main": "lib/index",
   "types": "lib/index"

@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2022 EclipseSource and others.
+ * Copyright (c) 2022-2023 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -9,8 +9,6 @@
  * SPDX-License-Identifier: EPL-2.0 OR MIT
  ********************************************************************************/
 package org.eclipse.emfcloud.integration.example.glspjavaserver.model;
-
-import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -58,9 +56,8 @@ public class TaskListGModelFactory extends EMSNotationGModelFactory {
          .id(idGenerator.getOrCreateId(task))
          .addCssClass("tasklist-node")
          .layout(GConstants.Layout.HBOX)
-         .add(new GLabelBuilder(DefaultTypes.LABEL).text(task.getName()).build())
-         .layout(GConstants.Layout.VBOX)
-         .addLayoutOptions(Map.of(GLayoutOptions.KEY_H_ALIGN, GConstants.HAlign.CENTER));
+         .layoutOptions(new GLayoutOptions().vAlign(GConstants.VAlign.TOP))
+         .add(new GLabelBuilder(DefaultTypes.LABEL).text(task.getName()).build());
 
       applyShapeData(task, taskNodeBuilder);
       return taskNodeBuilder.build();

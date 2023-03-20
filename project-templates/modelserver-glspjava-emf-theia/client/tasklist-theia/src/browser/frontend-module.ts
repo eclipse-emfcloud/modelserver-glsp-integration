@@ -8,9 +8,14 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR MIT
  ********************************************************************************/
-import { ContainerContext, GLSPClientContribution, GLSPTheiaFrontendModule, TheiaGLSPConnector } from '@eclipse-glsp/theia-integration';
+import {
+    ContainerContext,
+    DiagramConfiguration,
+    GLSPClientContribution,
+    GLSPTheiaFrontendModule,
+    TheiaGLSPConnector
+} from '@eclipse-glsp/theia-integration';
 import { LabelProviderContribution } from '@theia/core/lib/browser';
-import { DiagramConfiguration } from 'sprotty-theia';
 
 import { TaskListLanguage } from '../common/tasklist-language';
 import { TaskListDiagramConfiguration } from './diagram/diagram-configuration';
