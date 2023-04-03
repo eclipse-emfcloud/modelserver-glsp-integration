@@ -33,6 +33,7 @@ public class EMSGLSPServer extends DefaultGLSPServer {
    private static Logger LOGGER = LogManager.getLogger(EMSGLSPServer.class);
    private static final String TIMESTAMP_KEY = "timestamp";
    private static final String MODELSERVER_URL_KEY = "modelServerURL";
+   private static final int NUMBER_OF_TRIES = 10;
 
    @Inject
    protected ModelServerClientProvider modelServerClientProvider;
@@ -54,11 +55,21 @@ public class EMSGLSPServer extends DefaultGLSPServer {
 
       try {
          ModelServerClientV2 client = createModelServerClient(modelServerURL);
-         boolean alive = client.ping().thenApply(Response<Boolean>::body).get();
-         if (alive) {
-            modelServerClientProvider.setModelServerClient(client);
+         boolean alive = false;
+         int numberOfTries = NUMBER_OF_TRIES;
+         while (!alive && numberOfTries > 0) {
+            alive = client.ping().thenApply(Response<Boolean>::body).get();
+            if (alive) {
+               modelServerClientProvider.setModelServerClient(client);
+               break;
+            }
+            numberOfTries--;
+            LOGGER.warn("Ping of modelserver did not succeed! Retrying ...");
+            Thread.sleep(1000);
          }
-
+         if (!alive) {
+            LOGGER.error("Error during initialization of modelserver connection, ping did not succeed!");
+         }
       } catch (MalformedURLException | InterruptedException | ExecutionException e) {
          LOGGER.error("Error during initialization of modelserver connection", e);
       }
