@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021-2022 EclipseSource and others.
+ * Copyright (c) 2023 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,36 +14,16 @@ import java.util.Optional;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emfcloud.modelserver.glsp.EMSModelState;
-import org.eclipse.glsp.graph.GModelIndex;
-import org.eclipse.glsp.graph.GModelRoot;
 import org.eclipse.glsp.server.emf.model.notation.Diagram;
 import org.eclipse.glsp.server.emf.notation.EMFNotationModelIndex;
-import org.eclipse.glsp.server.session.ClientSession;
 
-public class EMSNotationModelState extends EMSModelState {
-
-   protected Diagram notationModel;
-
+public interface EMSNotationModelState extends EMSModelState {
    @Override
-   protected GModelIndex getOrUpdateIndex(final GModelRoot newRoot) {
-      return EMFNotationModelIndex.getOrCreate(getRoot(), semanticIdConverter);
-   }
+   EMFNotationModelIndex getIndex();
 
-   @Override
-   public EMFNotationModelIndex getIndex() { return (EMFNotationModelIndex) super.getIndex(); }
+   void setNotationModel(final Diagram notationModel);
 
-   public void setNotationModel(final Diagram notationModel) { this.notationModel = notationModel; }
+   Diagram getNotationModel();
 
-   public Diagram getNotationModel() { return this.notationModel; }
-
-   public <T extends EObject> Optional<T> getNotationModel(final Class<T> clazz) {
-      return Optional.ofNullable(this.notationModel).filter(clazz::isInstance).map(clazz::cast);
-   }
-
-   @Override
-   public void sessionDisposed(final ClientSession clientSession) {
-      this.notationModel = null;
-      super.sessionDisposed(clientSession);
-   }
-
+   <T extends EObject> Optional<T> getNotationModel(final Class<T> clazz);
 }

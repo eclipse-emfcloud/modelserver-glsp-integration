@@ -12,7 +12,6 @@ package org.eclipse.emfcloud.modelserver.glsp.notation.integration;
 
 import org.eclipse.emfcloud.modelserver.common.ModelServerPathParametersV2;
 import org.eclipse.emfcloud.modelserver.glsp.EMSGLSPDiagramModule;
-import org.eclipse.emfcloud.modelserver.glsp.EMSModelState;
 import org.eclipse.emfcloud.modelserver.glsp.ModelServerAccess;
 import org.eclipse.emfcloud.modelserver.glsp.layout.EMSLayoutEngine;
 import org.eclipse.emfcloud.modelserver.glsp.operations.handlers.EMSChangeBoundsOperationHandler;
@@ -25,6 +24,8 @@ import org.eclipse.glsp.server.emf.model.notation.NotationPackage;
 import org.eclipse.glsp.server.layout.LayoutEngine;
 import org.eclipse.glsp.server.operations.LayoutOperationHandler;
 import org.eclipse.glsp.server.operations.OperationHandler;
+
+import com.google.inject.Singleton;
 
 public abstract class EMSGLSPNotationDiagramModule extends EMSGLSPDiagramModule {
 
@@ -46,8 +47,8 @@ public abstract class EMSGLSPNotationDiagramModule extends EMSGLSPDiagramModule 
    protected String getNotationModelFormat() { return ModelServerPathParametersV2.FORMAT_JSON_V2; }
 
    @Override
-   protected Class<? extends EMSModelState> bindGModelState() {
-      return EMSNotationModelState.class;
+   protected Class<? extends EMSNotationModelState> bindGModelState() {
+      return EMSNotationModelStateImpl.class;
    }
 
    @Override
@@ -79,6 +80,16 @@ public abstract class EMSGLSPNotationDiagramModule extends EMSGLSPDiagramModule 
       binding.rebind(LayoutOperationHandler.class, EMSLayoutOperationHandler.class);
       binding.add(EMSChangeBoundsOperationHandler.class);
       binding.add(EMSChangeRoutingPointsOperationHandler.class);
+   }
+
+   @Override
+   protected void configure() {
+      super.configure();
+      configureEMSNotationModelState(bindGModelState());
+   }
+
+   protected void configureEMSNotationModelState(final Class<? extends EMSNotationModelState> modelState) {
+      bind(EMSNotationModelState.class).to(modelState).in(Singleton.class);
    }
 
 }
