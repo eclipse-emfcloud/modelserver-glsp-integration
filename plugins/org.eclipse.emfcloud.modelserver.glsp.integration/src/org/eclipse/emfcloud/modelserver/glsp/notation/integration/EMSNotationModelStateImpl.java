@@ -20,6 +20,9 @@ import org.eclipse.glsp.server.emf.model.notation.Diagram;
 import org.eclipse.glsp.server.emf.notation.EMFNotationModelIndex;
 import org.eclipse.glsp.server.session.ClientSession;
 
+import com.google.inject.Singleton;
+
+@Singleton
 public class EMSNotationModelStateImpl extends EMSModelStateImpl implements EMSNotationModelState {
 
    protected Diagram notationModel;

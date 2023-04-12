@@ -23,7 +23,9 @@ import org.eclipse.glsp.server.emf.notation.EMFSemanticIdConverter;
 import org.eclipse.glsp.server.session.ClientSession;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class EMSModelStateImpl extends EMFModelStateImpl implements EMSModelState {
 
    private static final Logger LOGGER = LogManager.getLogger(EMSModelStateImpl.class);
