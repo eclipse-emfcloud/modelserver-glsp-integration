@@ -21,9 +21,9 @@ public interface EMSNotationModelState extends EMSModelState {
    @Override
    EMFNotationModelIndex getIndex();
 
-   void setNotationModel(final Diagram notationModel);
+   void setNotationModel(Diagram notationModel);
 
    Diagram getNotationModel();
 
-   <T extends EObject> Optional<T> getNotationModel(final Class<T> clazz);
+   <T extends EObject> Optional<T> getNotationModel(Class<T> clazz);
 }

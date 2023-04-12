@@ -16,9 +16,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.glsp.server.emf.EMFModelState;
 
 public interface EMSModelState extends EMFModelState {
-   void setSemanticModel(final EObject semanticModel);
+   void setSemanticModel(EObject semanticModel);
 
    EObject getSemanticModel();
 
-   <T extends EObject> Optional<T> getSemanticModel(final Class<T> clazz);
+   <T extends EObject> Optional<T> getSemanticModel(Class<T> clazz);
 }
