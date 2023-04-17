@@ -30,7 +30,6 @@ import org.eclipse.glsp.server.emf.idgen.AttributeIdGenerator;
 import org.eclipse.glsp.server.emf.notation.EMFSemanticIdConverter;
 import org.eclipse.glsp.server.features.core.model.RequestModelActionHandler;
 import org.eclipse.glsp.server.features.undoredo.UndoRedoActionHandler;
-import org.eclipse.glsp.server.model.GModelState;
 import org.eclipse.glsp.server.operations.CompoundOperationHandler;
 import org.eclipse.glsp.server.operations.OperationActionHandler;
 import org.eclipse.glsp.server.operations.OperationHandler;
@@ -81,14 +80,7 @@ public abstract class EMSGLSPDiagramModule extends DiagramModule {
 
    @Override
    protected Class<? extends EMSModelState> bindGModelState() {
-      return EMSModelState.class;
-   }
-
-   @Override
-   @SuppressWarnings("unchecked")
-   protected void configureGModelState(final Class<? extends GModelState> gmodelStateClass) {
-      super.configureGModelState(gmodelStateClass);
-      bind(EMSModelState.class).to((Class<? extends EMSModelState>) gmodelStateClass);
+      return EMSModelStateImpl.class;
    }
 
    @Override
@@ -123,6 +115,16 @@ public abstract class EMSGLSPDiagramModule extends DiagramModule {
    protected void configureOperationHandlers(final MultiBinding<OperationHandler<?>> bindings) {
       super.configureOperationHandlers(bindings);
       bindings.rebind(CompoundOperationHandler.class, EMSCompoundOperationHandler.class);
+   }
+
+   @Override
+   protected void configure() {
+      super.configure();
+      configureEMSModelState(bindGModelState());
+   }
+
+   protected void configureEMSModelState(final Class<? extends EMSModelState> modelState) {
+      bind(EMSModelState.class).to(modelState).in(Singleton.class);
    }
 
 }
