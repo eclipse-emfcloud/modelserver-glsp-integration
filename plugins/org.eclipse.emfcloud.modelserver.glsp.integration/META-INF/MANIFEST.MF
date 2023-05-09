@@ -33,4 +33,3 @@ Export-Package: org.eclipse.emfcloud.modelserver.glsp,
  org.eclipse.emfcloud.modelserver.glsp.operations.handlers,
  org.eclipse.emfcloud.modelserver.integration,
  org.eclipse.emfcloud.modelserver.notation.integration
-Import-Package: javax.inject;version="1.0.0"

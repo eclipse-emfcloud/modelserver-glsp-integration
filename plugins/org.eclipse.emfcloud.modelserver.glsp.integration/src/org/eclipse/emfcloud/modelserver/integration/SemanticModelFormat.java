@@ -18,7 +18,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.inject.Qualifier;
+import com.google.inject.BindingAnnotation;
 
 /**
  * Helper annotation that is used for injecting the semantic model format string into classes of diagram session
@@ -33,7 +33,7 @@ import javax.inject.Qualifier;
  * </pre>
  *
  */
-@Qualifier
 @Target({ FIELD, PARAMETER, METHOD })
 @Retention(RUNTIME)
+@BindingAnnotation
 public @interface SemanticModelFormat {}
