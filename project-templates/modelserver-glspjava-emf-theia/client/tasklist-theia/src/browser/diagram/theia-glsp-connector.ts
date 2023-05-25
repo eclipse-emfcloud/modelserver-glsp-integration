@@ -9,10 +9,10 @@
  * SPDX-License-Identifier: EPL-2.0 OR MIT
  ********************************************************************************/
 import { Args } from '@eclipse-glsp/protocol';
-import { GLSPDiagramLanguage } from '@eclipse-glsp/theia-integration';
 import { BaseTheiaGLSPConnector } from '@eclipse-glsp/theia-integration/lib/browser/diagram/base-theia-glsp-connector';
+import { GLSPTheiaDiagramServer } from '@eclipse-glsp/theia-integration/lib/browser/diagram/glsp-theia-diagram-server';
+import { GLSPDiagramLanguage } from '@eclipse-glsp/theia-integration/lib/common/glsp-diagram-language';
 import { injectable } from 'inversify';
-import { TheiaDiagramServer } from 'sprotty-theia';
 import { TaskListLanguage } from '../../common/tasklist-language';
 
 @injectable()
@@ -46,9 +46,9 @@ export class TaskListTheiaGLSPConnector extends BaseTheiaGLSPConnector {
         }
     }
 
-    override disposeClientSessionArgs(diagramServer: TheiaDiagramServer): Args | undefined {
+    override disposeClientSessionArgs(diagramServer: GLSPTheiaDiagramServer): Args | undefined {
         return {
-            ['sourceUri']: diagramServer.sourceUri
+            ['sourceUri']: diagramServer.sourceURI
         };
     }
 }

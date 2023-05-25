@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2022 EclipseSource and others.
+ * Copyright (c) 2022-2023 EclipseSource and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -8,18 +8,19 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR MIT
  ********************************************************************************/
-import { createTaskListDiagramContainer } from '@eclipse-emfcloud/tasklist-glsp';
+import { initializeTaskListDiagramContainer } from '@eclipse-emfcloud/tasklist-glsp';
+import { ContainerConfiguration } from '@eclipse-glsp/client';
+import '@eclipse-glsp/theia-integration/css/sprotty-theia.css';
 import { configureDiagramServer, GLSPDiagramConfiguration, GLSPTheiaDiagramServer } from '@eclipse-glsp/theia-integration/lib/browser';
 import { Container, injectable } from '@theia/core/shared/inversify';
-import 'sprotty-theia/css/theia-sprotty.css';
 import { TaskListLanguage } from '../../common/tasklist-language';
 
 @injectable()
 export class TaskListDiagramConfiguration extends GLSPDiagramConfiguration {
     diagramType: string = TaskListLanguage.diagramType;
 
-    doCreateContainer(widgetId: string): Container {
-        const container = createTaskListDiagramContainer(widgetId);
+    configureContainer(container: Container, widgetId: string, ...containerConfiguration: ContainerConfiguration): Container {
+        initializeTaskListDiagramContainer(container, widgetId, ...containerConfiguration);
         configureDiagramServer(container, GLSPTheiaDiagramServer);
         return container;
     }
