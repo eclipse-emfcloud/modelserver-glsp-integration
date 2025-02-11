@@ -1,7 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-	http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.emfcloud.modelserver.glsp</groupId>
@@ -10,13 +9,13 @@
 	<description>Parent pm for the ModelServer/GLSP Java Server/EMF/Theia example</description>
 	<url>https://github.com/eclipse-emfcloud/modelserver-glsp-integration</url>
 	<packaging>pom</packaging>
-	
+
 	<properties>
 		<!-- Encoding: used by the maven-resource-plugin -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Compiler: used by the maven-compiler-plugin for Java source and target -->
-		<java.source>11</java.source>
-		<java.target>11</java.target>
+		<java.source>17</java.source>
+		<java.target>17</java.target>
 		<!-- Checkstyle Versions -->
 		<checkstyle.version>8.44</checkstyle.version>
 		<maven.checkstyle.version>3.2.1</maven.checkstyle.version>
@@ -41,7 +40,7 @@
 		<emfjson.jackson.version>2.0.0</emfjson.jackson.version>
 		<eclipse.core.resources.version>3.7.100</eclipse.core.resources.version>
 		<eclipse.core.runtime.version>3.7.0</eclipse.core.runtime.version>
-		<glsp.server.version>1.1.0-SNAPSHOT</glsp.server.version>
+		<glsp.server.version>1.1.0.RC08</glsp.server.version>
 		<google.guice.version>5.0.1</google.guice.version>
 		<google.guice.multibindings.version>4.2.3</google.guice.multibindings.version>
 		<google.guava.version>31.0.1-jre</google.guava.version>
